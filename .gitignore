@@ -4,8 +4,8 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # 自定义文件夹
-bin
-bin-int
+bin/
+bin-int/
 
 # User-specific files
 *.rsuser

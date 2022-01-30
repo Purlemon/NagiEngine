@@ -5,6 +5,7 @@
 
 #include<iostream>
 #include"PurlemonHazel/Application.h"
+#include "PurlemonHazel/Log.h"
 
 // ----Èë¿Úµã----------------------
 #include"PurlemonHazel/EntryPoint.h"

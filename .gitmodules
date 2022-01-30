@@ -1,0 +1,3 @@
+[submodule "PurlemonHazel/vendor/spdlog"]
+	path = PurlemonHazel/vendor/spdlog
+	url = https://github.com/gabime/spdlog

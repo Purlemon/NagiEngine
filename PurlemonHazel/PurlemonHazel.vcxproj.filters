@@ -30,6 +30,18 @@
     <ClInclude Include="src\PurlemonHazel\Log.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\PurlemonHazel\Event\Event.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PurlemonHazel\Event\KeyEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PurlemonHazel\Event\MouseEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PurlemonHazel\Event\ApplicationEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\PurlemonHazel\Application.cpp">

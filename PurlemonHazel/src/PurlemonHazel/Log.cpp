@@ -13,7 +13,6 @@ namespace PurlemonHazel {
 
 		client_logger_ = spdlog::stdout_color_mt("App");
 		client_logger_->set_level(spdlog::level::trace);
-
 	}
 
 }

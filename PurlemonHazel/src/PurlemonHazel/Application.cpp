@@ -2,11 +2,13 @@
 #include "Event/ApplicationEvent.h"
 #include "Log.h"
 
+#include "GLFW/glfw3.h"
+
 namespace PurlemonHazel {
 
 	Application::Application()
 	{
-
+		window_ = std::unique_ptr<Window>(Window::Create());
 	}
 
 	Application::~Application()
@@ -16,16 +18,10 @@ namespace PurlemonHazel {
 
 	void Application::Run()
 	{
-		WindowResizeEvent e(1280, 1080);
-		PH_TRACE(e);
-		if (e.IsInCategory(kEventCategoryApplication))
-			PH_INFO(e.ToString() + " kEventCategoryApplication");
-		if (e.IsInCategory(kEventCategoryInput))
-			PH_WARN(e.ToString() + " kEventCategoryInput");
-		if (e.IsInCategory(kEventCategoryKeyboard))
-			PH_ERROR(e.ToString() + " kEventCategoryKeyboard");
-		while (true) {
-
+		while (running_) {
+			glClearColor(1, 0, 1, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+			window_->OnUpdate();
 		}
 	}
 }

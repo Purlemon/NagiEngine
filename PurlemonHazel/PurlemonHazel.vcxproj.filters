@@ -42,12 +42,21 @@
     <ClInclude Include="src\PurlemonHazel\Event\ApplicationEvent.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\PurlemonHazel\Window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\PurlemonHazel\Application.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\PurlemonHazel\Log.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

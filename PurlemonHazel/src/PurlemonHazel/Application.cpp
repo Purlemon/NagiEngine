@@ -19,13 +19,28 @@ namespace PurlemonHazel {
 
 	}
 
+	void Application::PushLayer(Layer* layer)
+	{
+		layer_stack_.PushLayer(layer);
+	}
+
+	void Application::PushOverlay(Layer* layer)
+	{
+		layer_stack_.PushOverlay(layer);
+	}
+
 	void Application::OnEvent(Event& e)
 	{
 		// 接收到WindowCloseEvent事件关闭窗口
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 
-		PH_CORE_TRACE("{0}", e);
+		// 对所有层进行OnEvent调用
+		for (auto it = layer_stack_.end(); it != layer_stack_.begin(); ) {
+			(*--it)->OnEvent(e);
+			if (e.handled_)
+				break;
+		}
 	}
 
 	void Application::Run()
@@ -33,6 +48,10 @@ namespace PurlemonHazel {
 		while (running_) {
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			for (Layer* layer : layer_stack_)
+				layer->OnUpdate();
+
 			window_->OnUpdate();
 		}
 	}

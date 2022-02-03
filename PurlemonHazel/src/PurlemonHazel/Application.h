@@ -2,6 +2,7 @@
 #include "Core.h"
 #include "Event/Event.h"
 #include "Window.h"
+#include "LayerStack.h"
 
 namespace PurlemonHazel {
 
@@ -13,12 +14,16 @@ namespace PurlemonHazel {
 
 		void Run();
 
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* layer);
+
 		void OnEvent(Event& e);
 	private:
 		bool OnWindowClose(class WindowCloseEvent& e);
 
 		std::unique_ptr<Window>window_;
 		bool running_ = true;
+		LayerStack layer_stack_;
 	};
 
 	// 将在客户端被定义

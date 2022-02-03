@@ -16,6 +16,8 @@
     <ClInclude Include="src\PurlemonHazel\Event\Event.h" />
     <ClInclude Include="src\PurlemonHazel\Event\KeyEvent.h" />
     <ClInclude Include="src\PurlemonHazel\Event\MouseEvent.h" />
+    <ClInclude Include="src\PurlemonHazel\Layer.h" />
+    <ClInclude Include="src\PurlemonHazel\LayerStack.h" />
     <ClInclude Include="src\PurlemonHazel\Log.h" />
     <ClInclude Include="src\PurlemonHazel.h" />
     <ClInclude Include="src\PurlemonHazel\Application.h" />
@@ -25,6 +27,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="src\PurlemonHazel\Layer.cpp" />
+    <ClCompile Include="src\PurlemonHazel\LayerStack.cpp" />
     <ClCompile Include="src\PurlemonHazel\Log.cpp" />
     <ClCompile Include="src\PurlemonHazel\Application.cpp" />
   </ItemGroup>

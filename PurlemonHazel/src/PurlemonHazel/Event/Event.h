@@ -32,6 +32,8 @@ namespace PurlemonHazel {
 	private:
 		friend class EventDispatcher; 
 	public:
+		bool handled_ = false; // 事件是否被处理
+
 		virtual EventType GetEventType()const = 0;
 		virtual const char* GetName()const = 0; // only debug
 		virtual int GetCategoryFlags()const = 0;
@@ -42,9 +44,6 @@ namespace PurlemonHazel {
 		{
 			return GetCategoryFlags() & category;
 		}
-
-	protected:
-		bool handled = false; // 事件是否被处理
 	};
 
 	// 在每个Event子类中实现虚函数方法
@@ -66,7 +65,7 @@ namespace PurlemonHazel {
 		bool Dispatch(EventFn<T> func)
 		{
 			if (event_.GetEventType() == T::GetStaticType()) {
-				event_.handled = func(*(T*)&event_);
+				event_.handled_ = func(*(T*)&event_);
 				return true;
 			}
 			return false;

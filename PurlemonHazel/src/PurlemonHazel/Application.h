@@ -12,7 +12,11 @@ namespace PurlemonHazel {
 		virtual ~Application(); // 虚析构函数，调用同时调用子类
 
 		void Run();
+
+		void OnEvent(Event& e);
 	private:
+		bool OnWindowClose(class WindowCloseEvent& e);
+
 		std::unique_ptr<Window>window_;
 		bool running_ = true;
 	};

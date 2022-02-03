@@ -61,11 +61,12 @@ namespace PurlemonHazel {
 	public:
 		EventDispatcher(Event& event) :event_(event){ }
 	
+		// 当实例化时存的event_与T同类型时，调用传入的func并返回true
 		template<typename T>
 		bool Dispatch(EventFn<T> func)
 		{
 			if (event_.GetEventType() == T::GetStaticType()) {
-				event_.handled = func(*(T)&event_);
+				event_.handled = func(*(T*)&event_);
 				return true;
 			}
 			return false;

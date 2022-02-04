@@ -6,6 +6,7 @@
 #include<iostream>
 #include"PurlemonHazel/Application.h"
 #include "PurlemonHazel/Log.h"
+#include "PurlemonHazel/ImGui/ImGuiLayer.h"
 
 // ----Èë¿Úµã----------------------
 #include"PurlemonHazel/EntryPoint.h"

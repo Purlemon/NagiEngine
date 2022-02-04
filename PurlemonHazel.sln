@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PurlemonHazel", "PurlemonHa
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Glad", "PurlemonHazel\vendor\Glad\Glad.vcxproj", "{BFAEC214-0F93-4FC7-8D3B-5544867038AC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImGui", "PurlemonHazel\vendor\ImGui\ImGui.vcxproj", "{270F110F-EE43-49CD-A56E-ACE47A0C7DBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{BFAEC214-0F93-4FC7-8D3B-5544867038AC}.Release|x64.Build.0 = Release|x64
 		{BFAEC214-0F93-4FC7-8D3B-5544867038AC}.Release|x86.ActiveCfg = Release|Win32
 		{BFAEC214-0F93-4FC7-8D3B-5544867038AC}.Release|x86.Build.0 = Release|Win32
+		{270F110F-EE43-49CD-A56E-ACE47A0C7DBB}.Debug|x64.ActiveCfg = Debug|x64
+		{270F110F-EE43-49CD-A56E-ACE47A0C7DBB}.Debug|x64.Build.0 = Debug|x64
+		{270F110F-EE43-49CD-A56E-ACE47A0C7DBB}.Debug|x86.ActiveCfg = Debug|Win32
+		{270F110F-EE43-49CD-A56E-ACE47A0C7DBB}.Debug|x86.Build.0 = Debug|Win32
+		{270F110F-EE43-49CD-A56E-ACE47A0C7DBB}.Release|x64.ActiveCfg = Release|x64
+		{270F110F-EE43-49CD-A56E-ACE47A0C7DBB}.Release|x64.Build.0 = Release|x64
+		{270F110F-EE43-49CD-A56E-ACE47A0C7DBB}.Release|x86.ActiveCfg = Release|Win32
+		{270F110F-EE43-49CD-A56E-ACE47A0C7DBB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

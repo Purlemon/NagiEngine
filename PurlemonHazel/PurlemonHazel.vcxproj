@@ -11,11 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\PurlemonHazel\Event\ApplicationEvent.h" />
     <ClInclude Include="src\PurlemonHazel\Event\Event.h" />
     <ClInclude Include="src\PurlemonHazel\Event\KeyEvent.h" />
     <ClInclude Include="src\PurlemonHazel\Event\MouseEvent.h" />
+    <ClInclude Include="src\PurlemonHazel\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\PurlemonHazel\Layer.h" />
     <ClInclude Include="src\PurlemonHazel\LayerStack.h" />
     <ClInclude Include="src\PurlemonHazel\Log.h" />
@@ -26,7 +28,9 @@
     <ClInclude Include="src\PurlemonHazel\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="src\PurlemonHazel\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\PurlemonHazel\Layer.cpp" />
     <ClCompile Include="src\PurlemonHazel\LayerStack.cpp" />
     <ClCompile Include="src\PurlemonHazel\Log.cpp" />
@@ -38,6 +42,9 @@
   <ItemGroup>
     <ProjectReference Include="vendor\Glad\Glad.vcxproj">
       <Project>{bfaec214-0f93-4fc7-8d3b-5544867038ac}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vendor\ImGui\ImGui.vcxproj">
+      <Project>{270f110f-ee43-49cd-a56e-ace47a0c7dbb}</Project>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -90,7 +97,7 @@
       <PreprocessorDefinitions>PH_PLATFORM_WINDOWS;PH_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AssemblerOutput>AssemblyCode</AssemblerOutput>
-      <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\Glad\include;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\vendor\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\Glad\include;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\vendor\ImGui;$(SolutionDir)PurlemonHazel\vendor\GLFW\include;$(SolutionDir)PurlemonHazel\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -108,7 +115,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>PH_PLATFORM_WINDOWS;PH_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\Glad\include;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\vendor\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\Glad\include;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\vendor\ImGui;$(SolutionDir)PurlemonHazel\vendor\GLFW\include;$(SolutionDir)PurlemonHazel\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>

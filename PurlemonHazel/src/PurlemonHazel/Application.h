@@ -18,12 +18,17 @@ namespace PurlemonHazel {
 		void PushOverlay(Layer* layer);
 
 		void OnEvent(Event& e);
+
+		inline static Application& Get() { return *instance_; }
+		inline Window& GetWindow() { return *window_; }
 	private:
 		bool OnWindowClose(class WindowCloseEvent& e);
 
 		std::unique_ptr<Window>window_;
 		bool running_ = true;
 		LayerStack layer_stack_;
+	private:
+		static Application* instance_;
 	};
 
 	// 将在客户端被定义

@@ -8,8 +8,13 @@ namespace PurlemonHazel {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
+	Application* Application::instance_ = nullptr;
+
 	Application::Application()
 	{
+		PH_CORE_ASSERT(!instance_, "Application“—æ≠¥Ê‘⁄£°");
+		instance_ = this;
+
 		window_ = std::unique_ptr<Window>(Window::Create());
 		window_->SetEventCallback(BIND_EVENT_FN(OnEvent));
 	}
@@ -22,11 +27,13 @@ namespace PurlemonHazel {
 	void Application::PushLayer(Layer* layer)
 	{
 		layer_stack_.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* layer)
 	{
 		layer_stack_.PushOverlay(layer);
+		layer->OnAttach();
 	}
 
 	void Application::OnEvent(Event& e)

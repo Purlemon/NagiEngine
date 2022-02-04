@@ -5,6 +5,9 @@
 #include "../../PurlemonHazel/Event/KeyEvent.h"
 #include "../../PurlemonHazel/Event/MouseEvent.h"
 
+#include <glad/glad.h>
+#include "GLFW/glfw3.h"
+
 namespace PurlemonHazel {
 
 	static bool sGLFWInitialized = false;
@@ -48,6 +51,8 @@ namespace PurlemonHazel {
 
 		window_ = glfwCreateWindow((int)props.width, (int)props.height, data_.title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(window_);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		PH_CORE_ASSERT(status, "Failed to initialize Glad!");
 		glfwSetWindowUserPointer(window_, &data_);
 		SetVSync(true);
 

@@ -12,7 +12,7 @@ namespace PurlemonHazel {
 		kNone = 0,
 		kWindowClose, kWindowResize, kWindowFocus, kWindowMoved,
 		kAppTick, kAppUpdate, kAppRender,
-		kKeyPressed, kKeyReleased,
+		kKeyPressed, kKeyReleased, kKeyTyped,
 		kMouseButtonPressed, kMouseButtonReleased, kMouseMoved, kMouseScrolled
 	};
 

@@ -54,4 +54,21 @@ namespace PurlemonHazel {
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
+	class PH_API KeyTypedEvent :public KeyEvent
+	{// 键盘按压事件，长按会先输入一次key_code，停顿一下后重复key_code
+	public:
+		KeyTypedEvent(int key_code)
+			:KeyEvent(key_code)
+		{
+		}
+
+		std::string ToString()const override
+		{
+			std::stringstream ss;
+			ss << "KeyTypedEvent: " << key_code_;
+			return ss.str();
+		}
+
+		EVENT_CLASS_TYPE(KeyTyped)
+	};
 }

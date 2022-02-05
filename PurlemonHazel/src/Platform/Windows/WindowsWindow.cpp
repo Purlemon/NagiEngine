@@ -97,6 +97,13 @@ namespace PurlemonHazel {
 			}
 		});
 
+		glfwSetCharCallback(window_, [](GLFWwindow* window,unsigned int keycode) {
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+			KeyTypedEvent event(keycode);
+			data.event_callback(event);
+			});
+
 		glfwSetMouseButtonCallback(window_, [](GLFWwindow* window, int button, int action, int mods) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 

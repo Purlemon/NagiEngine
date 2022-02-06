@@ -12,12 +12,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\PurlemonHazel\Event\ApplicationEvent.h" />
     <ClInclude Include="src\PurlemonHazel\Event\Event.h" />
     <ClInclude Include="src\PurlemonHazel\Event\KeyEvent.h" />
     <ClInclude Include="src\PurlemonHazel\Event\MouseEvent.h" />
     <ClInclude Include="src\PurlemonHazel\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\PurlemonHazel\Input.h" />
     <ClInclude Include="src\PurlemonHazel\Layer.h" />
     <ClInclude Include="src\PurlemonHazel\LayerStack.h" />
     <ClInclude Include="src\PurlemonHazel\Log.h" />
@@ -29,6 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\PurlemonHazel\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\PurlemonHazel\Layer.cpp" />

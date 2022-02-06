@@ -17,6 +17,8 @@ namespace PurlemonHazel {
 		inline unsigned int GetWidth() const override { return data_.width; }
 		inline unsigned int GetHeight() const override { return data_.height; }
 
+		inline void* GetNativeWindow()const override { return window_; }
+
 		// ´°¿ÚÊôĞÔ
 		inline void SetEventCallback(const EventCallbackFn& callback) override
 		{

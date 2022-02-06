@@ -39,6 +39,8 @@ namespace PurlemonHazel {
 		virtual void SetVSync(bool enabled) = 0;// 设置垂直同步
 		virtual bool IsVSync()const = 0; 
 
+		virtual void* GetNativeWindow()const = 0; // 返回void以便使用不同window库
+
 		static Window* Create(const WindowProps& props = WindowProps());
 
 	};

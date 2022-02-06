@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "Event/ApplicationEvent.h"
 #include "Log.h"
+#include "Input.h"
 
 #include <glad/glad.h>
 

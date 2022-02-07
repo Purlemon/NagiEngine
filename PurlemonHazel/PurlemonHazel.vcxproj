@@ -20,6 +20,7 @@
     <ClInclude Include="src\PurlemonHazel\Event\MouseEvent.h" />
     <ClInclude Include="src\PurlemonHazel\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\PurlemonHazel\Input.h" />
+    <ClInclude Include="src\PurlemonHazel\KeyCodes.h" />
     <ClInclude Include="src\PurlemonHazel\Layer.h" />
     <ClInclude Include="src\PurlemonHazel\LayerStack.h" />
     <ClInclude Include="src\PurlemonHazel\Log.h" />
@@ -27,6 +28,7 @@
     <ClInclude Include="src\PurlemonHazel\Application.h" />
     <ClInclude Include="src\PurlemonHazel\Core.h" />
     <ClInclude Include="src\PurlemonHazel\EntryPoint.h" />
+    <ClInclude Include="src\PurlemonHazel\MouseButtonCodes.h" />
     <ClInclude Include="src\PurlemonHazel\Window.h" />
   </ItemGroup>
   <ItemGroup>

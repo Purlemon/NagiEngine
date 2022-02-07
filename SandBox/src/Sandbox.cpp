@@ -10,12 +10,14 @@ public:
 
 	void OnUpdate() override
 	{
-		PH_INFO("ExampleLayer::Update");
+		//PH_INFO("ExampleLayer::Update");
+		if (PurlemonHazel::Input::IsKeyPressed(PH_KEY_TAB))
+			PH_TRACE("tab key is pressed!");
 	}
 
 	void OnEvent(PurlemonHazel::Event& event) override
 	{
-		PH_TRACE("{0}", event);
+		//PH_TRACE("{0}", event);
 	}
 
 };

@@ -102,7 +102,7 @@
       <PreprocessorDefinitions>PH_PLATFORM_WINDOWS;PH_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AssemblerOutput>AssemblyCode</AssemblerOutput>
-      <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\Glad\include;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\vendor\ImGui;$(SolutionDir)PurlemonHazel\vendor\GLFW\include;$(SolutionDir)PurlemonHazel\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\Glad\include;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\vendor\ImGui;$(SolutionDir)PurlemonHazel\vendor\GLFW\include;$(SolutionDir)PurlemonHazel\vendor\glm;$(SolutionDir)PurlemonHazel\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -120,7 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>PH_PLATFORM_WINDOWS;PH_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\Glad\include;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\vendor\ImGui;$(SolutionDir)PurlemonHazel\vendor\GLFW\include;$(SolutionDir)PurlemonHazel\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\Glad\include;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\vendor\ImGui;$(SolutionDir)PurlemonHazel\vendor\GLFW\include;$(SolutionDir)PurlemonHazel\vendor\glm;$(SolutionDir)PurlemonHazel\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>

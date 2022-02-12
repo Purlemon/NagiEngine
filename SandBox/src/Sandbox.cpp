@@ -1,5 +1,7 @@
 #include<PurlemonHazel.h>
 
+#include "imgui.h"
+
 class ExampleLayer : public PurlemonHazel::Layer
 {
 public:
@@ -17,9 +19,15 @@ public:
 
 	void OnEvent(PurlemonHazel::Event& event) override
 	{
-		//PH_TRACE("{0}", event);
+		PH_TRACE("{0}", event);
 	}
 
+	/*virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::End();
+	}*/
 };
 
 class Sandbox:public PurlemonHazel::Application
@@ -28,7 +36,6 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
-		PushOverlay(new PurlemonHazel::ImGuiLayer());
 	}
 	~Sandbox()
 	{

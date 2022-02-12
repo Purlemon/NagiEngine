@@ -2,6 +2,7 @@
 #include "Core.h"
 #include "Event/Event.h"
 #include "Window.h"
+#include "ImGui/ImGuiLayer.h"
 #include "LayerStack.h"
 
 namespace PurlemonHazel {
@@ -25,6 +26,7 @@ namespace PurlemonHazel {
 		bool OnWindowClose(class WindowCloseEvent& e);
 
 		std::unique_ptr<Window>window_;
+		ImGuiLayer* imgui_layer_;
 		bool running_ = true;
 		LayerStack layer_stack_;
 	private:

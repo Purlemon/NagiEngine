@@ -18,6 +18,9 @@ namespace PurlemonHazel {
 
 		window_ = std::unique_ptr<Window>(Window::Create());
 		window_->SetEventCallback(BIND_EVENT_FN(OnEvent));
+	
+		imgui_layer_ = new ImGuiLayer();
+		PushOverlay(imgui_layer_);
 	}
 
 	Application::~Application()
@@ -59,6 +62,11 @@ namespace PurlemonHazel {
 
 			for (Layer* layer : layer_stack_)
 				layer->OnUpdate();
+
+			imgui_layer_->Begin();
+			for (Layer* layer : layer_stack_)
+				layer->OnImGuiRender();
+			imgui_layer_->End();
 
 			window_->OnUpdate();
 		}

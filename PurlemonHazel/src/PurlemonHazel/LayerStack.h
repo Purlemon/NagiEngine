@@ -25,7 +25,7 @@ namespace PurlemonHazel {
 
 	private:
 		std::vector<Layer*>layers_;
-		LayersIter layer_insert_;
+		unsigned int layer_insert_index_ = 0;;
 	};
 
 }

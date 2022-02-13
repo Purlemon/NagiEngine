@@ -98,7 +98,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>PH_PLATFORM_WINDOWS;PH_BUILD_DLL</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PH_PLATFORM_WINDOWS;PH_BUILD_DLL;IMGUI_API=__declspec(dllexport)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AssemblerOutput>AssemblyCode</AssemblerOutput>
       <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\Glad\include;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\vendor\ImGui;$(SolutionDir)PurlemonHazel\vendor\GLFW\include;$(SolutionDir)PurlemonHazel\vendor\glm;$(SolutionDir)PurlemonHazel\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -117,7 +117,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>PH_PLATFORM_WINDOWS;PH_BUILD_DLL</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PH_PLATFORM_WINDOWS;PH_BUILD_DLL;IMGUI_API=__declspec(dllexport)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\Glad\include;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\vendor\ImGui;$(SolutionDir)PurlemonHazel\vendor\GLFW\include;$(SolutionDir)PurlemonHazel\vendor\glm;$(SolutionDir)PurlemonHazel\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>

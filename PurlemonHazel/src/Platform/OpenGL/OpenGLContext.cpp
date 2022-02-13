@@ -1,4 +1,5 @@
 #include "OpenGLContext.h"
+#include "PurlemonHazel/Log.h"
 
 namespace PurlemonHazel {
 
@@ -13,6 +14,11 @@ namespace PurlemonHazel {
 		glfwMakeContextCurrent(window_handle_);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		PH_CORE_ASSERT(status, "Failed to initialize Glad!");
+
+		PH_CORE_INFO("OpenGL Info:");
+		PH_CORE_INFO("	Vendor: {0}", glGetString(GL_VENDOR));
+		PH_CORE_INFO("	Renderer: {0}", glGetString(GL_RENDERER));
+		PH_CORE_INFO("	Version: {0}", glGetString(GL_VERSION));
 	}
 
 	void OpenGLContext::SwapBuffers()

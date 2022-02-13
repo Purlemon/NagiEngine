@@ -29,6 +29,10 @@ namespace PurlemonHazel {
 		ImGuiLayer* imgui_layer_;
 		bool running_ = true;
 		LayerStack layer_stack_;
+
+		// OpenGL Buffers
+		unsigned int vertex_array_, vertex_buffer_, index_buffer_;
+
 	private:
 		static Application* instance_;
 	};

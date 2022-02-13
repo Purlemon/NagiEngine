@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../../PurlemonHazel/Window.h"
+#include "PurlemonHazel/Window.h"
+#include "PurlemonHazel/Renderer/GraphicsContext.h"
 
 struct GLFWwindow;
 
@@ -43,6 +44,7 @@ namespace PurlemonHazel {
 		};
 
 		WindowData data_;
+		GraphicsContext* context_;
 	};
 
 }

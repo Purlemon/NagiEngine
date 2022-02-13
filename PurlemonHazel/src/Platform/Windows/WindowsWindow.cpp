@@ -1,12 +1,11 @@
 #include "WindowsWindow.h"
-#include "../../PurlemonHazel/Log.h"
+#include "PurlemonHazel/Log.h"
 
-#include "../../PurlemonHazel/Event/ApplicationEvent.h"
-#include "../../PurlemonHazel/Event/KeyEvent.h"
-#include "../../PurlemonHazel/Event/MouseEvent.h"
+#include "PurlemonHazel/Event/ApplicationEvent.h"
+#include "PurlemonHazel/Event/KeyEvent.h"
+#include "PurlemonHazel/Event/MouseEvent.h"
 
-#include <glad/glad.h>
-#include "GLFW/glfw3.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace PurlemonHazel {
 
@@ -50,9 +49,10 @@ namespace PurlemonHazel {
 		}
 
 		window_ = glfwCreateWindow((int)props.width, (int)props.height, data_.title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(window_);
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		PH_CORE_ASSERT(status, "Failed to initialize Glad!");
+		
+		context_ = new OpenGLContext(window_);
+		context_->Init();
+
 		glfwSetWindowUserPointer(window_, &data_);
 		SetVSync(true);
 
@@ -146,7 +146,7 @@ namespace PurlemonHazel {
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(window_);
+		context_->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)

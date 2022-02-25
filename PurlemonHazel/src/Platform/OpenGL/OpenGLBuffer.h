@@ -12,8 +12,12 @@ namespace PurlemonHazel {
 
 		void Bind() const override;
 		void Unbind() const override;
+
+		inline const BufferLayout& GetLayout() const override { return layout_; }
+		inline void SetLayout(const BufferLayout& layout) override { layout_ = layout; }
 	private:
 		unsigned int render_id_;
+		BufferLayout layout_;
 	};
 	
 	class OpenGLIndexBuffer :public IndexBuffer

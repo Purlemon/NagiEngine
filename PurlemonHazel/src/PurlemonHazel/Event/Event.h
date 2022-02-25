@@ -9,11 +9,11 @@ namespace PurlemonHazel {
 
 	enum class EventType
 	{
-		kNone = 0,
-		kWindowClose, kWindowResize, kWindowFocus, kWindowMoved,
-		kAppTick, kAppUpdate, kAppRender,
-		kKeyPressed, kKeyReleased, kKeyTyped,
-		kMouseButtonPressed, kMouseButtonReleased, kMouseMoved, kMouseScrolled
+		None = 0,
+		WindowClose, WindowResize, WindowFocus, WindowMoved,
+		AppTick, AppUpdate, AppRender,
+		KeyPressed, KeyReleased, KeyTyped,
+		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
 	// 一个事件类型有多种分类
@@ -47,7 +47,7 @@ namespace PurlemonHazel {
 	};
 
 	// 在每个Event子类中实现虚函数方法
-#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::k##type; }\
+#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; }\
 								EventType GetEventType()const override { return GetStaticType(); }\
 								const char* GetName()const override { return #type; }
 #define EVENT_CLASS_CATEGORY(category) int GetCategoryFlags()const override { return category; }

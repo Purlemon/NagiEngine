@@ -19,7 +19,7 @@ public:
 
 	void OnEvent(PurlemonHazel::Event& event) override
 	{
-		PH_TRACE("{0}", event);
+		//PH_TRACE("{0}", event);
 	}
 
 	virtual void OnImGuiRender() override

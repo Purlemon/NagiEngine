@@ -4,6 +4,8 @@
 #include "Window.h"
 #include "ImGui/ImGuiLayer.h"
 #include "LayerStack.h"
+#include "Renderer/Shader.h"
+#include "Renderer/Buffer.h"
 
 namespace PurlemonHazel {
 
@@ -30,9 +32,11 @@ namespace PurlemonHazel {
 		bool running_ = true;
 		LayerStack layer_stack_;
 
-		// OpenGL Buffers
-		unsigned int vertex_array_, vertex_buffer_, index_buffer_;
-
+		// Render 
+		unsigned int vertex_array_;
+		std::unique_ptr<Shader>shader_;
+		std::unique_ptr<VertexBuffer>vertex_buffer_;
+		std::unique_ptr<IndexBuffer>index_buffer_;
 	private:
 		static Application* instance_;
 	};

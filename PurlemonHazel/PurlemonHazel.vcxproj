@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
@@ -29,10 +30,14 @@
     <ClInclude Include="src\PurlemonHazel\Core.h" />
     <ClInclude Include="src\PurlemonHazel\EntryPoint.h" />
     <ClInclude Include="src\PurlemonHazel\MouseButtonCodes.h" />
+    <ClInclude Include="src\PurlemonHazel\Renderer\Buffer.h" />
     <ClInclude Include="src\PurlemonHazel\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\PurlemonHazel\Renderer\Renderer.h" />
+    <ClInclude Include="src\PurlemonHazel\Renderer\Shader.h" />
     <ClInclude Include="src\PurlemonHazel\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
@@ -42,6 +47,9 @@
     <ClCompile Include="src\PurlemonHazel\LayerStack.cpp" />
     <ClCompile Include="src\PurlemonHazel\Log.cpp" />
     <ClCompile Include="src\PurlemonHazel\Application.cpp" />
+    <ClCompile Include="src\PurlemonHazel\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\PurlemonHazel\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\PurlemonHazel\Renderer\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -4,6 +4,8 @@
 #include "Window.h"
 #include "ImGui/ImGuiLayer.h"
 #include "LayerStack.h"
+
+#include "Renderer/VertexArray.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Buffer.h"
 
@@ -33,10 +35,11 @@ namespace PurlemonHazel {
 		LayerStack layer_stack_;
 
 		// Render 
-		unsigned int vertex_array_;
-		std::unique_ptr<Shader>shader_;
-		std::unique_ptr<VertexBuffer>vertex_buffer_;
-		std::unique_ptr<IndexBuffer>index_buffer_;
+		std::shared_ptr<Shader>shader_;
+		std::shared_ptr<VertexArray>vertex_array_;
+
+		std::shared_ptr<Shader>blue_shader_;
+		std::shared_ptr<VertexArray>square_va_;
 	private:
 		static Application* instance_;
 	};

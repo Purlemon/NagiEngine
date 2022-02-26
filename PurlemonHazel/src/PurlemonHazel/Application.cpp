@@ -11,26 +11,6 @@ namespace PurlemonHazel {
 
 	Application* Application::instance_ = nullptr;
 
-	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
-	{
-		switch (type) {
-			case PurlemonHazel::ShaderDataType::Float:		return GL_FLOAT;
-			case PurlemonHazel::ShaderDataType::Float2:		return GL_FLOAT;
-			case PurlemonHazel::ShaderDataType::Float3:		return GL_FLOAT;
-			case PurlemonHazel::ShaderDataType::Float4:		return GL_FLOAT;
-			case PurlemonHazel::ShaderDataType::Mat3:		return GL_FLOAT;
-			case PurlemonHazel::ShaderDataType::Mat4:		return GL_FLOAT;
-			case PurlemonHazel::ShaderDataType::Int:		return GL_INT;
-			case PurlemonHazel::ShaderDataType::Int2:		return GL_INT;
-			case PurlemonHazel::ShaderDataType::Int3:		return GL_INT;
-			case PurlemonHazel::ShaderDataType::Int4:		return GL_INT;
-			case PurlemonHazel::ShaderDataType::Bool:		return GL_BOOL;
-		}
-
-		PH_CORE_ASSERT(false, "Unknown ShaderDataType!");
-		return 0;
-	}
-
 	Application::Application()
 	{
 		PH_CORE_ASSERT(!instance_, "Application已经存在！");
@@ -42,42 +22,31 @@ namespace PurlemonHazel {
 		imgui_layer_ = new ImGuiLayer();
 		PushOverlay(imgui_layer_);
 
+		// ----------------------------
 		// OpenGL Render
-		glGenVertexArrays(1, &vertex_array_);
-		glBindVertexArray(vertex_array_);
+		// ----------------------------
+
+		// 三角形
+		vertex_array_.reset(VertexArray::Create());
 
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
 			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
 			 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f
 		};
-
+		BufferLayout layout = {
+			{ShaderDataType::Float3, "a_Position"},
+			{ShaderDataType::Float4, "a_Color"},
+		};
+		std::shared_ptr<VertexBuffer>vertex_buffer_;
 		vertex_buffer_.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-
-		{
-			BufferLayout layout = {
-				{ShaderDataType::Float3, "a_Position"},
-				{ShaderDataType::Float4, "a_Color"},
-			};
-			vertex_buffer_->SetLayout(layout);
-		}
-
-		unsigned int index = 0;
-		const auto& layout = vertex_buffer_->GetLayout();
-		for (const auto& element : layout) {
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index, 
-				element.GetComponentCount(), 
-				ShaderDataTypeToOpenGLBaseType(element.type),
-				element.normalized ? GL_TRUE : GL_FALSE, 
-				layout.GetStride(),
-				(const void*)element.offset);
-			++index;
-		}
+		vertex_buffer_->SetLayout(layout);
+		vertex_array_->AddVertexBuffer(vertex_buffer_);
 
 		unsigned int indices[3] = { 0,1,2 };
-		
+		std::shared_ptr<IndexBuffer>index_buffer_;
 		index_buffer_.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int)));
+		vertex_array_->SetIndexBuffer(index_buffer_);
 
 		std::string vertex_src = R"(
 			#version 330 core
@@ -111,7 +80,57 @@ namespace PurlemonHazel {
 			}
 		)";
 
-		shader_ = std::make_unique<Shader>(vertex_src, fragment_src);
+		shader_.reset(new Shader(vertex_src, fragment_src));
+	
+		// 正方形
+		square_va_.reset(VertexArray::Create());
+
+		float square_vertices[4 * 3] = {
+			-0.75f, -0.75f, 0.0f, 
+			 0.75f, -0.75f, 0.0f, 
+			 0.75f,  0.75f, 0.0f,
+			-0.75f,  0.75f, 0.0f,
+		};
+		
+		std::shared_ptr<VertexBuffer>square_vb;
+		square_vb.reset(VertexBuffer::Create(square_vertices, sizeof(square_vertices)));
+		square_vb->SetLayout({
+			{ ShaderDataType::Float3, "a_Position" }
+		});
+		square_va_->AddVertexBuffer(square_vb);
+
+		unsigned int square_indices[6] = { 0,1,2,2,3,0 };
+		std::shared_ptr<IndexBuffer>square_ib;
+		square_ib.reset(IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(unsigned int)));
+		square_va_->SetIndexBuffer(square_ib);
+
+		std::string blue_vertex_src = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+
+			out vec3 v_Position;
+
+			void main()
+			{
+				v_Position = a_Position;
+				gl_Position = vec4(a_Position, 1.0);	
+			}
+		)";
+
+		std::string blue_fragment_src = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec3 v_Position;
+
+			void main()
+			{
+				color = vec4(0.2f, 0.3f, 0.8f, 1.0f);
+			}
+		)";
+		blue_shader_.reset(new Shader(blue_vertex_src, blue_fragment_src));
 	}
 
 	Application::~Application()
@@ -151,10 +170,13 @@ namespace PurlemonHazel {
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			shader_->Bind();
+			blue_shader_->Bind();
+			square_va_->Bind();
+			glDrawElements(GL_TRIANGLES, square_va_->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
-			vertex_buffer_->Bind();
-			glDrawElements(GL_TRIANGLES, index_buffer_->GetCount(), GL_UNSIGNED_INT, nullptr);
+			shader_->Bind();
+			vertex_array_->Bind();
+			glDrawElements(GL_TRIANGLES, vertex_array_->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : layer_stack_)
 				layer->OnUpdate();

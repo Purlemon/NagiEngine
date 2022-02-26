@@ -87,6 +87,12 @@
     <ClInclude Include="src\PurlemonHazel\Renderer\Renderer.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\PurlemonHazel\Renderer\VertexArray.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\PurlemonHazel\Application.cpp">
@@ -126,6 +132,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\PurlemonHazel\Renderer\Renderer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PurlemonHazel\Renderer\VertexArray.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

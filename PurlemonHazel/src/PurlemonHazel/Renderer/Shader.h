@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <glm/glm.hpp>
 
 namespace PurlemonHazel {
 
@@ -12,6 +13,8 @@ namespace PurlemonHazel {
 
 		void Bind()const;
 		void Unbind()const;
+
+		void UploadUniformMat4(const char* name ,const glm::mat4& matrix);
 	private:
 		uint32_t render_id_;
 	};

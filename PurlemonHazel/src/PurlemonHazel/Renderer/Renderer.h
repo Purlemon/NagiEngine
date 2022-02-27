@@ -1,18 +1,30 @@
 #pragma once
 
-namespace PurlemonHazel {
+#include "RenderCommand.h"
+#include "Shader.h"
 
-	enum class RendererAPI
-	{
-		None = 0, OpenGL = 1
-	};
+#include "OrthographicCamera.h"
+
+namespace PurlemonHazel {
 
 	class Renderer
 	{
 	public:
-		inline static RendererAPI GetAPI() { return renderer_api_; }
+		static void BeginScene(OrthographicCamera& camera);
+		static void EndScene();
+
+		// 渲染每个物体
+		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertex_array);
+
+		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
+
 	private:
-		static RendererAPI renderer_api_;
+		struct SceneData
+		{
+			glm::mat4 projection_view_matrix;
+		};
+
+		static SceneData* scene_data_;
 	};
 
 }

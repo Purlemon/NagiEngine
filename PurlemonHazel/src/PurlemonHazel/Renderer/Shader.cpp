@@ -5,6 +5,8 @@
 #include <vector>
 #include <glad/glad.h>
 
+#include <glm/gtc/type_ptr.hpp>
+
 namespace PurlemonHazel {
 
 	Shader::Shader(const std::string& vertex_src, const std::string& fragment_src)
@@ -120,6 +122,12 @@ namespace PurlemonHazel {
 	void Shader::Unbind()const
 	{
 		glUseProgram(0);
+	}
+
+	void Shader::UploadUniformMat4(const char* name, const glm::mat4& matrix)
+	{
+		GLint location = glGetUniformLocation(render_id_, name);
+		glUniformMatrix4fv(location,1, GL_FALSE,glm::value_ptr(matrix));
 	}
 
 }

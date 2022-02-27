@@ -93,6 +93,18 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\PurlemonHazel\Renderer\RendererAPI.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PurlemonHazel\Renderer\RenderCommand.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PurlemonHazel\Renderer\OrthographicCamera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\PurlemonHazel\Application.cpp">
@@ -138,6 +150,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PurlemonHazel\Renderer\RendererAPI.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PurlemonHazel\Renderer\RenderCommand.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PurlemonHazel\Renderer\OrthographicCamera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

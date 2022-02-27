@@ -8,6 +8,7 @@
 #include "Renderer/VertexArray.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Buffer.h"
+#include "Renderer/OrthographicCamera.h"
 
 namespace PurlemonHazel {
 
@@ -40,6 +41,8 @@ namespace PurlemonHazel {
 
 		std::shared_ptr<Shader>blue_shader_;
 		std::shared_ptr<VertexArray>square_va_;
+
+		OrthographicCamera camera_;
 	private:
 		static Application* instance_;
 	};

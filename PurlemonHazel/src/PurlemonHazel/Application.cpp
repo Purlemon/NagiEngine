@@ -4,6 +4,7 @@
 #include "Input.h"
 
 #include <glad/glad.h>
+#include "PurlemonHazel/Renderer/Renderer.h"
 
 namespace PurlemonHazel {
 
@@ -12,6 +13,7 @@ namespace PurlemonHazel {
 	Application* Application::instance_ = nullptr;
 
 	Application::Application()
+		:camera_(-1.6f, 1.6f, -0.9f, 0.9f)
 	{
 		PH_CORE_ASSERT(!instance_, "ApplicationÒÑ¾­´æÔÚ£¡");
 		instance_ = this;
@@ -54,6 +56,8 @@ namespace PurlemonHazel {
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
 
+			uniform mat4 u_ProjectView;
+
 			out vec3 v_Position;
 			out vec4 v_Color;
 
@@ -61,7 +65,7 @@ namespace PurlemonHazel {
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = vec4(a_Position, 1.0);	
+				gl_Position = u_ProjectView * vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -109,12 +113,14 @@ namespace PurlemonHazel {
 			
 			layout(location = 0) in vec3 a_Position;
 
+			uniform mat4 u_ProjectView;
+
 			out vec3 v_Position;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = vec4(a_Position, 1.0);	
+				gl_Position = u_ProjectView * vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -167,16 +173,20 @@ namespace PurlemonHazel {
 	void Application::Run()
 	{
 		while (running_) {
-			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
 
-			blue_shader_->Bind();
-			square_va_->Bind();
-			glDrawElements(GL_TRIANGLES, square_va_->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			RenderCommand::SetClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
+			RenderCommand::Clear();
 
-			shader_->Bind();
-			vertex_array_->Bind();
-			glDrawElements(GL_TRIANGLES, vertex_array_->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			camera_.SetPosition({ 0.5f,0.5f,0.0f });
+			camera_.SetRotation(45.0f);
+
+			Renderer::BeginScene(camera_);
+			{
+				Renderer::Submit(blue_shader_, square_va_);
+
+				Renderer::Submit(shader_, vertex_array_);
+			}
+			Renderer::EndScene();
 
 			for (Layer* layer : layer_stack_)
 				layer->OnUpdate();

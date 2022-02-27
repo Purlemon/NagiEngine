@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
@@ -33,7 +34,10 @@
     <ClInclude Include="src\PurlemonHazel\MouseButtonCodes.h" />
     <ClInclude Include="src\PurlemonHazel\Renderer\Buffer.h" />
     <ClInclude Include="src\PurlemonHazel\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\PurlemonHazel\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\PurlemonHazel\Renderer\RenderCommand.h" />
     <ClInclude Include="src\PurlemonHazel\Renderer\Renderer.h" />
+    <ClInclude Include="src\PurlemonHazel\Renderer\RendererAPI.h" />
     <ClInclude Include="src\PurlemonHazel\Renderer\Shader.h" />
     <ClInclude Include="src\PurlemonHazel\Renderer\VertexArray.h" />
     <ClInclude Include="src\PurlemonHazel\Window.h" />
@@ -41,6 +45,7 @@
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
@@ -51,7 +56,10 @@
     <ClCompile Include="src\PurlemonHazel\Log.cpp" />
     <ClCompile Include="src\PurlemonHazel\Application.cpp" />
     <ClCompile Include="src\PurlemonHazel\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\PurlemonHazel\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\PurlemonHazel\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\PurlemonHazel\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\PurlemonHazel\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\PurlemonHazel\Renderer\Shader.cpp" />
     <ClCompile Include="src\PurlemonHazel\Renderer\VertexArray.cpp" />
   </ItemGroup>

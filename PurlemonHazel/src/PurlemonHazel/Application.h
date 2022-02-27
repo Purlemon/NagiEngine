@@ -35,14 +35,6 @@ namespace PurlemonHazel {
 		bool running_ = true;
 		LayerStack layer_stack_;
 
-		// Render 
-		std::shared_ptr<Shader>shader_;
-		std::shared_ptr<VertexArray>vertex_array_;
-
-		std::shared_ptr<Shader>blue_shader_;
-		std::shared_ptr<VertexArray>square_va_;
-
-		OrthographicCamera camera_;
 	private:
 		static Application* instance_;
 	};

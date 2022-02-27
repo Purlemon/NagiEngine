@@ -13,6 +13,17 @@
 
 #include "PurlemonHazel/ImGui/ImGuiLayer.h"
 
-// ----入口点----------------------
+// ----Renderer------------------
+#include "PurlemonHazel/Renderer/Renderer.h"
+#include "PurlemonHazel/Renderer/RenderCommand.h"
+
+#include "PurlemonHazel/Renderer/Buffer.h"
+#include "PurlemonHazel/Renderer/Shader.h"
+#include "PurlemonHazel/Renderer/VertexArray.h"
+
+#include "PurlemonHazel/Renderer/OrthographicCamera.h"
+// ------------------------------
+
+// ----入口点---------------------
 #include"PurlemonHazel/EntryPoint.h"
-// -------------------------------
+// ------------------------------

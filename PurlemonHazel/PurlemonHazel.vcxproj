@@ -17,6 +17,7 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="src\PurlemonHazel\Core\Timestep.h" />
     <ClInclude Include="src\PurlemonHazel\Event\ApplicationEvent.h" />
     <ClInclude Include="src\PurlemonHazel\Event\Event.h" />
     <ClInclude Include="src\PurlemonHazel\Event\KeyEvent.h" />

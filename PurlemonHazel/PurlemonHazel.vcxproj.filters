@@ -105,6 +105,9 @@
     <ClInclude Include="src\PurlemonHazel\Renderer\OrthographicCamera.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\PurlemonHazel\Core\Timestep.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\PurlemonHazel\Application.cpp">

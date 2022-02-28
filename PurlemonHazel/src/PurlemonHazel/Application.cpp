@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "Input.h"
 
-#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include "PurlemonHazel/Renderer/Renderer.h"
 
 namespace PurlemonHazel {
@@ -59,8 +59,12 @@ namespace PurlemonHazel {
 	void Application::Run()
 	{
 		while (running_) {
+			float time = glfwGetTime(); // TODO: 对不同平台的GetTime
+			Timestep timestep(time - last_frame_time_);
+			last_frame_time_ = time;
+
 			for (Layer* layer : layer_stack_)
-				layer->OnUpdate();
+				layer->OnUpdate(timestep);
 
 			imgui_layer_->Begin();
 			for (Layer* layer : layer_stack_)

@@ -131,22 +131,22 @@ public:
 
 	}
 
-	void OnUpdate() override
+	void OnUpdate(PH::Timestep ts) override
 	{
 		if (PH::Input::IsKeyPressed(PH_KEY_LEFT))
-			camera_pos_.x -= camera_move_speed_;
+			camera_pos_.x -= camera_move_speed_ * ts;
 		else if (PH::Input::IsKeyPressed(PH_KEY_RIGHT))
-			camera_pos_.x += camera_move_speed_;
+			camera_pos_.x += camera_move_speed_ * ts;
 
 		if (PH::Input::IsKeyPressed(PH_KEY_UP))
-			camera_pos_.y += camera_move_speed_;
+			camera_pos_.y += camera_move_speed_ * ts;
 		else if (PH::Input::IsKeyPressed(PH_KEY_DOWN))
-			camera_pos_.y -= camera_move_speed_;
+			camera_pos_.y -= camera_move_speed_ * ts;
 		
 		if (PH::Input::IsKeyPressed(PH_KEY_A))
-			camera_rotation_ += camera_rota_speed_;
+			camera_rotation_ += camera_rota_speed_ * ts;
 		else if (PH::Input::IsKeyPressed(PH_KEY_D))
-			camera_rotation_ -= camera_rota_speed_;
+			camera_rotation_ -= camera_rota_speed_ * ts;
 
 		PurlemonHazel::RenderCommand::SetClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
 		PurlemonHazel::RenderCommand::Clear();
@@ -195,8 +195,8 @@ private:
 	float camera_rotation_;
 	glm::vec3 camera_pos_;
 
-	float camera_rota_speed_ = 1.0f;
-	float camera_move_speed_ = 0.1f;
+	float camera_rota_speed_ = 10.0f;
+	float camera_move_speed_ = 10.0f;
 };
 
 class Sandbox:public PurlemonHazel::Application

@@ -8,7 +8,7 @@ class ExampleLayer : public PurlemonHazel::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), camera_(-1.6f, 1.6f, -0.9f, 0.9f), camera_pos_(0.0f), camera_rotation_(0.0f)
+		: Layer("Example"), camera_(-1.6f, 1.6f, -0.9f, 0.9f), camera_pos_(0.0f), camera_rotation_(0.0f), square_pos_(0.0f)
 	{
 
 		// ----------------------------
@@ -43,7 +43,8 @@ public:
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
 
-			uniform mat4 u_ProjectView;
+			uniform mat4 u_ProjectionView;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 			out vec4 v_Color;
@@ -52,7 +53,7 @@ public:
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = u_ProjectView * vec4(a_Position, 1.0);	
+				gl_Position = u_ProjectionView * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -100,14 +101,15 @@ public:
 			
 			layout(location = 0) in vec3 a_Position;
 
-			uniform mat4 u_ProjectView;
+			uniform mat4 u_ProjectionView;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = u_ProjectView * vec4(a_Position, 1.0);	
+				gl_Position = u_ProjectionView * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -133,6 +135,7 @@ public:
 
 	void OnUpdate(PH::Timestep ts) override
 	{
+		// Camera
 		if (PH::Input::IsKeyPressed(PH_KEY_LEFT))
 			camera_pos_.x -= camera_move_speed_ * ts;
 		else if (PH::Input::IsKeyPressed(PH_KEY_RIGHT))
@@ -148,6 +151,17 @@ public:
 		else if (PH::Input::IsKeyPressed(PH_KEY_D))
 			camera_rotation_ -= camera_rota_speed_ * ts;
 
+		// Square
+		if (PH::Input::IsKeyPressed(PH_KEY_J))
+			square_pos_.x -= square_move_speed_ * ts;
+		else if (PH::Input::IsKeyPressed(PH_KEY_L))
+			square_pos_.x += square_move_speed_ * ts;
+
+		if (PH::Input::IsKeyPressed(PH_KEY_I))
+			square_pos_.y += square_move_speed_ * ts;
+		else if (PH::Input::IsKeyPressed(PH_KEY_K))
+			square_pos_.y -= square_move_speed_ * ts;
+
 		PurlemonHazel::RenderCommand::SetClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
 		PurlemonHazel::RenderCommand::Clear();
 
@@ -156,7 +170,7 @@ public:
 
 		PurlemonHazel::Renderer::BeginScene(camera_);
 		{
-			PurlemonHazel::Renderer::Submit(blue_shader_, square_va_);
+			PurlemonHazel::Renderer::Submit(blue_shader_, square_va_, glm::translate(glm::mat4(1.0f),square_pos_));
 
 			PurlemonHazel::Renderer::Submit(shader_, vertex_array_);
 		}
@@ -165,23 +179,8 @@ public:
 
 	void OnEvent(PurlemonHazel::Event& event) override
 	{
-		/*PH::EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<PH::KeyPressedEvent>(PH_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));*/
+
 	}
-
-	/*bool OnKeyPressedEvent(PH::KeyPressedEvent& event)
-	{
-		if (event.GetKeyCode() == PH_KEY_LEFT) 
-			camera_pos_.x -= camera_speed_;
-		if (event.GetKeyCode() == PH_KEY_RIGHT) 
-			camera_pos_.x += camera_speed_;
-		if (event.GetKeyCode() == PH_KEY_DOWN) 
-			camera_pos_.y -= camera_speed_;
-		if (event.GetKeyCode() == PH_KEY_UP) 
-			camera_pos_.y += camera_speed_;
-
-		return false;
-	}*/
 
 private:
 	// Render 
@@ -191,12 +190,17 @@ private:
 	std::shared_ptr<PurlemonHazel::Shader>blue_shader_;
 	std::shared_ptr<PurlemonHazel::VertexArray>square_va_;
 
+	// Camera
 	PurlemonHazel::OrthographicCamera camera_;
 	float camera_rotation_;
 	glm::vec3 camera_pos_;
 
-	float camera_rota_speed_ = 10.0f;
-	float camera_move_speed_ = 10.0f;
+	float camera_rota_speed_ = 60.0f;
+	float camera_move_speed_ = 5.0f;
+
+	// Square
+	glm::vec3 square_pos_;
+	float square_move_speed_ = 10.0f;
 };
 
 class Sandbox:public PurlemonHazel::Application

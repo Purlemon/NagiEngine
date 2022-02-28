@@ -1,7 +1,5 @@
 #include "OrthographicCamera.h"
 
-#include "glm/gtc/matrix_transform.hpp"
-
 namespace PurlemonHazel {
 
 	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top)

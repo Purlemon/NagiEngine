@@ -2,6 +2,9 @@
 
 #include "imgui.h"
 
+#include "Platform/OpenGL/OpenGLShader.h"
+#include <glm/gtc/type_ptr.hpp>
+
 #define PH PurlemonHazel
 
 class ExampleLayer : public PurlemonHazel::Layer
@@ -72,7 +75,7 @@ public:
 			}
 		)";
 
-		shader_.reset(new PH::Shader(vertex_src, fragment_src));
+		shader_.reset(PH::Shader::Create(vertex_src, fragment_src));
 
 		// Õý·½ÐÎ
 		square_va_.reset(PH::VertexArray::Create());
@@ -118,19 +121,16 @@ public:
 			
 			layout(location = 0) out vec4 color;
 
+			uniform vec4 u_Color;
+
 			in vec3 v_Position;
 
 			void main()
 			{
-				color = vec4(0.2f, 0.3f, 0.8f, 1.0f);
+				color = u_Color;
 			}
 		)";
-		blue_shader_.reset(new PH::Shader(blue_vertex_src, blue_fragment_src));
-	}
-
-	virtual void OnImGuiRender() override
-	{
-
+		color_shader_.reset(PH::Shader::Create(blue_vertex_src, blue_fragment_src));
 	}
 
 	void OnUpdate(PH::Timestep ts) override
@@ -170,11 +170,32 @@ public:
 
 		PurlemonHazel::Renderer::BeginScene(camera_);
 		{
-			PurlemonHazel::Renderer::Submit(blue_shader_, square_va_, glm::translate(glm::mat4(1.0f),square_pos_));
+			glm::vec4 blue = glm::vec4(0.2f, 0.3f, 0.8f, 1.0f);
+			glm::vec4 red = glm::vec4(0.8f, 0.2f, 0.3f, 1.0f);
+
+			glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+			
+			std::dynamic_pointer_cast<PH::OpenGLShader>(color_shader_)->Bind();
+			std::dynamic_pointer_cast<PH::OpenGLShader>(color_shader_)->UploadUniforFloat4("u_Color", square_color_);
+
+			for (int y = 0; y < 20; ++y) {
+				for (int x = 0; x < 20; ++x) {
+					glm::vec3 pos(x * 0.18f, y * 0.18f, 0.0f);
+					glm::mat4 transform = glm::translate(glm::translate(glm::mat4(1.0f),square_pos_), pos) * scale;
+					PurlemonHazel::Renderer::Submit(color_shader_, square_va_, transform);
+				}
+			}
 
 			PurlemonHazel::Renderer::Submit(shader_, vertex_array_);
 		}
 		PurlemonHazel::Renderer::EndScene();
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit4("Square Color", glm::value_ptr(square_color_));
+		ImGui::End();
 	}
 
 	void OnEvent(PurlemonHazel::Event& event) override
@@ -187,7 +208,7 @@ private:
 	std::shared_ptr<PurlemonHazel::Shader>shader_;
 	std::shared_ptr<PurlemonHazel::VertexArray>vertex_array_;
 
-	std::shared_ptr<PurlemonHazel::Shader>blue_shader_;
+	std::shared_ptr<PurlemonHazel::Shader>color_shader_;
 	std::shared_ptr<PurlemonHazel::VertexArray>square_va_;
 
 	// Camera
@@ -201,6 +222,7 @@ private:
 	// Square
 	glm::vec3 square_pos_;
 	float square_move_speed_ = 10.0f;
+	glm::vec4 square_color_ = { 0.2f, 0.3f, 0.8f, 1.0f };
 };
 
 class Sandbox:public PurlemonHazel::Application

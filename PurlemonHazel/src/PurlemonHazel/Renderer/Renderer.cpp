@@ -1,5 +1,7 @@
 #include "Renderer.h"
 
+#include "Platform/OpenGL/OpenGLShader.h"
+
 namespace PurlemonHazel {
 
 	Renderer::SceneData* Renderer::scene_data_ = new SceneData();
@@ -19,8 +21,8 @@ namespace PurlemonHazel {
 	{
 		shader->Bind();
 		// 这里硬编码uniform名称，记得和shader里面的同名
-		shader->UploadUniformMat4("u_ProjectionView", scene_data_->projection_view_matrix);
-		shader->UploadUniformMat4("u_Transform", transform);
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ProjectionView", scene_data_->projection_view_matrix);
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
 
 		vertex_array->Bind();
 		RenderCommand::DrawIndexed(vertex_array);

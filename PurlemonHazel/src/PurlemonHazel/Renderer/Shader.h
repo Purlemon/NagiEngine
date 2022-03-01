@@ -1,22 +1,18 @@
 #pragma once
 
 #include <string>
-#include <glm/glm.hpp>
 
 namespace PurlemonHazel {
 
 	class Shader
 	{
 	public:
-		Shader(const std::string& vertex_src, const std::string& fragment_src);
-		~Shader();
+		virtual ~Shader() = default;
 
-		void Bind()const;
-		void Unbind()const;
+		virtual void Bind()const = 0;
+		virtual void Unbind()const = 0;
 
-		void UploadUniformMat4(const char* name ,const glm::mat4& matrix);
-	private:
-		uint32_t render_id_;
+		static Shader* Create(const std::string& vertex_src, const std::string& fragment_src);
 	};
 
 }

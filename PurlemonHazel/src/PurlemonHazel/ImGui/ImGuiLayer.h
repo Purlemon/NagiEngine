@@ -6,7 +6,7 @@
 #include "PurlemonHazel/Event/KeyEvent.h"
 #include "PurlemonHazel/Event/ApplicationEvent.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	class PH_API ImGuiLayer :public Layer
 	{

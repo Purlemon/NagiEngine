@@ -2,14 +2,14 @@
 
 #include "PurlemonHazel/Renderer/RendererAPI.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	class OpenGLRendererAPI :public RendererAPI
 	{
 		void SetClearColor(const glm::vec4& color) override;
 		void Clear() override;
 
-		void DrawIndexed(const std::shared_ptr<VertexArray>& vertex_array) override;
+		void DrawIndexed(const PH::Ref<VertexArray>& vertex_array) override;
 	};
 
 }

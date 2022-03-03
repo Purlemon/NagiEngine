@@ -8,7 +8,7 @@
 
 #include "PurlemonHazel/Application.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	ImGuiLayer::ImGuiLayer()
 		: Layer("ImGuiLayer")

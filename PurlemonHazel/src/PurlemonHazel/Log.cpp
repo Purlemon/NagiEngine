@@ -1,6 +1,6 @@
 #include "Log.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
-namespace PurlemonHazel {
+namespace PH {
 
 	std::shared_ptr<spdlog::logger>Log::core_logger_;
 	std::shared_ptr<spdlog::logger>Log::client_logger_;

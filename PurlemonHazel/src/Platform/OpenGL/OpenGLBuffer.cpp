@@ -2,7 +2,7 @@
 
 #include <glad/glad.h>
 
-namespace PurlemonHazel {
+namespace PH {
 
 	// ------------------------------------------
 	// OpenGLVertexBuffer

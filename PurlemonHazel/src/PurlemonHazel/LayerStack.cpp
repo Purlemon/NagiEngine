@@ -1,6 +1,6 @@
 #include "LayerStack.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	LayerStack::LayerStack()
 	{

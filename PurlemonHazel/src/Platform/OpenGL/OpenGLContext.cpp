@@ -1,7 +1,7 @@
 #include "OpenGLContext.h"
 #include "PurlemonHazel/Log.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	OpenGLContext::OpenGLContext(class GLFWwindow* window_handle)
 		:window_handle_(window_handle)

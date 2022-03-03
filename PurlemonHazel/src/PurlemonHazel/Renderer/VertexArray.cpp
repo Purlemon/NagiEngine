@@ -3,7 +3,7 @@
 
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	VertexArray* VertexArray::Create()
 	{

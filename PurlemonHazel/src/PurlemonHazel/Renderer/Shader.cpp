@@ -3,7 +3,7 @@
 #include "Renderer.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	Shader* Shader::Create(const std::string& vertex_src, const std::string& fragment_src)
 	{

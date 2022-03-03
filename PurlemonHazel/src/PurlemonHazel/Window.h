@@ -5,7 +5,7 @@
 
 #include <functional>
 
-namespace PurlemonHazel {
+namespace PH {
 
 	// 用于存储初始化窗口信息
 	struct WindowProps
@@ -14,7 +14,7 @@ namespace PurlemonHazel {
 		unsigned int width;
 		unsigned int height;
 
-		WindowProps(const std::string& t = "PurlemonHazel",
+		WindowProps(const std::string& t = "PH",
 			unsigned int w = 1280,
 			unsigned int h =720)
 			:title(t),width(w),height(h){ }

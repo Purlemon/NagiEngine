@@ -12,7 +12,7 @@
 #include "Renderer/Buffer.h"
 #include "Renderer/OrthographicCamera.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	class PH_API Application
 	{

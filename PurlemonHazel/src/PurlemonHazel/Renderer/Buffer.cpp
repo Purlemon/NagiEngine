@@ -5,7 +5,7 @@
 
 #include "Platform/OpenGL/OpenGLBuffer.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	VertexBuffer* VertexBuffer::Create(float* vertices, unsigned int size)
 	{

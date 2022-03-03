@@ -5,9 +5,7 @@
 #include "Platform/OpenGL/OpenGLShader.h"
 #include <glm/gtc/type_ptr.hpp>
 
-#define PH PurlemonHazel
-
-class ExampleLayer : public PurlemonHazel::Layer
+class ExampleLayer : public PH::Layer
 {
 public:
 	ExampleLayer()
@@ -30,13 +28,13 @@ public:
 			{PH::ShaderDataType::Float3, "a_Position"},
 			{PH::ShaderDataType::Float4, "a_Color"},
 		};
-		std::shared_ptr<PH::VertexBuffer>vertex_buffer_;
+		PH::Ref<PH::VertexBuffer>vertex_buffer_;
 		vertex_buffer_.reset(PH::VertexBuffer::Create(vertices, sizeof(vertices)));
 		vertex_buffer_->SetLayout(layout);
 		vertex_array_->AddVertexBuffer(vertex_buffer_);
 
 		unsigned int indices[3] = { 0,1,2 };
-		std::shared_ptr<PH::IndexBuffer>index_buffer_;
+		PH::Ref<PH::IndexBuffer>index_buffer_;
 		index_buffer_.reset(PH::IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int)));
 		vertex_array_->SetIndexBuffer(index_buffer_);
 
@@ -87,7 +85,7 @@ public:
 			-0.75f,  0.75f, 0.0f,
 		};
 
-		std::shared_ptr<PH::VertexBuffer>square_vb;
+		PH::Ref<PH::VertexBuffer>square_vb;
 		square_vb.reset(PH::VertexBuffer::Create(square_vertices, sizeof(square_vertices)));
 		square_vb->SetLayout({
 			{ PH::ShaderDataType::Float3, "a_Position" }
@@ -95,7 +93,7 @@ public:
 		square_va_->AddVertexBuffer(square_vb);
 
 		unsigned int square_indices[6] = { 0,1,2,2,3,0 };
-		std::shared_ptr<PH::IndexBuffer>square_ib;
+		PH::Ref<PH::IndexBuffer>square_ib;
 		square_ib.reset(PH::IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(unsigned int)));
 		square_va_->SetIndexBuffer(square_ib);
 
@@ -162,13 +160,13 @@ public:
 		else if (PH::Input::IsKeyPressed(PH_KEY_K))
 			square_pos_.y -= square_move_speed_ * ts;
 
-		PurlemonHazel::RenderCommand::SetClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
-		PurlemonHazel::RenderCommand::Clear();
+		PH::RenderCommand::SetClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
+		PH::RenderCommand::Clear();
 
 		camera_.SetPosition(camera_pos_);
 		camera_.SetRotation(camera_rotation_);
 
-		PurlemonHazel::Renderer::BeginScene(camera_);
+		PH::Renderer::BeginScene(camera_);
 		{
 			glm::vec4 blue = glm::vec4(0.2f, 0.3f, 0.8f, 1.0f);
 			glm::vec4 red = glm::vec4(0.8f, 0.2f, 0.3f, 1.0f);
@@ -182,13 +180,13 @@ public:
 				for (int x = 0; x < 20; ++x) {
 					glm::vec3 pos(x * 0.18f, y * 0.18f, 0.0f);
 					glm::mat4 transform = glm::translate(glm::translate(glm::mat4(1.0f),square_pos_), pos) * scale;
-					PurlemonHazel::Renderer::Submit(color_shader_, square_va_, transform);
+					PH::Renderer::Submit(color_shader_, square_va_, transform);
 				}
 			}
 
-			PurlemonHazel::Renderer::Submit(shader_, vertex_array_);
+			PH::Renderer::Submit(shader_, vertex_array_);
 		}
-		PurlemonHazel::Renderer::EndScene();
+		PH::Renderer::EndScene();
 	}
 
 	virtual void OnImGuiRender() override
@@ -198,21 +196,21 @@ public:
 		ImGui::End();
 	}
 
-	void OnEvent(PurlemonHazel::Event& event) override
+	void OnEvent(PH::Event& event) override
 	{
 
 	}
 
 private:
 	// Render 
-	std::shared_ptr<PurlemonHazel::Shader>shader_;
-	std::shared_ptr<PurlemonHazel::VertexArray>vertex_array_;
+	PH::Ref<PH::Shader>shader_;
+	PH::Ref<PH::VertexArray>vertex_array_;
 
-	std::shared_ptr<PurlemonHazel::Shader>color_shader_;
-	std::shared_ptr<PurlemonHazel::VertexArray>square_va_;
+	PH::Ref<PH::Shader>color_shader_;
+	PH::Ref<PH::VertexArray>square_va_;
 
 	// Camera
-	PurlemonHazel::OrthographicCamera camera_;
+	PH::OrthographicCamera camera_;
 	float camera_rotation_;
 	glm::vec3 camera_pos_;
 
@@ -225,7 +223,7 @@ private:
 	glm::vec4 square_color_ = { 0.2f, 0.3f, 0.8f, 1.0f };
 };
 
-class Sandbox:public PurlemonHazel::Application
+class Sandbox:public PH::Application
 {
 public:
 	Sandbox()
@@ -239,7 +237,7 @@ public:
 };
 
 // 实现入口方法
-PurlemonHazel::Application* PurlemonHazel::CreateApplication()
+PH::Application* PH::CreateApplication()
 {
 	return new Sandbox();
 }

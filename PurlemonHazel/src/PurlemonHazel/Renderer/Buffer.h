@@ -5,7 +5,7 @@
 
 #include <vector>
 
-namespace PurlemonHazel {
+namespace PH {
 
 	enum class ShaderDataType
 	{
@@ -15,17 +15,17 @@ namespace PurlemonHazel {
 	static unsigned int ShaderDataTypeSize(ShaderDataType type) // 每个buffer块的大小
 	{
 		switch (type) {
-			case PurlemonHazel::ShaderDataType::Float:		return 4;
-			case PurlemonHazel::ShaderDataType::Float2:     return 4 * 2;
-			case PurlemonHazel::ShaderDataType::Float3:     return 4 * 3;
-			case PurlemonHazel::ShaderDataType::Float4:     return 4 * 4;
-			case PurlemonHazel::ShaderDataType::Mat3:		return 4 * 3 * 3;
-			case PurlemonHazel::ShaderDataType::Mat4:		return 4 * 4 * 4;
-			case PurlemonHazel::ShaderDataType::Int:		return 4;
-			case PurlemonHazel::ShaderDataType::Int2:		return 4 * 2;
-			case PurlemonHazel::ShaderDataType::Int3:		return 4 * 3;
-			case PurlemonHazel::ShaderDataType::Int4:		return 4 * 4;
-			case PurlemonHazel::ShaderDataType::Bool:		return 1;
+			case PH::ShaderDataType::Float:		return 4;
+			case PH::ShaderDataType::Float2:     return 4 * 2;
+			case PH::ShaderDataType::Float3:     return 4 * 3;
+			case PH::ShaderDataType::Float4:     return 4 * 4;
+			case PH::ShaderDataType::Mat3:		return 4 * 3 * 3;
+			case PH::ShaderDataType::Mat4:		return 4 * 4 * 4;
+			case PH::ShaderDataType::Int:		return 4;
+			case PH::ShaderDataType::Int2:		return 4 * 2;
+			case PH::ShaderDataType::Int3:		return 4 * 3;
+			case PH::ShaderDataType::Int4:		return 4 * 4;
+			case PH::ShaderDataType::Bool:		return 1;
 		}
 		
 		PH_CORE_ASSERT(false, "Unknown ShaderDataType!");
@@ -50,17 +50,17 @@ namespace PurlemonHazel {
 		unsigned int GetComponentCount()const // 每个buffer块组成元素的数量
 		{
 			switch (type) {
-				case PurlemonHazel::ShaderDataType::Float:		return 1;
-				case PurlemonHazel::ShaderDataType::Float2:		return 2;
-				case PurlemonHazel::ShaderDataType::Float3:		return 3;
-				case PurlemonHazel::ShaderDataType::Float4:		return 3;
-				case PurlemonHazel::ShaderDataType::Mat3:		return 3 * 3;
-				case PurlemonHazel::ShaderDataType::Mat4:		return 4 * 4;
-				case PurlemonHazel::ShaderDataType::Int:		return 1;
-				case PurlemonHazel::ShaderDataType::Int2:		return 2;
-				case PurlemonHazel::ShaderDataType::Int3:		return 3;
-				case PurlemonHazel::ShaderDataType::Int4:		return 4;
-				case PurlemonHazel::ShaderDataType::Bool:		return 1;
+				case PH::ShaderDataType::Float:		return 1;
+				case PH::ShaderDataType::Float2:		return 2;
+				case PH::ShaderDataType::Float3:		return 3;
+				case PH::ShaderDataType::Float4:		return 3;
+				case PH::ShaderDataType::Mat3:		return 3 * 3;
+				case PH::ShaderDataType::Mat4:		return 4 * 4;
+				case PH::ShaderDataType::Int:		return 1;
+				case PH::ShaderDataType::Int2:		return 2;
+				case PH::ShaderDataType::Int3:		return 3;
+				case PH::ShaderDataType::Int4:		return 4;
+				case PH::ShaderDataType::Bool:		return 1;
 			}
 
 			PH_CORE_ASSERT(false, "Unknown ShaderDataType!");

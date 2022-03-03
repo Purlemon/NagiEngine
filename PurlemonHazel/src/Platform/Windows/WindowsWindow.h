@@ -5,7 +5,7 @@
 
 struct GLFWwindow;
 
-namespace PurlemonHazel {
+namespace PH {
 
 	class WindowsWindow :public Window
 	{

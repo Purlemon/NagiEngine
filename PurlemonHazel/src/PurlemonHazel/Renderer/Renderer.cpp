@@ -2,7 +2,7 @@
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	Renderer::SceneData* Renderer::scene_data_ = new SceneData();
 
@@ -17,7 +17,7 @@ namespace PurlemonHazel {
 
 	}
 
-	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertex_array, const glm::mat4& transform)
+	void Renderer::Submit(const PH::Ref<Shader>& shader, const PH::Ref<VertexArray>& vertex_array, const glm::mat4& transform)
 	{
 		shader->Bind();
 		// 这里硬编码uniform名称，记得和shader里面的同名

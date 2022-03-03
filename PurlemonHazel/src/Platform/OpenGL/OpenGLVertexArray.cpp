@@ -2,22 +2,22 @@
 
 #include <glad/glad.h>
 
-namespace PurlemonHazel {
+namespace PH {
 
 	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
 	{
 		switch (type) {
-		case PurlemonHazel::ShaderDataType::Float:		return GL_FLOAT;
-		case PurlemonHazel::ShaderDataType::Float2:		return GL_FLOAT;
-		case PurlemonHazel::ShaderDataType::Float3:		return GL_FLOAT;
-		case PurlemonHazel::ShaderDataType::Float4:		return GL_FLOAT;
-		case PurlemonHazel::ShaderDataType::Mat3:		return GL_FLOAT;
-		case PurlemonHazel::ShaderDataType::Mat4:		return GL_FLOAT;
-		case PurlemonHazel::ShaderDataType::Int:		return GL_INT;
-		case PurlemonHazel::ShaderDataType::Int2:		return GL_INT;
-		case PurlemonHazel::ShaderDataType::Int3:		return GL_INT;
-		case PurlemonHazel::ShaderDataType::Int4:		return GL_INT;
-		case PurlemonHazel::ShaderDataType::Bool:		return GL_BOOL;
+		case PH::ShaderDataType::Float:		return GL_FLOAT;
+		case PH::ShaderDataType::Float2:		return GL_FLOAT;
+		case PH::ShaderDataType::Float3:		return GL_FLOAT;
+		case PH::ShaderDataType::Float4:		return GL_FLOAT;
+		case PH::ShaderDataType::Mat3:		return GL_FLOAT;
+		case PH::ShaderDataType::Mat4:		return GL_FLOAT;
+		case PH::ShaderDataType::Int:		return GL_INT;
+		case PH::ShaderDataType::Int2:		return GL_INT;
+		case PH::ShaderDataType::Int3:		return GL_INT;
+		case PH::ShaderDataType::Int4:		return GL_INT;
+		case PH::ShaderDataType::Bool:		return GL_BOOL;
 		}
 
 		PH_CORE_ASSERT(false, "Unknown ShaderDataType!");
@@ -44,7 +44,7 @@ namespace PurlemonHazel {
 		glBindVertexArray(0);
 	}
 
-	void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertex_buffer)
+	void OpenGLVertexArray::AddVertexBuffer(const PH::Ref<VertexBuffer>& vertex_buffer)
 	{
 		PH_CORE_ASSERT(vertex_buffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 
@@ -67,7 +67,7 @@ namespace PurlemonHazel {
 		vertex_buffers_.push_back(vertex_buffer);
 	}
 
-	void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& index_buffer)
+	void OpenGLVertexArray::SetIndexBuffer(const PH::Ref<IndexBuffer>& index_buffer)
 	{
 		glBindVertexArray(render_id_);
 		index_buffer->Bind();

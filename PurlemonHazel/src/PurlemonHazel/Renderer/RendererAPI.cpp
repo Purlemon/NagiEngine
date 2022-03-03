@@ -1,6 +1,6 @@
 #include "RendererAPI.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	RendererAPI::API RendererAPI::api_ = RendererAPI::API::OpenGL;
 

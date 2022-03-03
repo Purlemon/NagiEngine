@@ -4,7 +4,7 @@
 
 #include "PurlemonHazel/Renderer/Shader.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	class OpenGLShader : public Shader
 	{

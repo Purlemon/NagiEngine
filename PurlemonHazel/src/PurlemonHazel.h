@@ -1,7 +1,7 @@
 #pragma once
 
-// 仅供PurlemonHazel的程序使用
-// 包含PurlemonHazel的内容
+// 仅供PH的程序使用
+// 包含PH的内容
 
 #include<iostream>
 #include"PurlemonHazel/Application.h"

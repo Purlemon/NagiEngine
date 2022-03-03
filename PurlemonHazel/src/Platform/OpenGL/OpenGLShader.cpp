@@ -7,7 +7,7 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
-namespace PurlemonHazel {
+namespace PH {
 
 	OpenGLShader::OpenGLShader(const std::string& vertex_src, const std::string& fragment_src)
 	{

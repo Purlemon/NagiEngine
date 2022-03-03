@@ -5,7 +5,7 @@
 #include <string>
 #include <functional>
 
-namespace PurlemonHazel {
+namespace PH {
 
 	enum class EventType
 	{

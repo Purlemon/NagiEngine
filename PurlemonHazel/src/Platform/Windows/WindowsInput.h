@@ -2,7 +2,7 @@
 
 #include "PurlemonHazel/Input.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	class WindowsInput :public Input
 	{

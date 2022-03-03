@@ -1,6 +1,6 @@
 #include "OrthographicCamera.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top)
 		:projection_matrix_(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)), 

@@ -1,9 +1,11 @@
 #pragma once
 
+#include <memory>
+
 #ifdef PH_PLATFORM_WINDOWS // 在windows生效
 	#if PH_DYNAMIC_LINK
-		#ifdef PH_BUILD_DLL // 在PurlemonHazel中定义
-			#define PH_API __declspec(dllexport) // 在PurlemonHazel中导出dll
+		#ifdef PH_BUILD_DLL // 在PH中定义
+			#define PH_API __declspec(dllexport) // 在PH中导出dll
 		#else 
 			#define PH_API __declspec(dllimport) // 在其他项目中导入dll
 		#endif 
@@ -11,7 +13,7 @@
 		#define PH_API
 	#endif
 #else
-	#error PurlemonHazel only support windows!
+	#error PH only support windows!
 #endif 
 
 #ifdef PH_ENABLE_ASSERTS 
@@ -25,3 +27,14 @@
 #define BIT(x) (1 << x)
 
 #define PH_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+namespace PH {
+
+	// 便于之后更改实现
+	template<typename T>
+	using Scope = std::unique_ptr<T>;
+
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+
+}

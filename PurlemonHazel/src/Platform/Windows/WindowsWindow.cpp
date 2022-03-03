@@ -7,7 +7,7 @@
 
 #include "Platform/OpenGL/OpenGLContext.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	static bool sGLFWInitialized = false;
 

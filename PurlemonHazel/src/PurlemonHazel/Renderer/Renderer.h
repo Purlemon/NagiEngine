@@ -5,7 +5,7 @@
 
 #include "OrthographicCamera.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	class Renderer
 	{
@@ -15,8 +15,8 @@ namespace PurlemonHazel {
 
 		// 渲染每个物体
 		static void Submit(
-			const std::shared_ptr<Shader>& shader, 
-			const std::shared_ptr<VertexArray>& vertex_array,
+			const PH::Ref<Shader>& shader,
+			const PH::Ref<VertexArray>& vertex_array,
 			const glm::mat4& transform = glm::mat4(1.0f)
 		);
 

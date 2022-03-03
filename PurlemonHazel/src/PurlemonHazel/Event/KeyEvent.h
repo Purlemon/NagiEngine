@@ -4,7 +4,7 @@
 
 #include <sstream>
 
-namespace PurlemonHazel {
+namespace PH {
 
 	class PH_API KeyEvent : public Event
 	{ // ³éÏóÀà

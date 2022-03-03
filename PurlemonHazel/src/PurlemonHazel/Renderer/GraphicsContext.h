@@ -2,7 +2,7 @@
 
 #include "PurlemonHazel/Core.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	class PH_API GraphicsContext
 	{

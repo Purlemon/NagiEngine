@@ -3,7 +3,7 @@
 #include "PurlemonHazel/Application.h"
 #include <GLFW/glfw3.h>
 
-namespace PurlemonHazel {
+namespace PH {
 
 	Input* Input::instance_ = new WindowsInput();
 

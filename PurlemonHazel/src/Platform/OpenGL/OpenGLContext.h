@@ -7,7 +7,7 @@
 
 class GLFWwindow;
 
-namespace PurlemonHazel {
+namespace PH {
 
 	class OpenGLContext :public GraphicsContext
 	{

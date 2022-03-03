@@ -4,7 +4,7 @@
 
 #include <utility>
 
-namespace PurlemonHazel {
+namespace PH {
 	// µ¥ÀýÀà
 	class PH_API Input
 	{

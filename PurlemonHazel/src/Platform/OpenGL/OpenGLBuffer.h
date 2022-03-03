@@ -2,7 +2,7 @@
 
 #include "PurlemonHazel/Renderer/Buffer.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 	class OpenGLVertexBuffer :public VertexBuffer
 	{

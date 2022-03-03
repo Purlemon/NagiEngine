@@ -3,21 +3,21 @@
 
 #ifdef PH_PLATFORM_WINDOWS // ÔÚwindowsÉúÐ§
 
-extern PurlemonHazel::Application* PurlemonHazel::CreateApplication();
+extern PH::Application* PH::CreateApplication();
 
 int main(int argc, char** argv)
 {
-	PurlemonHazel::Log::Init();
+	PH::Log::Init();
 	PH_CORE_WARN("Initialized Log!");
 	int a = 5;
 	PH_INFO("Hello!Var={0}",a);
 
-	std::cout << "Hello PurlemonHazel!\n";
-	auto app = PurlemonHazel::CreateApplication();
+	std::cout << "Hello PH!\n";
+	auto app = PH::CreateApplication();
 	app->Run();
 	delete app;
 }
 
 #else
-	#error PurlemonHazel only support windows!
+	#error PH only support windows!
 #endif 

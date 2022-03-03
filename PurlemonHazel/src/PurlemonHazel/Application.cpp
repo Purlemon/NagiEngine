@@ -6,7 +6,7 @@
 #include <GLFW/glfw3.h>
 #include "PurlemonHazel/Renderer/Renderer.h"
 
-namespace PurlemonHazel {
+namespace PH {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 

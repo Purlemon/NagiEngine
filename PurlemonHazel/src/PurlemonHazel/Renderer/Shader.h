@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace PurlemonHazel {
+namespace PH {
 
 	class Shader
 	{

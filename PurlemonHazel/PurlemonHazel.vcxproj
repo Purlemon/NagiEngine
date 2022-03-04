@@ -15,6 +15,7 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
@@ -25,7 +26,8 @@
     <ClInclude Include="src\PurlemonHazel\Event\MouseEvent.h" />
     <ClInclude Include="src\PurlemonHazel\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\PurlemonHazel\Input.h" />
-    <ClInclude Include="src\PurlemonHazel\KeyCodes.h" />
+    <ClInclude Include="src\PurlemonHazel\PHCode\GLCode.h" />
+    <ClInclude Include="src\PurlemonHazel\PHCode\KeyCodes.h" />
     <ClInclude Include="src\PurlemonHazel\Layer.h" />
     <ClInclude Include="src\PurlemonHazel\LayerStack.h" />
     <ClInclude Include="src\PurlemonHazel\Log.h" />
@@ -41,14 +43,17 @@
     <ClInclude Include="src\PurlemonHazel\Renderer\Renderer.h" />
     <ClInclude Include="src\PurlemonHazel\Renderer\RendererAPI.h" />
     <ClInclude Include="src\PurlemonHazel\Renderer\Shader.h" />
+    <ClInclude Include="src\PurlemonHazel\Renderer\Texture.h" />
     <ClInclude Include="src\PurlemonHazel\Renderer\VertexArray.h" />
     <ClInclude Include="src\PurlemonHazel\Window.h" />
+    <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
@@ -64,6 +69,7 @@
     <ClCompile Include="src\PurlemonHazel\Renderer\Renderer.cpp" />
     <ClCompile Include="src\PurlemonHazel\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\PurlemonHazel\Renderer\Shader.cpp" />
+    <ClCompile Include="src\PurlemonHazel\Renderer\Texture.cpp" />
     <ClCompile Include="src\PurlemonHazel\Renderer\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -127,7 +133,7 @@
       <PreprocessorDefinitions>PH_PLATFORM_WINDOWS;PH_BUILD_DLL;IMGUI_API=__declspec(dllexport)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AssemblerOutput>AssemblyCode</AssemblerOutput>
-      <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\Glad\include;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\vendor\ImGui;$(SolutionDir)PurlemonHazel\vendor\GLFW\include;$(SolutionDir)PurlemonHazel\vendor\glm;$(SolutionDir)PurlemonHazel\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\Glad\include;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\vendor\ImGui;$(SolutionDir)PurlemonHazel\vendor\GLFW\include;$(SolutionDir)PurlemonHazel\vendor\stb_image;$(SolutionDir)PurlemonHazel\vendor\glm;$(SolutionDir)PurlemonHazel\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -145,7 +151,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>PH_PLATFORM_WINDOWS;PH_BUILD_DLL;IMGUI_API=__declspec(dllexport)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\Glad\include;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\vendor\ImGui;$(SolutionDir)PurlemonHazel\vendor\GLFW\include;$(SolutionDir)PurlemonHazel\vendor\glm;$(SolutionDir)PurlemonHazel\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\Glad\include;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\vendor\ImGui;$(SolutionDir)PurlemonHazel\vendor\GLFW\include;$(SolutionDir)PurlemonHazel\vendor\stb_image;$(SolutionDir)PurlemonHazel\vendor\glm;$(SolutionDir)PurlemonHazel\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>

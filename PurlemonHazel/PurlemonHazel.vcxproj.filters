@@ -63,7 +63,7 @@
     <ClInclude Include="src\PurlemonHazel\Input.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\PurlemonHazel\KeyCodes.h">
+    <ClInclude Include="src\PurlemonHazel\PHCode\KeyCodes.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\PurlemonHazel\MouseButtonCodes.h">
@@ -109,6 +109,18 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PurlemonHazel\Renderer\Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\stb_image\stb_image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PurlemonHazel\PHCode\GLCode.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -171,6 +183,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PurlemonHazel\Renderer\Texture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

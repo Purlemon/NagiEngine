@@ -18,6 +18,8 @@ namespace PH {
 		void UploadUniformMat3(const char* name, const glm::mat3& matrix);
 		void UploadUniformMat4(const char* name, const glm::mat4& matrix);
 		
+		void UploadUniforInt(const char* name, float value);
+
 		void UploadUniforFloat(const char* name, float value);
 		void UploadUniforFloat2(const char* name, const glm::vec2& vec);
 		void UploadUniforFloat3(const char* name, const glm::vec3& vec);

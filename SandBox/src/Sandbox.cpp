@@ -78,17 +78,18 @@ public:
 		// Õý·½ÐÎ
 		square_va_.reset(PH::VertexArray::Create());
 
-		float square_vertices[4 * 3] = {
-			-0.75f, -0.75f, 0.0f,
-			 0.75f, -0.75f, 0.0f,
-			 0.75f,  0.75f, 0.0f,
-			-0.75f,  0.75f, 0.0f,
+		float square_vertices[5 * 4] = {
+			-0.75f, -0.75f, 0.0f, 0.0f, 0.0f,
+			 0.75f, -0.75f, 0.0f, 1.0f, 0.0f,
+			 0.75f,  0.75f, 0.0f, 1.0f, 1.0f,
+			-0.75f,  0.75f, 0.0f, 0.0f, 1.0f,
 		};
 
 		PH::Ref<PH::VertexBuffer>square_vb;
 		square_vb.reset(PH::VertexBuffer::Create(square_vertices, sizeof(square_vertices)));
 		square_vb->SetLayout({
-			{ PH::ShaderDataType::Float3, "a_Position" }
+			{ PH::ShaderDataType::Float3, "a_Position" },
+			{ PH::ShaderDataType::Float2, "a_Position" }
 			});
 		square_va_->AddVertexBuffer(square_vb);
 
@@ -129,6 +130,46 @@ public:
 			}
 		)";
 		color_shader_.reset(PH::Shader::Create(blue_vertex_src, blue_fragment_src));
+	
+		std::string tex_vertex_src = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+
+			uniform mat4 u_ProjectionView;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TexCoord;
+
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ProjectionView * u_Transform * vec4(a_Position, 1.0);	
+			}
+		)";
+
+		std::string tex_fragment_src = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			uniform sampler2D u_Texture;
+
+			in vec2 v_TexCoord;
+
+			void main()
+			{
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+		tex_shader_.reset(PH::Shader::Create(tex_vertex_src, tex_fragment_src));
+	
+		texture2d_ = PH::Texture2D::Create("assets/textures/test.jpg");
+	
+		std::dynamic_pointer_cast<PH::OpenGLShader>(tex_shader_)->Bind();
+		std::dynamic_pointer_cast<PH::OpenGLShader>(tex_shader_)->UploadUniforInt("u_Texture", 0);
+
 	}
 
 	void OnUpdate(PH::Timestep ts) override
@@ -184,7 +225,10 @@ public:
 				}
 			}
 
-			PH::Renderer::Submit(shader_, vertex_array_);
+			texture2d_->Bind();
+			PH::Renderer::Submit(tex_shader_, square_va_, glm::mat4(1.0f));
+
+			//PH::Renderer::Submit(shader_, vertex_array_);
 		}
 		PH::Renderer::EndScene();
 	}
@@ -206,8 +250,10 @@ private:
 	PH::Ref<PH::Shader>shader_;
 	PH::Ref<PH::VertexArray>vertex_array_;
 
-	PH::Ref<PH::Shader>color_shader_;
+	PH::Ref<PH::Shader>color_shader_, tex_shader_;
 	PH::Ref<PH::VertexArray>square_va_;
+
+	PH::Ref<PH::Texture2D>texture2d_;
 
 	// Camera
 	PH::OrthographicCamera camera_;

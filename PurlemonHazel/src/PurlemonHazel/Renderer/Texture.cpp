@@ -5,7 +5,7 @@
 
 namespace PH {
 
-	Ref<Texture2D> Texture2D::Create(const std::string& path, unsigned int format)
+	Ref<Texture2D> Texture2D::Create(const std::string& path)
 	{
 		switch (Renderer::GetAPI()) {
 			case RendererAPI::API::None:
@@ -15,7 +15,7 @@ namespace PH {
 			}
 			case RendererAPI::API::OpenGL:
 			{
-				return std::make_shared<OpenGLTexture2D>(path, format);
+				return std::make_shared<OpenGLTexture2D>(path);
 			}
 		}
 

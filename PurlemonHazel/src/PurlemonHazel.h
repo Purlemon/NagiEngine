@@ -15,7 +15,6 @@
 #include "PurlemonHazel/ImGui/ImGuiLayer.h"
 
 #include "PurlemonHazel/PHCode/KeyCodes.h"
-#include "PurlemonHazel/PHCode/GLCode.h"
 
 // ----Renderer------------------
 #include "PurlemonHazel/Renderer/Renderer.h"

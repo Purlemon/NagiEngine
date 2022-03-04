@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PurlemonHazel/Core.h"
+#include "PurlemonHazel/Log.h"
 
 namespace PH {
 

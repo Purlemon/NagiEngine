@@ -166,6 +166,7 @@ public:
 		tex_shader_.reset(PH::Shader::Create(tex_vertex_src, tex_fragment_src));
 	
 		texture2d_ = PH::Texture2D::Create("assets/textures/test.jpg");
+		tex_sdz_ = PH::Texture2D::Create("assets/textures/2.png");
 	
 		std::dynamic_pointer_cast<PH::OpenGLShader>(tex_shader_)->Bind();
 		std::dynamic_pointer_cast<PH::OpenGLShader>(tex_shader_)->UploadUniforInt("u_Texture", 0);
@@ -228,6 +229,10 @@ public:
 			texture2d_->Bind();
 			PH::Renderer::Submit(tex_shader_, square_va_, glm::mat4(1.0f));
 
+			tex_sdz_->Bind();
+			PH::Renderer::Submit(tex_shader_, square_va_,glm::translate(glm::mat4(1.0f),glm::vec3(0.2f,0.25f,0.0f))
+				* glm::scale(glm::mat4(1.0f),glm::vec3(0.2f)));
+
 			//PH::Renderer::Submit(shader_, vertex_array_);
 		}
 		PH::Renderer::EndScene();
@@ -254,6 +259,7 @@ private:
 	PH::Ref<PH::VertexArray>square_va_;
 
 	PH::Ref<PH::Texture2D>texture2d_;
+	PH::Ref<PH::Texture2D>tex_sdz_;
 
 	// Camera
 	PH::OrthographicCamera camera_;

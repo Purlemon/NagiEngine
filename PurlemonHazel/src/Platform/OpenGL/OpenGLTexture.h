@@ -1,14 +1,13 @@
 #pragma once
 
 #include "PurlemonHazel/Renderer/Texture.h"
-#include "PurlemonHazel/PHCode/GLCode.h"
 
 namespace PH {
 
 	class OpenGLTexture2D :public Texture2D
 	{
 	public:
-		OpenGLTexture2D(const std::string& path, unsigned int format);
+		OpenGLTexture2D(const std::string& path);
 		~OpenGLTexture2D() override;
 
 		inline unsigned int GetWidth()const override { return width_; }

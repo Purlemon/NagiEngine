@@ -8,6 +8,11 @@ namespace PH {
 	class RenderCommand
 	{
 	public:
+		inline static void Init()
+		{
+			renderer_api_->Init();
+		}
+
 		inline static void SetClearColor(const glm::vec4& color)
 		{
 			return renderer_api_->SetClearColor(color);

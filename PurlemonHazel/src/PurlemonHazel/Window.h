@@ -14,7 +14,7 @@ namespace PH {
 		unsigned int width;
 		unsigned int height;
 
-		WindowProps(const std::string& t = "PH",
+		WindowProps(const std::string& t = "PurlemonHazel",
 			unsigned int w = 1280,
 			unsigned int h =720)
 			:title(t),width(w),height(h){ }

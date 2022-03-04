@@ -7,25 +7,36 @@
 
 namespace PH {
 
-	OpenGLTexture2D::OpenGLTexture2D(const std::string& path, unsigned int format)
+	OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
 		:path_(path)
 	{
 		int width, height, channels;
 		stbi_set_flip_vertically_on_load(true);
 		stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
-		if (!data)PH_CORE_ERROR("textureŒ¥º”‘ÿ£°");
 		PH_CORE_ASSERT(data, "Failed to load image!");
 		width_ = width;
 		height_ = height;
 
-		glGenTextures(1, &render_id_);
-		glBindTexture(GL_TEXTURE_2D, render_id_);
+		GLenum internal_format = 0, data_format = 0;
+		if (channels == 3) {	// RGB
+			internal_format = GL_RGB32F;
+			data_format = GL_RGB;
+		}
+		else if (channels == 4) { //RGBA
+			internal_format = GL_RGBA32F;
+			data_format = GL_RGBA;
+		}
+
+		PH_CORE_ASSERT(internal_format & data_format, "Format not supported!");
+
+		glCreateTextures(GL_TEXTURE_2D, 1, &render_id_);
+		glTextureStorage2D(render_id_, 1, internal_format, width_, height_);
 
 		glTextureParameteri(render_id_, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTextureParameteri(render_id_, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, format, GL_UNSIGNED_BYTE, data);
-	
+		glTextureSubImage2D(render_id_, 0, 0, 0, width_, height_, data_format, GL_UNSIGNED_BYTE, data);
+
 		stbi_image_free(data);
 	}
 

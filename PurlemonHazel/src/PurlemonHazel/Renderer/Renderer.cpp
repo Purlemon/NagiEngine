@@ -6,6 +6,11 @@ namespace PH {
 
 	Renderer::SceneData* Renderer::scene_data_ = new SceneData();
 
+	void Renderer::Init()
+	{
+		RenderCommand::Init();
+	}
+
 	void Renderer::BeginScene(OrthographicCamera& camera)
 	{
 		scene_data_->projection_view_matrix = camera.GetProjectionViewMatrix();

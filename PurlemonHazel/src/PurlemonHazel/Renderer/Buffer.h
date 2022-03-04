@@ -2,6 +2,7 @@
 
 #include <string>
 #include "PurlemonHazel/Core.h"
+#include "PurlemonHazel/Log.h"
 
 #include <vector>
 

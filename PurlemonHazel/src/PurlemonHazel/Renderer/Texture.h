@@ -1,7 +1,6 @@
 #pragma once
 
 #include "PurlemonHazel/Core.h"
-#include "PurlemonHazel/PHCode/GLCode.h"
 #include <string>
 
 namespace PH {
@@ -20,6 +19,6 @@ namespace PH {
 	class Texture2D :public Texture
 	{
 	public:
-		static Ref<Texture2D>Create(const std::string& path, unsigned int format = PH_RGB);
+		static Ref<Texture2D>Create(const std::string& path);
 	};
 }

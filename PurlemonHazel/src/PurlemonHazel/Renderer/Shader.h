@@ -1,6 +1,9 @@
 #pragma once
 
 #include <string>
+#include <unordered_map>
+
+#include <PurlemonHazel/Core.h>
 
 namespace PH {
 
@@ -12,7 +15,20 @@ namespace PH {
 		virtual void Bind()const = 0;
 		virtual void Unbind()const = 0;
 
-		static Shader* Create(const std::string& vertex_src, const std::string& fragment_src);
+		virtual const std::string& GetName()const = 0;
+
+		static Ref<Shader> Create(const std::string& name, const std::string& vertex_path, const std::string& fragment_path);
 	};
 
+	class ShaderLibrary
+	{
+	public:
+		void Add(const Ref<Shader>& shader);
+		Ref<Shader>Load(const std::string& name, const std::string& vertex_path, const std::string& fragment_path);
+		
+		Ref<Shader>Get(const std::string& name);
+		bool Exists(const std::string& name) const;
+	private:
+		std::unordered_map<std::string, Ref<Shader>>shaders_;
+	};
 }

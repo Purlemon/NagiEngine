@@ -2,6 +2,7 @@
 
 #include "PurlemonHazel/Log.h"
 
+#include <fstream>
 #include <vector>
 #include <glad/glad.h> 
 
@@ -9,7 +10,71 @@
 
 namespace PH {
 
-	OpenGLShader::OpenGLShader(const std::string& vertex_src, const std::string& fragment_src)
+	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertex_path, const std::string& fragment_path)
+		:name_(name)
+	{
+		std::string vertex_src = ReadFile(vertex_path);
+		std::string fragment_src = ReadFile(fragment_path);
+		Compile(vertex_src, fragment_src);
+	}
+
+	OpenGLShader::~OpenGLShader()
+	{
+		glDeleteProgram(render_id_);
+	}
+
+	void OpenGLShader::Bind()const
+	{
+		glUseProgram(render_id_);
+	}
+	void OpenGLShader::Unbind()const
+	{
+		glUseProgram(0);
+	}
+
+	void OpenGLShader::UploadUniformMat3(const char* name, const glm::mat3& matrix)
+	{
+		GLint location = glGetUniformLocation(render_id_, name);
+		glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+	}
+
+	void OpenGLShader::UploadUniformMat4(const char* name, const glm::mat4& matrix)
+	{
+		GLint location = glGetUniformLocation(render_id_, name);
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+	}
+
+	void OpenGLShader::UploadUniforInt(const char* name, float value)
+	{
+		GLint location = glGetUniformLocation(render_id_, name);
+		glUniform1i(location, value);
+	}
+
+	void OpenGLShader::UploadUniforFloat(const char* name, float value)
+	{
+		GLint location = glGetUniformLocation(render_id_, name);
+		glUniform1f(location, value);
+	}
+
+	void OpenGLShader::UploadUniforFloat2(const char* name, const glm::vec2& vec)
+	{
+		GLint location = glGetUniformLocation(render_id_, name);
+		glUniform2f(location, vec.x, vec.y);
+	}
+
+	void OpenGLShader::UploadUniforFloat3(const char* name, const glm::vec3& vec)
+	{
+		GLint location = glGetUniformLocation(render_id_, name);
+		glUniform3f(location, vec.x, vec.y, vec.z);
+	}
+
+	void OpenGLShader::UploadUniforFloat4(const char* name, const glm::vec4& vec)
+	{
+		GLint location = glGetUniformLocation(render_id_, name);
+		glUniform4f(location, vec.x, vec.y, vec.z, vec.w);
+	}
+
+	void OpenGLShader::Compile(const std::string& vertex_src, const std::string& fragment_src)
 	{
 		// Create an empty vertex shader handle
 		GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -110,60 +175,22 @@ namespace PH {
 		glDetachShader(program, fragmentShader);
 	}
 
-	OpenGLShader::~OpenGLShader()
+	std::string OpenGLShader::ReadFile(const std::string& path)
 	{
-		glDeleteProgram(render_id_);
-	}
+		std::string result;
+		std::ifstream file;
+		std::stringstream stream;
 
-	void OpenGLShader::Bind()const
-	{
-		glUseProgram(render_id_);
-	}
-	void OpenGLShader::Unbind()const
-	{
-		glUseProgram(0);
-	}
+		file.open(path);
 
-	void OpenGLShader::UploadUniformMat3(const char* name, const glm::mat3& matrix)
-	{
-		GLint location = glGetUniformLocation(render_id_, name);
-		glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+		if (file) {
+			stream << file.rdbuf();
+			file.close();
+			result = stream.str();
+		}
+		else {
+			PH_CORE_ERROR("Vertex shader file could not open in [{0}]", path);
+		}
+		return result;
 	}
-
-	void OpenGLShader::UploadUniformMat4(const char* name, const glm::mat4& matrix)
-	{
-		GLint location = glGetUniformLocation(render_id_, name);
-		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
-	}
-
-	void OpenGLShader::UploadUniforInt(const char* name, float value)
-	{
-		GLint location = glGetUniformLocation(render_id_, name);
-		glUniform1i(location, value);
-	}
-
-	void OpenGLShader::UploadUniforFloat(const char* name, float value)
-	{
-		GLint location = glGetUniformLocation(render_id_, name);
-		glUniform1f(location, value);
-	}
-
-	void OpenGLShader::UploadUniforFloat2(const char* name, const glm::vec2& vec)
-	{
-		GLint location = glGetUniformLocation(render_id_, name);
-		glUniform2f(location, vec.x, vec.y);
-	}
-
-	void OpenGLShader::UploadUniforFloat3(const char* name, const glm::vec3& vec)
-	{
-		GLint location = glGetUniformLocation(render_id_, name);
-		glUniform3f(location, vec.x, vec.y, vec.z);
-	}
-
-	void OpenGLShader::UploadUniforFloat4(const char* name, const glm::vec4& vec)
-	{
-		GLint location = glGetUniformLocation(render_id_, name);
-		glUniform4f(location, vec.x, vec.y, vec.z, vec.w);
-	}
-
 }

@@ -101,6 +101,12 @@
   <ItemGroup>
     <Image Include="assets\textures\2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\fragment\color.frag" />
+    <None Include="assets\shaders\fragment\texture.frag" />
+    <None Include="assets\shaders\vertex\color.vert" />
+    <None Include="assets\shaders\vertex\texture.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -38,43 +38,6 @@ public:
 		index_buffer_.reset(PH::IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int)));
 		vertex_array_->SetIndexBuffer(index_buffer_);
 
-		std::string vertex_src = R"(
-			#version 330 core
-			
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec4 a_Color;
-
-			uniform mat4 u_ProjectionView;
-			uniform mat4 u_Transform;
-
-			out vec3 v_Position;
-			out vec4 v_Color;
-
-			void main()
-			{
-				v_Position = a_Position;
-				v_Color = a_Color;
-				gl_Position = u_ProjectionView * u_Transform * vec4(a_Position, 1.0);	
-			}
-		)";
-
-		std::string fragment_src = R"(
-			#version 330 core
-			
-			layout(location = 0) out vec4 color;
-
-			in vec3 v_Position;
-			in vec4 v_Color;
-
-			void main()
-			{
-				color = vec4(v_Position * 0.5 + 0.5, 1.0);
-				color = v_Color;
-			}
-		)";
-
-		shader_.reset(PH::Shader::Create(vertex_src, fragment_src));
-
 		// Õý·½ÐÎ
 		square_va_.reset(PH::VertexArray::Create());
 
@@ -98,72 +61,8 @@ public:
 		square_ib.reset(PH::IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(unsigned int)));
 		square_va_->SetIndexBuffer(square_ib);
 
-		std::string blue_vertex_src = R"(
-			#version 330 core
-			
-			layout(location = 0) in vec3 a_Position;
-
-			uniform mat4 u_ProjectionView;
-			uniform mat4 u_Transform;
-
-			out vec3 v_Position;
-
-			void main()
-			{
-				v_Position = a_Position;
-				gl_Position = u_ProjectionView * u_Transform * vec4(a_Position, 1.0);	
-			}
-		)";
-
-		std::string blue_fragment_src = R"(
-			#version 330 core
-			
-			layout(location = 0) out vec4 color;
-
-			uniform vec4 u_Color;
-
-			in vec3 v_Position;
-
-			void main()
-			{
-				color = u_Color;
-			}
-		)";
-		color_shader_.reset(PH::Shader::Create(blue_vertex_src, blue_fragment_src));
-	
-		std::string tex_vertex_src = R"(
-			#version 330 core
-			
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec2 a_TexCoord;
-
-			uniform mat4 u_ProjectionView;
-			uniform mat4 u_Transform;
-
-			out vec2 v_TexCoord;
-
-			void main()
-			{
-				v_TexCoord = a_TexCoord;
-				gl_Position = u_ProjectionView * u_Transform * vec4(a_Position, 1.0);	
-			}
-		)";
-
-		std::string tex_fragment_src = R"(
-			#version 330 core
-			
-			layout(location = 0) out vec4 color;
-
-			uniform sampler2D u_Texture;
-
-			in vec2 v_TexCoord;
-
-			void main()
-			{
-				color = texture(u_Texture, v_TexCoord);
-			}
-		)";
-		tex_shader_.reset(PH::Shader::Create(tex_vertex_src, tex_fragment_src));
+		auto tex_shader_ = shader_lib_.Load("color", "assets/shaders/vertex/color.vert", "assets/shaders/fragment/color.frag");
+		shader_lib_.Load("texture", "assets/shaders/vertex/texture.vert", "assets/shaders/fragment/texture.frag");
 	
 		texture2d_ = PH::Texture2D::Create("assets/textures/test.jpg");
 		tex_sdz_ = PH::Texture2D::Create("assets/textures/2.png");
@@ -215,22 +114,24 @@ public:
 
 			glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 			
-			std::dynamic_pointer_cast<PH::OpenGLShader>(color_shader_)->Bind();
-			std::dynamic_pointer_cast<PH::OpenGLShader>(color_shader_)->UploadUniforFloat4("u_Color", square_color_);
+			auto color = shader_lib_.Get("color");
+			std::dynamic_pointer_cast<PH::OpenGLShader>(color)->Bind();
+			std::dynamic_pointer_cast<PH::OpenGLShader>(color)->UploadUniforFloat4("u_Color", square_color_);
 
 			for (int y = 0; y < 20; ++y) {
 				for (int x = 0; x < 20; ++x) {
 					glm::vec3 pos(x * 0.18f, y * 0.18f, 0.0f);
 					glm::mat4 transform = glm::translate(glm::translate(glm::mat4(1.0f),square_pos_), pos) * scale;
-					PH::Renderer::Submit(color_shader_, square_va_, transform);
+					PH::Renderer::Submit(color, square_va_, transform);
 				}
 			}
 
+			auto texture = shader_lib_.Get("texture");
 			texture2d_->Bind();
-			PH::Renderer::Submit(tex_shader_, square_va_, glm::mat4(1.0f));
+			PH::Renderer::Submit(texture, square_va_, glm::mat4(1.0f));
 
 			tex_sdz_->Bind();
-			PH::Renderer::Submit(tex_shader_, square_va_,glm::translate(glm::mat4(1.0f),glm::vec3(0.2f,0.25f,0.0f))
+			PH::Renderer::Submit(texture, square_va_,glm::translate(glm::mat4(1.0f),glm::vec3(0.2f,0.25f,0.0f))
 				* glm::scale(glm::mat4(1.0f),glm::vec3(0.2f)));
 
 			//PH::Renderer::Submit(shader_, vertex_array_);
@@ -252,10 +153,9 @@ public:
 
 private:
 	// Render 
-	PH::Ref<PH::Shader>shader_;
+	PH::ShaderLibrary shader_lib_;
 	PH::Ref<PH::VertexArray>vertex_array_;
 
-	PH::Ref<PH::Shader>color_shader_, tex_shader_;
 	PH::Ref<PH::VertexArray>square_va_;
 
 	PH::Ref<PH::Texture2D>texture2d_;

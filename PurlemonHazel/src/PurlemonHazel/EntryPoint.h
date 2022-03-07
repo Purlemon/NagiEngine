@@ -9,10 +9,8 @@ int main(int argc, char** argv)
 {
 	PH::Log::Init();
 	PH_CORE_WARN("Initialized Log!");
-	int a = 5;
-	PH_INFO("Hello!Var={0}",a);
 
-	std::cout << "Hello PH!\n";
+	std::cout << "Hello PurlemonHazel!\n";
 	auto app = PH::CreateApplication();
 	app->Run();
 	delete app;

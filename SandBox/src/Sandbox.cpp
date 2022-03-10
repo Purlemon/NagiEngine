@@ -9,7 +9,7 @@ class ExampleLayer : public PH::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), camera_(-1.6f, 1.6f, -0.9f, 0.9f), camera_pos_(0.0f), camera_rotation_(0.0f), square_pos_(0.0f)
+		: Layer("Example"), camera_controller_(1280.0f / 720.0f, true), square_pos_(0.0f)
 	{
 
 		// ----------------------------
@@ -74,22 +74,6 @@ public:
 
 	void OnUpdate(PH::Timestep ts) override
 	{
-		// Camera
-		if (PH::Input::IsKeyPressed(PH_KEY_LEFT))
-			camera_pos_.x -= camera_move_speed_ * ts;
-		else if (PH::Input::IsKeyPressed(PH_KEY_RIGHT))
-			camera_pos_.x += camera_move_speed_ * ts;
-
-		if (PH::Input::IsKeyPressed(PH_KEY_UP))
-			camera_pos_.y += camera_move_speed_ * ts;
-		else if (PH::Input::IsKeyPressed(PH_KEY_DOWN))
-			camera_pos_.y -= camera_move_speed_ * ts;
-		
-		if (PH::Input::IsKeyPressed(PH_KEY_A))
-			camera_rotation_ += camera_rota_speed_ * ts;
-		else if (PH::Input::IsKeyPressed(PH_KEY_D))
-			camera_rotation_ -= camera_rota_speed_ * ts;
-
 		// Square
 		if (PH::Input::IsKeyPressed(PH_KEY_J))
 			square_pos_.x -= square_move_speed_ * ts;
@@ -101,13 +85,14 @@ public:
 		else if (PH::Input::IsKeyPressed(PH_KEY_K))
 			square_pos_.y -= square_move_speed_ * ts;
 
+		// Update
+		camera_controller_.OnUpdate(ts);
+
+		// Render
 		PH::RenderCommand::SetClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
 		PH::RenderCommand::Clear();
 
-		camera_.SetPosition(camera_pos_);
-		camera_.SetRotation(camera_rotation_);
-
-		PH::Renderer::BeginScene(camera_);
+		PH::Renderer::BeginScene(camera_controller_.GetCamera());
 		{
 			glm::vec4 blue = glm::vec4(0.2f, 0.3f, 0.8f, 1.0f);
 			glm::vec4 red = glm::vec4(0.8f, 0.2f, 0.3f, 1.0f);
@@ -148,7 +133,7 @@ public:
 
 	void OnEvent(PH::Event& event) override
 	{
-
+		camera_controller_.OnEvent(event);
 	}
 
 private:
@@ -162,12 +147,7 @@ private:
 	PH::Ref<PH::Texture2D>tex_sdz_;
 
 	// Camera
-	PH::OrthographicCamera camera_;
-	float camera_rotation_;
-	glm::vec3 camera_pos_;
-
-	float camera_rota_speed_ = 60.0f;
-	float camera_move_speed_ = 5.0f;
+	PH::OrthographicCameraController camera_controller_;
 
 	// Square
 	glm::vec3 square_pos_;

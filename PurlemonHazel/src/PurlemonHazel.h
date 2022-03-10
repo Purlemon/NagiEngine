@@ -11,6 +11,7 @@
 
 #include "PurlemonHazel/Input.h"
 #include "PurlemonHazel/MouseButtonCodes.h"
+#include "PurlemonHazel/OrthographicCameraController.h"
 
 #include "PurlemonHazel/ImGui/ImGuiLayer.h"
 

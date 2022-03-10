@@ -120,6 +120,9 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\PurlemonHazel\OrthographicCameraController.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\PurlemonHazel\Application.cpp">
@@ -186,6 +189,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PurlemonHazel\OrthographicCameraController.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

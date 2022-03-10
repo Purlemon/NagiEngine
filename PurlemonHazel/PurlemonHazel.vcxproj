@@ -26,6 +26,7 @@
     <ClInclude Include="src\PurlemonHazel\Event\MouseEvent.h" />
     <ClInclude Include="src\PurlemonHazel\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\PurlemonHazel\Input.h" />
+    <ClInclude Include="src\PurlemonHazel\OrthographicCameraController.h" />
     <ClInclude Include="src\PurlemonHazel\PHCode\KeyCodes.h" />
     <ClInclude Include="src\PurlemonHazel\Layer.h" />
     <ClInclude Include="src\PurlemonHazel\LayerStack.h" />
@@ -62,6 +63,7 @@
     <ClCompile Include="src\PurlemonHazel\LayerStack.cpp" />
     <ClCompile Include="src\PurlemonHazel\Log.cpp" />
     <ClCompile Include="src\PurlemonHazel\Application.cpp" />
+    <ClCompile Include="src\PurlemonHazel\OrthographicCameraController.cpp" />
     <ClCompile Include="src\PurlemonHazel\Renderer\Buffer.cpp" />
     <ClCompile Include="src\PurlemonHazel\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\PurlemonHazel\Renderer\RenderCommand.cpp" />

@@ -13,6 +13,11 @@ namespace PH {
 			renderer_api_->Init();
 		}
 
+		inline static void SetViewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
+		{
+			return renderer_api_->SetViewport(x, y, width, height);
+		}
+
 		inline static void SetClearColor(const glm::vec4& color)
 		{
 			return renderer_api_->SetClearColor(color);

@@ -17,9 +17,9 @@ namespace PH {
 		const glm::vec3& GetPosition()const { return position_; }
 		void SetPosition(const glm::vec3& position) { position_ = position; RecalculateViewMatrix();}
 
-		float GetRotation() { return rotation_; }
-		void SetRotation(float rotation) { rotation_ = rotation; RecalculateViewMatrix(); }
-	
+		inline float GetRotation() { return rotation_; }
+		inline void SetRotation(float rotation) { rotation_ = rotation; RecalculateViewMatrix(); }
+
 		inline const glm::mat4& GetProjectionMatrix() const { return projection_matrix_; }
 		inline const glm::mat4& GetViewMatrix() const { return view_matrix_; }
 		inline const glm::mat4& GetProjectionViewMatrix() const { return projection_view_matrix_; }

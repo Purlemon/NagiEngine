@@ -31,10 +31,12 @@ namespace PH {
 		inline Window& GetWindow() { return *window_; }
 	private:
 		bool OnWindowClose(class WindowCloseEvent& e);
+		bool OnWindowResize(class WindowResizeEvent& e);
 	private:
 		std::unique_ptr<Window>window_;
 		ImGuiLayer* imgui_layer_;
 		bool running_ = true;
+		bool minimized_ = false; 
 		LayerStack layer_stack_;
 
 		Timestep timestep_;

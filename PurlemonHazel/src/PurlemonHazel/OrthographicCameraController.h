@@ -18,6 +18,9 @@ namespace PH {
 
 		inline OrthographicCamera& GetCamera() { return camera_; }
 		inline const OrthographicCamera& GetCamera() const { return camera_; }
+	
+		float GetZoomLevel() const { return zoom_level_; }
+		void SetZoomLevel(float level) { zoom_level_ = level; }
 	private:
 		bool OnMouseScrolled(MouseScrolledEvent& e);
 		bool OnWindowResized(WindowResizeEvent& e);

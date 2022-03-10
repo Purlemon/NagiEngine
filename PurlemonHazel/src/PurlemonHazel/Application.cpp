@@ -46,9 +46,12 @@ namespace PH {
 
 	void Application::OnEvent(Event& e)
 	{
-		// 接收到WindowCloseEvent事件关闭窗口
+		
 		EventDispatcher dispatcher(e);
+		// 接收到WindowCloseEvent事件关闭窗口
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+		
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
 
 		// 对所有层进行OnEvent调用
 		for (auto it = layer_stack_.end(); it != layer_stack_.begin(); ) {
@@ -65,8 +68,10 @@ namespace PH {
 			Timestep timestep(time - last_frame_time_);
 			last_frame_time_ = time;
 
-			for (Layer* layer : layer_stack_)
-				layer->OnUpdate(timestep);
+			if (!minimized_) { // 最小化不更新
+				for (Layer* layer : layer_stack_)
+					layer->OnUpdate(timestep);
+			}
 
 			imgui_layer_->Begin();
 			for (Layer* layer : layer_stack_)
@@ -75,6 +80,19 @@ namespace PH {
 
 			window_->OnUpdate();
 		}
+	}
+
+	bool Application::OnWindowResize(WindowResizeEvent& e)
+	{
+		if (e.GetWidth() == 0 || e.GetHeight() == 0) {
+			minimized_ = true;
+			return false;
+		}
+
+		minimized_ = false;
+		Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+
+		return false;
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& e)

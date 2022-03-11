@@ -18,6 +18,9 @@
     <ClCompile Include="src\Sandbox.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\Sandbox2D.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\2.png">
@@ -27,7 +30,12 @@
   <ItemGroup>
     <None Include="assets\shaders\vertex\texture.vert" />
     <None Include="assets\shaders\fragment\texture.frag" />
-    <None Include="assets\shaders\vertex\color.vert" />
-    <None Include="assets\shaders\fragment\color.frag" />
+    <None Include="assets\shaders\vertex\flat_color.vert" />
+    <None Include="assets\shaders\fragment\flat_color.frag" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Sandbox2D.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

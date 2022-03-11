@@ -5,6 +5,8 @@
 #include "Platform/OpenGL/OpenGLShader.h"
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Sandbox2D.h"
+
 class ExampleLayer : public PH::Layer
 {
 public:
@@ -17,7 +19,7 @@ public:
 		// ----------------------------
 
 		// 三角形
-		vertex_array_.reset(PH::VertexArray::Create());
+		vertex_array_ = PH::VertexArray::Create();
 
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
@@ -39,7 +41,7 @@ public:
 		vertex_array_->SetIndexBuffer(index_buffer_);
 
 		// 正方形
-		square_va_.reset(PH::VertexArray::Create());
+		square_va_ = PH::VertexArray::Create();
 
 		float square_vertices[5 * 4] = {
 			-0.75f, -0.75f, 0.0f, 0.0f, 0.0f,
@@ -160,7 +162,8 @@ class Sandbox:public PH::Application
 public:
 	Sandbox()
 	{
-		PushLayer(new ExampleLayer());
+		//PushLayer(new ExampleLayer());
+		PushLayer(new Sandbox2D());
 	}
 	~Sandbox()
 	{

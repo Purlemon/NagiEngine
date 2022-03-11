@@ -20,6 +20,7 @@ namespace PH {
 		static Ref<Shader> Create(const std::string& name, const std::string& vertex_path, const std::string& fragment_path);
 	};
 
+	// ´æ´¢ÒÑÅäÖÃºÃµÄshader
 	class ShaderLibrary
 	{
 	public:

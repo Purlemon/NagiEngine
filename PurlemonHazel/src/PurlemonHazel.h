@@ -27,7 +27,3 @@
 
 #include "PurlemonHazel/Renderer/OrthographicCameraController.h"
 // ------------------------------
-
-// ----Èë¿Úµã---------------------
-#include"PurlemonHazel/Core/EntryPoint.h"
-// ------------------------------

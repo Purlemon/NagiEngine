@@ -20,7 +20,7 @@ namespace PH {
 		virtual const std::vector<PH::Ref<VertexBuffer>>& GetVertexBuffers()const = 0;
 		virtual const PH::Ref<IndexBuffer>& GetIndexBuffer()const = 0;
 
-		static VertexArray* Create();
+		static Ref<VertexArray> Create();
 	};
 
 }

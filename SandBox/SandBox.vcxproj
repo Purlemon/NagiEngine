@@ -92,6 +92,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Sandbox.cpp" />
+    <ClCompile Include="src\Sandbox2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PurlemonHazel\PurlemonHazel.vcxproj">
@@ -102,10 +103,13 @@
     <Image Include="assets\textures\2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shaders\fragment\color.frag" />
+    <None Include="assets\shaders\fragment\flat_color.frag" />
     <None Include="assets\shaders\fragment\texture.frag" />
-    <None Include="assets\shaders\vertex\color.vert" />
+    <None Include="assets\shaders\vertex\flat_color.vert" />
     <None Include="assets\shaders\vertex\texture.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Sandbox2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

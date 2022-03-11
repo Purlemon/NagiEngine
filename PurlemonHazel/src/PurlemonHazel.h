@@ -18,6 +18,7 @@
 
 // ----Renderer------------------
 #include "PurlemonHazel/Renderer/Renderer.h"
+#include "PurlemonHazel/Renderer/Renderer2D.h"
 #include "PurlemonHazel/Renderer/RenderCommand.h"
 
 #include "PurlemonHazel/Renderer/Buffer.h"

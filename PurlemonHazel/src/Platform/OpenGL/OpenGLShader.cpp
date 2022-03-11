@@ -50,25 +50,25 @@ namespace PH {
 		glUniform1i(location, value);
 	}
 
-	void OpenGLShader::UploadUniforFloat(const char* name, float value)
+	void OpenGLShader::UploadUniformFloat(const char* name, float value)
 	{
 		GLint location = glGetUniformLocation(render_id_, name);
 		glUniform1f(location, value);
 	}
 
-	void OpenGLShader::UploadUniforFloat2(const char* name, const glm::vec2& vec)
+	void OpenGLShader::UploadUniformFloat2(const char* name, const glm::vec2& vec)
 	{
 		GLint location = glGetUniformLocation(render_id_, name);
 		glUniform2f(location, vec.x, vec.y);
 	}
 
-	void OpenGLShader::UploadUniforFloat3(const char* name, const glm::vec3& vec)
+	void OpenGLShader::UploadUniformFloat3(const char* name, const glm::vec3& vec)
 	{
 		GLint location = glGetUniformLocation(render_id_, name);
 		glUniform3f(location, vec.x, vec.y, vec.z);
 	}
 
-	void OpenGLShader::UploadUniforFloat4(const char* name, const glm::vec4& vec)
+	void OpenGLShader::UploadUniformFloat4(const char* name, const glm::vec4& vec)
 	{
 		GLint location = glGetUniformLocation(render_id_, name);
 		glUniform4f(location, vec.x, vec.y, vec.z, vec.w);

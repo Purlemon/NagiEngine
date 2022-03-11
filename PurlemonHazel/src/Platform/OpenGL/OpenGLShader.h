@@ -22,10 +22,10 @@ namespace PH {
 		
 		void UploadUniforInt(const char* name, float value);
 
-		void UploadUniforFloat(const char* name, float value);
-		void UploadUniforFloat2(const char* name, const glm::vec2& vec);
-		void UploadUniforFloat3(const char* name, const glm::vec3& vec);
-		void UploadUniforFloat4(const char* name, const glm::vec4& vec);
+		void UploadUniformFloat(const char* name, float value);
+		void UploadUniformFloat2(const char* name, const glm::vec2& vec);
+		void UploadUniformFloat3(const char* name, const glm::vec3& vec);
+		void UploadUniformFloat4(const char* name, const glm::vec4& vec);
 	private:
 		void Compile(const std::string& vertex_src, const std::string& fragment_src);
 		std::string ReadFile(const std::string& path);

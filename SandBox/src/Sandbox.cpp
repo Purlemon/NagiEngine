@@ -103,7 +103,7 @@ public:
 			
 			auto color = shader_lib_.Get("color");
 			std::dynamic_pointer_cast<PH::OpenGLShader>(color)->Bind();
-			std::dynamic_pointer_cast<PH::OpenGLShader>(color)->UploadUniforFloat4("u_Color", square_color_);
+			std::dynamic_pointer_cast<PH::OpenGLShader>(color)->UploadUniformFloat4("u_Color", square_color_);
 
 			for (int y = 0; y < 20; ++y) {
 				for (int x = 0; x < 20; ++x) {

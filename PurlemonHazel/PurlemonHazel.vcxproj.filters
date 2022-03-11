@@ -123,6 +123,9 @@
     <ClInclude Include="src\PurlemonHazel\Renderer\OrthographicCameraController.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\PurlemonHazel\Renderer\Renderer2D.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\PurlemonHazel\Core\Application.cpp">
@@ -192,6 +195,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\PurlemonHazel\Renderer\OrthographicCameraController.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PurlemonHazel\Renderer\Renderer2D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

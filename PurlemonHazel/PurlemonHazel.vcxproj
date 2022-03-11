@@ -25,17 +25,17 @@
     <ClInclude Include="src\PurlemonHazel\Event\KeyEvent.h" />
     <ClInclude Include="src\PurlemonHazel\Event\MouseEvent.h" />
     <ClInclude Include="src\PurlemonHazel\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\PurlemonHazel\Input.h" />
-    <ClInclude Include="src\PurlemonHazel\OrthographicCameraController.h" />
+    <ClInclude Include="src\PurlemonHazel\Core\Input.h" />
+    <ClInclude Include="src\PurlemonHazel\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="src\PurlemonHazel\PHCode\KeyCodes.h" />
-    <ClInclude Include="src\PurlemonHazel\Layer.h" />
-    <ClInclude Include="src\PurlemonHazel\LayerStack.h" />
-    <ClInclude Include="src\PurlemonHazel\Log.h" />
+    <ClInclude Include="src\PurlemonHazel\Core\Layer.h" />
+    <ClInclude Include="src\PurlemonHazel\Core\LayerStack.h" />
+    <ClInclude Include="src\PurlemonHazel\Core\Log.h" />
     <ClInclude Include="src\PurlemonHazel.h" />
-    <ClInclude Include="src\PurlemonHazel\Application.h" />
-    <ClInclude Include="src\PurlemonHazel\Core.h" />
-    <ClInclude Include="src\PurlemonHazel\EntryPoint.h" />
-    <ClInclude Include="src\PurlemonHazel\MouseButtonCodes.h" />
+    <ClInclude Include="src\PurlemonHazel\Core\Application.h" />
+    <ClInclude Include="src\PurlemonHazel\Core\Core.h" />
+    <ClInclude Include="src\PurlemonHazel\Core\EntryPoint.h" />
+    <ClInclude Include="src\PurlemonHazel\Core\MouseButtonCodes.h" />
     <ClInclude Include="src\PurlemonHazel\Renderer\Buffer.h" />
     <ClInclude Include="src\PurlemonHazel\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\PurlemonHazel\Renderer\OrthographicCamera.h" />
@@ -45,7 +45,7 @@
     <ClInclude Include="src\PurlemonHazel\Renderer\Shader.h" />
     <ClInclude Include="src\PurlemonHazel\Renderer\Texture.h" />
     <ClInclude Include="src\PurlemonHazel\Renderer\VertexArray.h" />
-    <ClInclude Include="src\PurlemonHazel\Window.h" />
+    <ClInclude Include="src\PurlemonHazel\Core\Window.h" />
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
@@ -59,11 +59,11 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\PurlemonHazel\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\PurlemonHazel\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\PurlemonHazel\Layer.cpp" />
-    <ClCompile Include="src\PurlemonHazel\LayerStack.cpp" />
-    <ClCompile Include="src\PurlemonHazel\Log.cpp" />
-    <ClCompile Include="src\PurlemonHazel\Application.cpp" />
-    <ClCompile Include="src\PurlemonHazel\OrthographicCameraController.cpp" />
+    <ClCompile Include="src\PurlemonHazel\Core\Layer.cpp" />
+    <ClCompile Include="src\PurlemonHazel\Core\LayerStack.cpp" />
+    <ClCompile Include="src\PurlemonHazel\Core\Log.cpp" />
+    <ClCompile Include="src\PurlemonHazel\Core\Application.cpp" />
+    <ClCompile Include="src\PurlemonHazel\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\PurlemonHazel\Renderer\Buffer.cpp" />
     <ClCompile Include="src\PurlemonHazel\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\PurlemonHazel\Renderer\RenderCommand.cpp" />

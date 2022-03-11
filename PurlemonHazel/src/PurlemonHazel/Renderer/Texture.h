@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PurlemonHazel/Core.h"
+#include "PurlemonHazel/Core/Core.h"
 #include <string>
 
 namespace PH {

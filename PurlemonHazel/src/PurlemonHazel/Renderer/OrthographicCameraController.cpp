@@ -1,7 +1,7 @@
 #include "OrthographicCameraController.h"
 
-#include "PHCode/KeyCodes.h"
-#include "Input.h"
+#include "PurlemonHazel/PHCode/KeyCodes.h"
+#include "PurlemonHazel/Core/Input.h"
 
 namespace PH {
 

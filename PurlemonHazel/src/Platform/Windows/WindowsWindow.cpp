@@ -1,5 +1,5 @@
 #include "WindowsWindow.h"
-#include "PurlemonHazel/Log.h"
+#include "PurlemonHazel/Core/Log.h"
 
 #include "PurlemonHazel/Event/ApplicationEvent.h"
 #include "PurlemonHazel/Event/KeyEvent.h"

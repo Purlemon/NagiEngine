@@ -1,5 +1,5 @@
 #include "OpenGLContext.h"
-#include "PurlemonHazel/Log.h"
+#include "PurlemonHazel/Core/Log.h"
 
 namespace PH {
 

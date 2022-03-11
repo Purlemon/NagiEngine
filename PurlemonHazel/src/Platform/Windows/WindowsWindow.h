@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PurlemonHazel/Window.h"
+#include "PurlemonHazel/Core/Window.h"
 #include "PurlemonHazel/Renderer/GraphicsContext.h"
 
 struct GLFWwindow;

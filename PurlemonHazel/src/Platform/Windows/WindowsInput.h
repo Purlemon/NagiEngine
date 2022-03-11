@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PurlemonHazel/Input.h"
+#include "PurlemonHazel/Core/Input.h"
 
 namespace PH {
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../PurlemonHazel/Core.h"
-#include "Event/Event.h"
+#include "Core.h"
+#include "PurlemonHazel/Event/Event.h"
 
 #include <functional>
 

@@ -1,6 +1,6 @@
 #include "WindowsInput.h"
 
-#include "PurlemonHazel/Application.h"
+#include "PurlemonHazel/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace PH {

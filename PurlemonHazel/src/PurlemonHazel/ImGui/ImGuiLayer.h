@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PurlemonHazel/Layer.h"
+#include "PurlemonHazel/Core/Layer.h"
 
 #include "PurlemonHazel/Event/MouseEvent.h"
 #include "PurlemonHazel/Event/KeyEvent.h"

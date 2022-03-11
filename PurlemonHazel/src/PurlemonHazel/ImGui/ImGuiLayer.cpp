@@ -6,7 +6,7 @@
 
 #include "GLFW/glfw3.h"
 
-#include "PurlemonHazel/Application.h"
+#include "PurlemonHazel/Core/Application.h"
 
 namespace PH {
 

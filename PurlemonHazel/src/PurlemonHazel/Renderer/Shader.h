@@ -3,7 +3,7 @@
 #include <string>
 #include <unordered_map>
 
-#include <PurlemonHazel/Core.h>
+#include <PurlemonHazel/Core/Core.h>
 
 namespace PH {
 

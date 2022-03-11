@@ -1,4 +1,4 @@
-#include "PurlemonHazel/Core.h"
+#include "PurlemonHazel/Core/Core.h"
 
 #include "Buffer.h"
 #include "Renderer.h"

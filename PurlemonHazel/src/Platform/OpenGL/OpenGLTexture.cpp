@@ -1,7 +1,7 @@
 #include "OpenGLTexture.h"
 
 #include "stb_image.h"
-#include "PurlemonHazel/Log.h"
+#include "PurlemonHazel/Core/Log.h"
 
 #include <glad/glad.h>
 

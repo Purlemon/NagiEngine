@@ -4,14 +4,13 @@
 // 包含PH的内容
 
 #include<iostream>
-#include"PurlemonHazel/Application.h"
-#include "PurlemonHazel/Log.h"
+#include"PurlemonHazel/Core/Application.h"
+#include "PurlemonHazel/Core/Log.h"
 
 #include "PurlemonHazel/Core/Timestep.h"
 
-#include "PurlemonHazel/Input.h"
-#include "PurlemonHazel/MouseButtonCodes.h"
-#include "PurlemonHazel/OrthographicCameraController.h"
+#include "PurlemonHazel/Core/Input.h"
+#include "PurlemonHazel/Core/MouseButtonCodes.h"
 
 #include "PurlemonHazel/ImGui/ImGuiLayer.h"
 
@@ -26,9 +25,9 @@
 #include "PurlemonHazel/Renderer/Texture.h"
 #include "PurlemonHazel/Renderer/VertexArray.h"
 
-#include "PurlemonHazel/Renderer/OrthographicCamera.h"
+#include "PurlemonHazel/Renderer/OrthographicCameraController.h"
 // ------------------------------
 
 // ----入口点---------------------
-#include"PurlemonHazel/EntryPoint.h"
+#include"PurlemonHazel/Core/EntryPoint.h"
 // ------------------------------

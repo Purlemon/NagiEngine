@@ -3,7 +3,7 @@
 #include <glm/glm.hpp>
 #include "glm/gtc/matrix_transform.hpp"
 
-#include "PurlemonHazel/Log.h"
+#include "PurlemonHazel/Core/Log.h"
 
 namespace PH {
 

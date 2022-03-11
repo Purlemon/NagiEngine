@@ -15,19 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\PurlemonHazel\Core.h">
+    <ClInclude Include="src\PurlemonHazel\Core\Core.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\PurlemonHazel\Application.h">
+    <ClInclude Include="src\PurlemonHazel\Core\Application.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\PurlemonHazel.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\PurlemonHazel\EntryPoint.h">
+    <ClInclude Include="src\PurlemonHazel\Core\EntryPoint.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\PurlemonHazel\Log.h">
+    <ClInclude Include="src\PurlemonHazel\Core\Log.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\PurlemonHazel\Event\Event.h">
@@ -42,16 +42,16 @@
     <ClInclude Include="src\PurlemonHazel\Event\ApplicationEvent.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\PurlemonHazel\Window.h">
+    <ClInclude Include="src\PurlemonHazel\Core\Window.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\PurlemonHazel\Layer.h">
+    <ClInclude Include="src\PurlemonHazel\Core\Layer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\PurlemonHazel\LayerStack.h">
+    <ClInclude Include="src\PurlemonHazel\Core\LayerStack.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\PurlemonHazel\ImGui\ImGuiLayer.h">
@@ -60,13 +60,13 @@
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\PurlemonHazel\Input.h">
+    <ClInclude Include="src\PurlemonHazel\Core\Input.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\PurlemonHazel\PHCode\KeyCodes.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\PurlemonHazel\MouseButtonCodes.h">
+    <ClInclude Include="src\PurlemonHazel\Core\MouseButtonCodes.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\PurlemonHazel\Renderer\GraphicsContext.h">
@@ -120,24 +120,24 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\PurlemonHazel\OrthographicCameraController.h">
+    <ClInclude Include="src\PurlemonHazel\Renderer\OrthographicCameraController.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\PurlemonHazel\Application.cpp">
+    <ClCompile Include="src\PurlemonHazel\Core\Application.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\PurlemonHazel\Log.cpp">
+    <ClCompile Include="src\PurlemonHazel\Core\Log.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\PurlemonHazel\Layer.cpp">
+    <ClCompile Include="src\PurlemonHazel\Core\Layer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\PurlemonHazel\LayerStack.cpp">
+    <ClCompile Include="src\PurlemonHazel\Core\LayerStack.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\PurlemonHazel\ImGui\ImGuiLayer.cpp">
@@ -191,7 +191,7 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\PurlemonHazel\OrthographicCameraController.cpp">
+    <ClCompile Include="src\PurlemonHazel\Renderer\OrthographicCameraController.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

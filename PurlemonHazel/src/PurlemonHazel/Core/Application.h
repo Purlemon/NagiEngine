@@ -1,16 +1,16 @@
 #pragma once
 #include "Core.h"
-#include "Event/Event.h"
+#include "PurlemonHazel/Event/Event.h"
 #include "Window.h"
-#include "ImGui/ImGuiLayer.h"
+#include "PurlemonHazel/ImGui/ImGuiLayer.h"
 #include "LayerStack.h"
 
-#include "Core/Timestep.h"
+#include "Timestep.h"
 
-#include "Renderer/VertexArray.h"
-#include "Renderer/Shader.h"
-#include "Renderer/Buffer.h"
-#include "Renderer/OrthographicCamera.h"
+#include "PurlemonHazel/Renderer/VertexArray.h"
+#include "PurlemonHazel/Renderer/Shader.h"
+#include "PurlemonHazel/Renderer/Buffer.h"
+#include "PurlemonHazel/Renderer/OrthographicCamera.h"
 
 namespace PH {
 

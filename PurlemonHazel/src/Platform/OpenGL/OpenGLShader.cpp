@@ -1,6 +1,6 @@
 #include "OpenGLShader.h"
 
-#include "PurlemonHazel/Log.h"
+#include "PurlemonHazel/Core/Log.h"
 
 #include <fstream>
 #include <vector>

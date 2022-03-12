@@ -5,14 +5,12 @@
 #include <glad/glad.h>
 #include "GLFW/glfw3.h"
 
-class GLFWwindow;
-
 namespace PH {
 
 	class OpenGLContext :public GraphicsContext
 	{
 	public:
-		OpenGLContext(GLFWwindow* window_handle);
+		OpenGLContext(struct GLFWwindow* window_handle);
 
 		void Init() override;
 		void SwapBuffers() override;

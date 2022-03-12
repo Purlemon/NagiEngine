@@ -64,7 +64,7 @@ namespace PH {
 	void Application::Run()
 	{
 		while (running_) {
-			float time = glfwGetTime(); // TODO: 对不同平台的GetTime
+			float time =(float)glfwGetTime(); // TODO: 对不同平台的GetTime
 			Timestep timestep(time - last_frame_time_);
 			last_frame_time_ = time;
 

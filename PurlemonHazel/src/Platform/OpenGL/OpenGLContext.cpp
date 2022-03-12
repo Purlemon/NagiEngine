@@ -3,7 +3,7 @@
 
 namespace PH {
 
-	OpenGLContext::OpenGLContext(class GLFWwindow* window_handle)
+	OpenGLContext::OpenGLContext(struct GLFWwindow* window_handle)
 		:window_handle_(window_handle)
 	{
 		PH_CORE_ASSERT(window_handle_, "Window handle is null! ");

@@ -66,7 +66,7 @@ namespace PH {
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 
-	void OpenGLShader::UploadUniformInt(const std::string& name, float value)
+	void OpenGLShader::UploadUniformInt(const std::string& name, int value)
 	{
 		GLint location = glGetUniformLocation(render_id_, name.c_str());
 		glUniform1i(location, value);

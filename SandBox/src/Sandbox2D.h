@@ -23,4 +23,12 @@ private:
 
 	glm::vec4 square_color_ = { 0.2f, 0.3f, 0.8f, 1.0f };
 	glm::ivec3 square_pos_ = { 100.0f, 100.0f, 100.0f };
+
+	// –‘ƒ‹≈‰÷√
+	struct ProfileResult
+	{
+		const char* Name;
+		float Time;
+	};
+	std::vector<ProfileResult> profile_results_;
 };

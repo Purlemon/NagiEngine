@@ -91,7 +91,7 @@ namespace PH {
 		DrawQuad({ position.x, position.y, 0.0f }, size, texture);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const const Ref<Texture2D>& texture)
+	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture)
 	{
 		texture->Bind(0);
 		sData->texture_shader->SetFloat4("u_Color", glm::vec4(1.0f));

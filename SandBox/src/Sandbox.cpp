@@ -71,7 +71,7 @@ public:
 		tex_sdz_ = PH::Texture2D::Create("assets/textures/2.png");
 	
 		std::dynamic_pointer_cast<PH::OpenGLShader>(tex_shader_)->Bind();
-		std::dynamic_pointer_cast<PH::OpenGLShader>(tex_shader_)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<PH::OpenGLShader>(tex_shader_)->UploadUniforInt("u_Texture", 0);
 
 	}
 

@@ -205,7 +205,7 @@ namespace PH {
 
 			for (Layer* layer : layer_stack_)
 				layer->OnUpdate();
->>>>>>> parent of 8f1285a (将渲染移动到sandbox中):PurlemonHazel/src/PurlemonHazel/Application.cpp
+>>>>>>> parent of 8f1285a (将渲染移动到sandbox�?:PurlemonHazel/src/PurlemonHazel/Application.cpp
 
 			imgui_layer_->Begin();
 			for (Layer* layer : layer_stack_)

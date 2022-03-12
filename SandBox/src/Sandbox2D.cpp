@@ -13,7 +13,7 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
-
+	texture2d_ = PH::Texture2D::Create("assets/textures/test.jpg");
 }
 
 void Sandbox2D::OnDetach()
@@ -31,6 +31,7 @@ void Sandbox2D::OnUpdate(PH::Timestep ts)
 	PH::Renderer2D::BeginScene(camera_controller_.GetCamera());
 	{
 		PH::Renderer2D::DrawQuad({ 0.0f,0.0f }, { 1.0f,1.0f }, square_color_);
+		PH::Renderer2D::DrawQuad({ (glm::vec3)square_pos_ / 100.0f }, { 1.0f,1.0f }, texture2d_);
 	}
 	PH::Renderer2D::EndScene();
 }
@@ -39,6 +40,7 @@ void Sandbox2D::OnImGuiRender()
 {
 	ImGui::Begin("Settings");
 	ImGui::ColorEdit4("Square Color", glm::value_ptr(square_color_));
+	ImGui::DragInt3("Pos", glm::value_ptr(square_pos_));
 	ImGui::End();
 }
 

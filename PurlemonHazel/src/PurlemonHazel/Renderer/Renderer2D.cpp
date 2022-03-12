@@ -22,17 +22,18 @@ namespace PH {
 		sData = new Renderer2DStorage();
 		sData->quad_vertex_array= VertexArray::Create();
 
-		float square_vertices[4 * 3] = {
-			-0.75f, -0.75f, 0.0f,
-			 0.75f, -0.75f, 0.0f,
-			 0.75f,  0.75f, 0.0f,
-			-0.75f,  0.75f, 0.0f
+		float square_vertices[4 * 5] = {
+			-0.75f, -0.75f, 0.0f, 0.0f, 0.0f,
+			 0.75f, -0.75f, 0.0f, 1.0f, 0.0f,
+			 0.75f,  0.75f, 0.0f, 1.0f, 1.0f,
+			-0.75f,  0.75f, 0.0f, 0.0f, 1.0f
 		};
 
 		Ref<PH::VertexBuffer>square_vb;
 		square_vb.reset(VertexBuffer::Create(square_vertices, sizeof(square_vertices)));
 		square_vb->SetLayout({
 			{ ShaderDataType::Float3, "a_Position" },
+			{ ShaderDataType::Float2, "a_TexCoord" },
 			});
 		sData->quad_vertex_array->AddVertexBuffer(square_vb);
 
@@ -40,10 +41,6 @@ namespace PH {
 		Ref<IndexBuffer>square_ib;
 		square_ib.reset(IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(unsigned int)));
 		sData->quad_vertex_array->SetIndexBuffer(square_ib);
-
-
-		sData->flat_color_shader = Shader::Create("flat_color", "assets/shaders/vertex/flat_color.vert", "assets/shaders/fragment/flat_color.frag");
-
 
 		sData->flat_color_shader = Shader::Create("flat_color", "assets/shaders/vertex/flat_color.vert", "assets/shaders/fragment/flat_color.frag");
 	
@@ -88,7 +85,6 @@ namespace PH {
 		RenderCommand::DrawIndexed(sData->quad_vertex_array);
 	}
 
-
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, size, texture);
@@ -106,5 +102,4 @@ namespace PH {
 		sData->quad_vertex_array->Bind();
 		RenderCommand::DrawIndexed(sData->quad_vertex_array);
 	}
-
 }

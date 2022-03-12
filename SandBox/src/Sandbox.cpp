@@ -2,7 +2,6 @@
 
 #include "imgui.h"
 
-<<<<<<< HEAD
 #include "Platform/OpenGL/OpenGLShader.h"
 #include <glm/gtc/type_ptr.hpp>
 
@@ -71,7 +70,7 @@ public:
 		tex_sdz_ = PH::Texture2D::Create("assets/textures/2.png");
 	
 		std::dynamic_pointer_cast<PH::OpenGLShader>(tex_shader_)->Bind();
-		std::dynamic_pointer_cast<PH::OpenGLShader>(tex_shader_)->UploadUniforInt("u_Texture", 0);
+		std::dynamic_pointer_cast<PH::OpenGLShader>(tex_shader_)->UploadUniformInt("u_Texture", 0);
 
 	}
 
@@ -125,26 +124,10 @@ public:
 			//PH::Renderer::Submit(shader_, vertex_array_);
 		}
 		PH::Renderer::EndScene();
-=======
-class ExampleLayer : public PurlemonHazel::Layer
-{
-public:
-	ExampleLayer()
-		: Layer("Example")
-	{
-	}
-
-	void OnUpdate() override
-	{
-		//PH_INFO("ExampleLayer::Update");
-		if (PurlemonHazel::Input::IsKeyPressed(PH_KEY_TAB))
-			PH_TRACE("tab key is pressed!");
->>>>>>> parent of 8f1285a (灏嗘覆鏌撶Щ鍔ㄥ埌sandbox涓?
 	}
 
 	virtual void OnImGuiRender() override
 	{
-<<<<<<< HEAD
 		ImGui::Begin("Settings");
 		ImGui::ColorEdit4("Square Color", glm::value_ptr(square_color_));
 		ImGui::End();
@@ -172,17 +155,6 @@ private:
 	glm::vec3 square_pos_;
 	float square_move_speed_ = 10.0f;
 	glm::vec4 square_color_ = { 0.2f, 0.3f, 0.8f, 1.0f };
-=======
-		//PH_TRACE("{0}", event);
-	}
-
-	virtual void OnImGuiRender() override
-	{
-		ImGui::Begin("Test");
-		ImGui::Text("Hello World");
-		ImGui::End();
-	}
->>>>>>> parent of 8f1285a (灏嗘覆鏌撶Щ鍔ㄥ埌sandbox涓?
 };
 
 class Sandbox:public PH::Application
@@ -197,7 +169,6 @@ public:
 	{
 
 	}
-
 };
 
 // 实现入口方法

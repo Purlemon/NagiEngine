@@ -15,7 +15,7 @@ namespace PH {
 			}
 			case RendererAPI::API::OpenGL:
 			{
-				return CreateRef<OpenGLTexture2D>(path);
+				return std::make_shared<OpenGLTexture2D>(path);
 			}
 		}
 
@@ -23,21 +23,4 @@ namespace PH {
 		return nullptr;
 	}
 
-	Ref<Texture2D> Texture2D::Create(unsigned int width, unsigned int height)
-	{
-		switch (Renderer::GetAPI()) {
-			case RendererAPI::API::None:
-			{
-				PH_CORE_ASSERT(false, "RendererAPI::None is not supported!");
-				return nullptr;
-			}
-			case RendererAPI::API::OpenGL:
-			{
-				return CreateRef<OpenGLTexture2D>(width, height);
-			}
-		}
-
-		PH_CORE_ASSERT(false, "Unknown RendererAPI!");
-		return nullptr;
-	}
 }

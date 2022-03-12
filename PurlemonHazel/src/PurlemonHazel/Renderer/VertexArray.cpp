@@ -15,7 +15,7 @@ namespace PH {
 			}
 			case RendererAPI::API::OpenGL:
 			{
-				return CreateRef<OpenGLVertexArray>();
+				return std::make_shared<OpenGLVertexArray>();
 			}
 		}
 

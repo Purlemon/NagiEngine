@@ -13,9 +13,6 @@ namespace PH {
 		virtual unsigned int GetWidth()const = 0;
 		virtual unsigned int GetHeight()const = 0;
 
-		// 对GPU的一块内存更新
-		virtual void SetData(void* data, unsigned int size) = 0;
-
 		virtual void Bind(unsigned int slot = 0)const = 0;
 	};
 
@@ -23,6 +20,5 @@ namespace PH {
 	{
 	public:
 		static Ref<Texture2D>Create(const std::string& path);
-		static Ref<Texture2D>Create(unsigned int width, unsigned int height);
 	};
 }

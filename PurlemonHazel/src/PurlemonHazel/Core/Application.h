@@ -51,7 +51,7 @@ namespace PH {
 		std::shared_ptr<VertexArray>square_va_;
 
 		OrthographicCamera camera_;
->>>>>>> parent of 8f1285a (将渲染移动到sandbox中):PurlemonHazel/src/PurlemonHazel/Application.h
+>>>>>>> parent of 8f1285a (将渲染移动到sandbox�?:PurlemonHazel/src/PurlemonHazel/Application.h
 	private:
 		static Application* instance_;
 	};

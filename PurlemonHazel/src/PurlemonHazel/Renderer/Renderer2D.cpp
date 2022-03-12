@@ -41,8 +41,12 @@ namespace PH {
 		square_ib.reset(IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(unsigned int)));
 		sData->quad_vertex_array->SetIndexBuffer(square_ib);
 
+
 		sData->flat_color_shader = Shader::Create("flat_color", "assets/shaders/vertex/flat_color.vert", "assets/shaders/fragment/flat_color.frag");
 
+
+		sData->flat_color_shader = Shader::Create("flat_color", "assets/shaders/vertex/flat_color.vert", "assets/shaders/fragment/flat_color.frag");
+	
 		sData->texture_shader = Shader::Create("texture", "assets/shaders/vertex/texture.vert", "assets/shaders/fragment/texture.frag");
 		sData->texture_shader->Bind();
 		sData->texture_shader->SetInt("u_Texture", 0);

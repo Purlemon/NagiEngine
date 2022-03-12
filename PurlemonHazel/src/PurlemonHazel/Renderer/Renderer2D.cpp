@@ -11,11 +11,8 @@ namespace PH {
 	struct Renderer2DStorage
 	{
 		Ref<VertexArray> quad_vertex_array;
-		Ref<Shader> flat_color_shader;
-<<<<<<< HEAD
-=======
 		Ref<Shader> texture_shader;
->>>>>>> parent of 81a3470 (å°†ä¸¤ä¸ªshaderåˆå¹¶)
+		Ref<Texture2D> white_texture;
 	};
 
 	static Renderer2DStorage* sData;
@@ -25,17 +22,18 @@ namespace PH {
 		sData = new Renderer2DStorage();
 		sData->quad_vertex_array= VertexArray::Create();
 
-		float square_vertices[4 * 3] = {
-			-0.75f, -0.75f, 0.0f,
-			 0.75f, -0.75f, 0.0f,
-			 0.75f,  0.75f, 0.0f,
-			-0.75f,  0.75f, 0.0f
+		float square_vertices[4 * 5] = {
+			-0.75f, -0.75f, 0.0f, 0.0f, 0.0f,
+			 0.75f, -0.75f, 0.0f, 1.0f, 0.0f,
+			 0.75f,  0.75f, 0.0f, 1.0f, 1.0f,
+			-0.75f,  0.75f, 0.0f, 0.0f, 1.0f
 		};
 
 		Ref<PH::VertexBuffer>square_vb;
 		square_vb.reset(VertexBuffer::Create(square_vertices, sizeof(square_vertices)));
 		square_vb->SetLayout({
 			{ ShaderDataType::Float3, "a_Position" },
+			{ ShaderDataType::Float2, "a_TexCoord" },
 			});
 		sData->quad_vertex_array->AddVertexBuffer(square_vb);
 
@@ -43,15 +41,15 @@ namespace PH {
 		Ref<IndexBuffer>square_ib;
 		square_ib.reset(IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(unsigned int)));
 		sData->quad_vertex_array->SetIndexBuffer(square_ib);
-
-		sData->flat_color_shader = Shader::Create("flat_color", "assets/shaders/vertex/flat_color.vert", "assets/shaders/fragment/flat_color.frag");
-<<<<<<< HEAD
-=======
 	
+		// ÔÚGPUÖĞÓÃ0xffffffffÉú³ÉÒ»¸öÎÆÀí
+		sData->white_texture = Texture2D::Create(1, 1);
+		unsigned int white_texture_data = 0xffffffff; // {1.0f, 1.0f, 1.0f, 1.0f}
+		sData->white_texture->SetData(&white_texture_data, sizeof(unsigned int));
+
 		sData->texture_shader = Shader::Create("texture", "assets/shaders/vertex/texture.vert", "assets/shaders/fragment/texture.frag");
 		sData->texture_shader->Bind();
 		sData->texture_shader->SetInt("u_Texture", 0);
->>>>>>> parent of 81a3470 (å°†ä¸¤ä¸ªshaderåˆå¹¶)
 	}
 
 	void Renderer2D::Shutdown()
@@ -61,16 +59,8 @@ namespace PH {
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
-<<<<<<< HEAD
-		std::dynamic_pointer_cast<OpenGLShader>(sData->flat_color_shader)->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(sData->flat_color_shader)->UploadUniformMat4("u_ProjectionView", camera.GetProjectionViewMatrix());
-=======
-		sData->flat_color_shader->Bind();
-		sData->flat_color_shader->SetMat4("u_ProjectionView", camera.GetProjectionViewMatrix());
-		
 		sData->texture_shader->Bind();
 		sData->texture_shader->SetMat4("u_ProjectionView", camera.GetProjectionViewMatrix());
->>>>>>> parent of 81a3470 (å°†ä¸¤ä¸ªshaderåˆå¹¶)
 	}
 
 	void Renderer2D::EndScene()
@@ -85,25 +75,17 @@ namespace PH {
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
-<<<<<<< HEAD
-		std::dynamic_pointer_cast<OpenGLShader>(sData->flat_color_shader)->Bind();
-		glm::mat4 transform = glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 0.0f)), position);
-		std::dynamic_pointer_cast<OpenGLShader>(sData->flat_color_shader)->UploadUniformMat4("u_Transform", transform);
-		std::dynamic_pointer_cast<OpenGLShader>(sData->flat_color_shader)->UploadUniformFloat4("u_Color", color);
-=======
-		sData->flat_color_shader->Bind();
+		sData->white_texture->Bind(0);
+		sData->texture_shader->SetFloat4("u_Color", color);
+
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
 			glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f));
-		sData->flat_color_shader->SetMat4("u_Transform", transform);
-		sData->flat_color_shader->SetFloat4("u_Color", color);
->>>>>>> parent of 81a3470 (å°†ä¸¤ä¸ªshaderåˆå¹¶)
+		sData->texture_shader->SetMat4("u_Transform", transform);
 
 		sData->quad_vertex_array->Bind();
 		RenderCommand::DrawIndexed(sData->quad_vertex_array);
 	}
 
-<<<<<<< HEAD
-=======
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, size, texture);
@@ -111,15 +93,14 @@ namespace PH {
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const const Ref<Texture2D>& texture)
 	{
-		sData->texture_shader->Bind();
+		texture->Bind(0);
+		sData->texture_shader->SetFloat4("u_Color", glm::vec4(1.0f));
+
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
 			glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f));
 		sData->texture_shader->SetMat4("u_Transform", transform);
-
-		texture->Bind(0);
-
+		
 		sData->quad_vertex_array->Bind();
 		RenderCommand::DrawIndexed(sData->quad_vertex_array);
 	}
->>>>>>> parent of 81a3470 (å°†ä¸¤ä¸ªshaderåˆå¹¶)
 }

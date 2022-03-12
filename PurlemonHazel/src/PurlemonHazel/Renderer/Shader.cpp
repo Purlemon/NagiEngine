@@ -15,7 +15,7 @@ namespace PH {
 			}
 			case RendererAPI::API::OpenGL:
 			{
-				return std::make_shared<OpenGLShader>(name, vertex_path, fragment_path);
+				return CreateRef<OpenGLShader>(name, vertex_path, fragment_path);
 			}
 		}
 

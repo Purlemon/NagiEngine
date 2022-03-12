@@ -1,5 +1,7 @@
 #pragma once
 
+#include <glm/glm.hpp>
+
 #include "PurlemonHazel/Renderer/Shader.h"
 
 namespace PH {
@@ -15,23 +17,15 @@ namespace PH {
 
 		const std::string& GetName()const override { return name_; }
 
-		// ∏ﬂ≤„API
-		void SetInt(const std::string& name, int val) override;
-		void SetFloat3(const std::string& name, const glm::vec3& val) override;
-		void SetFloat4(const std::string& name, const glm::vec4& val) override;
-		void SetMat3(const std::string& name, const glm::mat3& val) override;
-		void SetMat4(const std::string& name, const glm::mat4& val) override;
-
-		// µÕ≤„API
-		void UploadUniformMat3(const std::string& name, const glm::mat3& matrix);
-		void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
+		void UploadUniformMat3(const char* name, const glm::mat3& matrix);
+		void UploadUniformMat4(const char* name, const glm::mat4& matrix);
 		
-		void UploadUniformInt(const std::string& name, float value);
+		void UploadUniforInt(const char* name, float value);
 
-		void UploadUniformFloat(const std::string& name, float value);
-		void UploadUniformFloat2(const std::string& name, const glm::vec2& vec);
-		void UploadUniformFloat3(const std::string& name, const glm::vec3& vec);
-		void UploadUniformFloat4(const std::string& name, const glm::vec4& vec);
+		void UploadUniformFloat(const char* name, float value);
+		void UploadUniformFloat2(const char* name, const glm::vec2& vec);
+		void UploadUniformFloat3(const char* name, const glm::vec3& vec);
+		void UploadUniformFloat4(const char* name, const glm::vec4& vec);
 	private:
 		void Compile(const std::string& vertex_src, const std::string& fragment_src);
 		std::string ReadFile(const std::string& path);

@@ -13,6 +13,7 @@ namespace PH {
 	Application* Application::instance_ = nullptr;
 
 	Application::Application()
+		:camera_(-1.6f, 1.6f, -0.9f, 0.9f)
 	{
 		PH_CORE_ASSERT(!instance_, "ApplicationÒÑ¾­´æÔÚ£¡");
 		instance_ = this;
@@ -25,6 +26,119 @@ namespace PH {
 		imgui_layer_ = new ImGuiLayer();
 		PushOverlay(imgui_layer_);
 
+		// ----------------------------
+		// OpenGL Render
+		// ----------------------------
+
+		// Èý½ÇÐÎ
+		vertex_array_.reset(VertexArray::Create());
+
+		float vertices[3 * 7] = {
+			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
+			 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f
+		};
+		BufferLayout layout = {
+			{ShaderDataType::Float3, "a_Position"},
+			{ShaderDataType::Float4, "a_Color"},
+		};
+		std::shared_ptr<VertexBuffer>vertex_buffer_;
+		vertex_buffer_.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+		vertex_buffer_->SetLayout(layout);
+		vertex_array_->AddVertexBuffer(vertex_buffer_);
+
+		unsigned int indices[3] = { 0,1,2 };
+		std::shared_ptr<IndexBuffer>index_buffer_;
+		index_buffer_.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int)));
+		vertex_array_->SetIndexBuffer(index_buffer_);
+
+		std::string vertex_src = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec4 a_Color;
+
+			uniform mat4 u_ProjectView;
+
+			out vec3 v_Position;
+			out vec4 v_Color;
+
+			void main()
+			{
+				v_Position = a_Position;
+				v_Color = a_Color;
+				gl_Position = u_ProjectView * vec4(a_Position, 1.0);	
+			}
+		)";
+
+		std::string fragment_src = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec3 v_Position;
+			in vec4 v_Color;
+
+			void main()
+			{
+				color = vec4(v_Position * 0.5 + 0.5, 1.0);
+				color = v_Color;
+			}
+		)";
+
+		shader_.reset(new Shader(vertex_src, fragment_src));
+	
+		// Õý·½ÐÎ
+		square_va_.reset(VertexArray::Create());
+
+		float square_vertices[4 * 3] = {
+			-0.75f, -0.75f, 0.0f, 
+			 0.75f, -0.75f, 0.0f, 
+			 0.75f,  0.75f, 0.0f,
+			-0.75f,  0.75f, 0.0f,
+		};
+		
+		std::shared_ptr<VertexBuffer>square_vb;
+		square_vb.reset(VertexBuffer::Create(square_vertices, sizeof(square_vertices)));
+		square_vb->SetLayout({
+			{ ShaderDataType::Float3, "a_Position" }
+		});
+		square_va_->AddVertexBuffer(square_vb);
+
+		unsigned int square_indices[6] = { 0,1,2,2,3,0 };
+		std::shared_ptr<IndexBuffer>square_ib;
+		square_ib.reset(IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(unsigned int)));
+		square_va_->SetIndexBuffer(square_ib);
+
+		std::string blue_vertex_src = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+
+			uniform mat4 u_ProjectView;
+
+			out vec3 v_Position;
+
+			void main()
+			{
+				v_Position = a_Position;
+				gl_Position = u_ProjectView * vec4(a_Position, 1.0);	
+			}
+		)";
+
+		std::string blue_fragment_src = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec3 v_Position;
+
+			void main()
+			{
+				color = vec4(0.2f, 0.3f, 0.8f, 1.0f);
+			}
+		)";
+		blue_shader_.reset(new Shader(blue_vertex_src, blue_fragment_src));
 	}
 
 	Application::~Application()
@@ -64,6 +178,7 @@ namespace PH {
 	void Application::Run()
 	{
 		while (running_) {
+<<<<<<< HEAD:PurlemonHazel/src/PurlemonHazel/Core/Application.cpp
 			float time = glfwGetTime(); // TODO: ¶Ô²»Í¬Æ½Ì¨µÄGetTime
 			Timestep timestep(time - last_frame_time_);
 			last_frame_time_ = time;
@@ -72,6 +187,25 @@ namespace PH {
 				for (Layer* layer : layer_stack_)
 					layer->OnUpdate(timestep);
 			}
+=======
+
+			RenderCommand::SetClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
+			RenderCommand::Clear();
+
+			camera_.SetPosition({ 0.5f,0.5f,0.0f });
+			camera_.SetRotation(45.0f);
+
+			Renderer::BeginScene(camera_);
+			{
+				Renderer::Submit(blue_shader_, square_va_);
+
+				Renderer::Submit(shader_, vertex_array_);
+			}
+			Renderer::EndScene();
+
+			for (Layer* layer : layer_stack_)
+				layer->OnUpdate();
+>>>>>>> parent of 8f1285a (å°†æ¸²æŸ“ç§»åŠ¨åˆ°sandboxä¸­):PurlemonHazel/src/PurlemonHazel/Application.cpp
 
 			imgui_layer_->Begin();
 			for (Layer* layer : layer_stack_)

@@ -42,6 +42,7 @@ namespace PH {
 		square_ib.reset(IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(unsigned int)));
 		sData->quad_vertex_array->SetIndexBuffer(square_ib);
 	
+		// 直接以0xffffffff为数据在GPU上创建纹理
 		sData->white_texture = Texture2D::Create(1, 1);
 		unsigned int white_texture_data = 0xffffffff; // {1.0f, 1.0f, 1.0f, 1.0f}
 		sData->white_texture->SetData(&white_texture_data, sizeof(unsigned int));

@@ -39,8 +39,19 @@ namespace PH {
 		bool minimized_ = false; 
 		LayerStack layer_stack_;
 
+<<<<<<< HEAD:PurlemonHazel/src/PurlemonHazel/Core/Application.h
 		Timestep timestep_;
 		float last_frame_time_ = 0.0f;
+=======
+		// Render 
+		std::shared_ptr<Shader>shader_;
+		std::shared_ptr<VertexArray>vertex_array_;
+
+		std::shared_ptr<Shader>blue_shader_;
+		std::shared_ptr<VertexArray>square_va_;
+
+		OrthographicCamera camera_;
+>>>>>>> parent of 8f1285a (将渲染移动到sandbox中):PurlemonHazel/src/PurlemonHazel/Application.h
 	private:
 		static Application* instance_;
 	};

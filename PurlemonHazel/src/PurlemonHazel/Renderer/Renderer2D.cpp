@@ -11,8 +11,8 @@ namespace PH {
 	struct Renderer2DStorage
 	{
 		Ref<VertexArray> quad_vertex_array;
-		Ref<Shader> flat_color_shader;
 		Ref<Shader> texture_shader;
+		Ref<Texture2D> white_texture;
 	};
 
 	static Renderer2DStorage* sData;
@@ -41,9 +41,11 @@ namespace PH {
 		Ref<IndexBuffer>square_ib;
 		square_ib.reset(IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(unsigned int)));
 		sData->quad_vertex_array->SetIndexBuffer(square_ib);
-
-		sData->flat_color_shader = Shader::Create("flat_color", "assets/shaders/vertex/flat_color.vert", "assets/shaders/fragment/flat_color.frag");
 	
+		sData->white_texture = Texture2D::Create(1, 1);
+		unsigned int white_texture_data = 0xffffffff; // {1.0f, 1.0f, 1.0f, 1.0f}
+		sData->white_texture->SetData(&white_texture_data, sizeof(unsigned int));
+
 		sData->texture_shader = Shader::Create("texture", "assets/shaders/vertex/texture.vert", "assets/shaders/fragment/texture.frag");
 		sData->texture_shader->Bind();
 		sData->texture_shader->SetInt("u_Texture", 0);
@@ -56,9 +58,6 @@ namespace PH {
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
-		sData->flat_color_shader->Bind();
-		sData->flat_color_shader->SetMat4("u_ProjectionView", camera.GetProjectionViewMatrix());
-		
 		sData->texture_shader->Bind();
 		sData->texture_shader->SetMat4("u_ProjectionView", camera.GetProjectionViewMatrix());
 	}
@@ -75,11 +74,12 @@ namespace PH {
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
-		sData->flat_color_shader->Bind();
+		sData->white_texture->Bind(0);
+		sData->texture_shader->SetFloat4("u_Color", color);
+
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
 			glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f));
-		sData->flat_color_shader->SetMat4("u_Transform", transform);
-		sData->flat_color_shader->SetFloat4("u_Color", color);
+		sData->texture_shader->SetMat4("u_Transform", transform);
 
 		sData->quad_vertex_array->Bind();
 		RenderCommand::DrawIndexed(sData->quad_vertex_array);
@@ -92,13 +92,13 @@ namespace PH {
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const const Ref<Texture2D>& texture)
 	{
-		sData->texture_shader->Bind();
+		texture->Bind(0);
+		sData->texture_shader->SetFloat4("u_Color", glm::vec4(1.0f));
+
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
 			glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f));
 		sData->texture_shader->SetMat4("u_Transform", transform);
-
-		texture->Bind(0);
-
+		
 		sData->quad_vertex_array->Bind();
 		RenderCommand::DrawIndexed(sData->quad_vertex_array);
 	}

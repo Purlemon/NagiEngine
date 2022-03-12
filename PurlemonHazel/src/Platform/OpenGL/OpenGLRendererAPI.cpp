@@ -29,6 +29,7 @@ namespace PH {
 	void OpenGLRendererAPI::DrawIndexed(const PH::Ref<VertexArray>& vertex_array)
 	{
 		glDrawElements(GL_TRIANGLES, vertex_array->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 }

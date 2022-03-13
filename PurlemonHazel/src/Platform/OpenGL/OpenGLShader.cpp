@@ -37,6 +37,10 @@ namespace PH {
 		UploadUniformInt(name, val);
 	}
 
+	void OpenGLShader::SetFloat(const std::string& name, float val)
+	{
+		UploadUniformFloat(name, val);
+	}
 	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& val)
 	{
 		UploadUniformFloat3(name, val);

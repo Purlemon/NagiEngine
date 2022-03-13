@@ -17,6 +17,7 @@ namespace PH {
 
 		// ∏ﬂ≤„API
 		void SetInt(const std::string& name, int val) override;
+		void SetFloat(const std::string& name, float val) override;
 		void SetFloat3(const std::string& name, const glm::vec3& val) override;
 		void SetFloat4(const std::string& name, const glm::vec4& val) override;
 		void SetMat3(const std::string& name, const glm::mat3& val) override;

@@ -68,36 +68,31 @@ namespace PH {
 
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
-	{
-		DrawQuad({ position.x, position.y, 0.0f }, size, color);
-	}
-
-	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
+	void Renderer2D::DrawQuad(const QuadProps& quad_props, const glm::vec4& color)
 	{
 		sData->white_texture->Bind(0);
 		sData->texture_shader->SetFloat4("u_Color", color);
+		sData->texture_shader->SetFloat("u_TilingFactor", 1.0f);
 
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
-			glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f));
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), quad_props.position / 100.0f) *
+			glm::scale(glm::mat4(1.0f), glm::vec3(quad_props.size.x, quad_props.size.y, 1.0f) / 10.0f) *
+			glm::rotate(glm::mat4(1.0f), glm::radians(quad_props.rotation), glm::vec3(0.0f, 0.0f, 1.0f));
 		sData->texture_shader->SetMat4("u_Transform", transform);
 
 		sData->quad_vertex_array->Bind();
 		RenderCommand::DrawIndexed(sData->quad_vertex_array);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture)
-	{
-		DrawQuad({ position.x, position.y, 0.0f }, size, texture);
-	}
 
-	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture)
+	void Renderer2D::DrawQuad(const QuadProps& quad_props, const Texture2DPorps& tex2d_porps)
 	{
-		texture->Bind(0);
-		sData->texture_shader->SetFloat4("u_Color", glm::vec4(1.0f));
+		tex2d_porps.texture->Bind(0);
+		sData->texture_shader->SetFloat4("u_Color", tex2d_porps.tintcolor);
+		sData->texture_shader->SetFloat("u_TilingFactor", tex2d_porps.tiling_factor);
 
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
-			glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f));
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), quad_props.position / 100.0f) *
+			glm::scale(glm::mat4(1.0f), glm::vec3(quad_props.size.x, quad_props.size.y, 1.0f) / 10.0f) *
+			glm::rotate(glm::mat4(1.0f), glm::radians(quad_props.rotation), glm::vec3(0.0f, 0.0f, 1.0f));
 		sData->texture_shader->SetMat4("u_Transform", transform);
 		
 		sData->quad_vertex_array->Bind();

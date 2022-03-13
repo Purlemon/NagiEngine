@@ -52,7 +52,7 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
-	texture2d_ = PH::Texture2D::Create("assets/textures/test.jpg");
+	tex2d_props_.texture = PH::Texture2D::Create("assets/textures/test.jpg");
 }
 
 void Sandbox2D::OnDetach()
@@ -72,8 +72,8 @@ void Sandbox2D::OnUpdate(PH::Timestep ts)
 		PROFILE_SCOPE("Renderer");
 		PH::Renderer2D::BeginScene(camera_controller_.GetCamera());
 		{
-			PH::Renderer2D::DrawQuad({ 0.0f,0.0f }, { 1.0f,1.0f }, square_color_);
-			PH::Renderer2D::DrawQuad({ (glm::vec3)square_pos_ / 100.0f }, { 1.0f,1.0f }, texture2d_);
+			PH::Renderer2D::DrawQuad({ { 0.0f,0.0f }, { 1.0f,1.0f } }, square_color_);
+			PH::Renderer2D::DrawQuad(quad_props_, tex2d_props_);
 		}
 		PH::Renderer2D::EndScene();
 	}
@@ -84,7 +84,11 @@ void Sandbox2D::OnImGuiRender()
 	ImGui::Begin("Settings");
 
 	ImGui::ColorEdit4("Square Color", glm::value_ptr(square_color_));
-	ImGui::DragInt3("Pos", glm::value_ptr(square_pos_));
+	ImGui::DragFloat3("Position", glm::value_ptr(quad_props_.position));
+	ImGui::DragFloat2("Size", glm::value_ptr(quad_props_.size));
+	ImGui::DragFloat("Rotation",&quad_props_.rotation);
+	ImGui::DragFloat("Texture Tiling Factor", &tex2d_props_.tiling_factor);
+	ImGui::ColorEdit4("Texture Tintcolor", glm::value_ptr(tex2d_props_.tintcolor));
 	for (auto& result : profile_results_) {
 		char label[50];
 		strcpy_s(label, "%.3fms ");

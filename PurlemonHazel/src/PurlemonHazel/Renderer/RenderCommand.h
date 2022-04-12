@@ -28,9 +28,9 @@ namespace PH {
 			return renderer_api_->Clear();
 		}
 
-		static void DrawIndexed(const PH::Ref<VertexArray>& vertex_array)
+		static void DrawIndexed(const PH::Ref<VertexArray>& vertex_array, ph_uint32 count = 0)
 		{ 
-			return renderer_api_->DrawIndexed(vertex_array); 
+			return renderer_api_->DrawIndexed(vertex_array, count);
 		}
 	
 	private:

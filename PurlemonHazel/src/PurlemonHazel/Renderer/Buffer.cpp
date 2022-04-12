@@ -7,6 +7,24 @@
 
 namespace PH {
 
+	Ref<VertexBuffer> VertexBuffer::Create(ph_uint32 size)
+	{
+		switch (Renderer::GetAPI()) {
+		case RendererAPI::API::None:
+		{
+			PH_CORE_ASSERT(false, "RendererAPI::None is not supported!");
+			return nullptr;
+		}
+		case RendererAPI::API::OpenGL:
+		{
+			return CreateRef<OpenGLVertexBuffer>(size);
+		}
+		}
+
+		PH_CORE_ASSERT(false, "Unknown RendererAPI!");
+		return nullptr;
+	}
+
 	Ref<VertexBuffer> VertexBuffer::Create(float* vertices, ph_uint32 size)
 	{
 		switch (Renderer::GetAPI()) {

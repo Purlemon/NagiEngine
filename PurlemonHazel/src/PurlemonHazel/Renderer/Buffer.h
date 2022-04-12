@@ -115,10 +115,13 @@ namespace PH {
 		virtual void Bind() const= 0;
 		virtual void Unbind() const = 0;
 
+		virtual void SetData(const void* data, ph_uint32 size) = 0;
+
 		virtual const BufferLayout& GetLayout()const = 0;
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 
 		static Ref<VertexBuffer> Create(float* vertices, ph_uint32 size); // 起到构造函数的作用
+		static Ref<VertexBuffer> Create(ph_uint32 size); // 起到构造函数的作用
 	};
 
 	class IndexBuffer

@@ -19,7 +19,7 @@ namespace PH {
 		virtual void SetClearColor(const glm::vec4& color) = 0;
 		virtual void Clear() = 0;
 		
-		virtual void DrawIndexed(const PH::Ref<VertexArray>& vertex_array) = 0;
+		virtual void DrawIndexed(const PH::Ref<VertexArray>& vertex_array, ph_uint32 index_count = 0) = 0;
 	
 		static API GetAPI() { return api_; }
 	private:

@@ -8,6 +8,13 @@ namespace PH {
 	// OpenGLVertexBuffer
 	// ------------------------------------------
 
+	OpenGLVertexBuffer::OpenGLVertexBuffer(ph_uint32 size)
+	{
+		glCreateBuffers(1, &render_id_);
+		glBindBuffer(GL_ARRAY_BUFFER, render_id_);
+		glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW);
+	}
+
 	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, ph_uint32 size)
 	{
 		glCreateBuffers(1, &render_id_);
@@ -27,6 +34,12 @@ namespace PH {
 	void OpenGLVertexBuffer::Unbind() const
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+
+	void OpenGLVertexBuffer::SetData(const void* data, ph_uint32 size)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, render_id_);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
 	}
 
 	// ------------------------------------------

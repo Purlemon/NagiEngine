@@ -39,6 +39,7 @@ namespace PH {
 
 		static void BeginScene(const OrthographicCamera& camera);
 		static void EndScene();
+		static void Flush();
 
 		static void DrawQuad(const QuadProps& quad_props, const glm::vec4& color);
 		static void DrawQuad(const QuadProps& quad_props, const Texture2DPorps& tex2d_porps);

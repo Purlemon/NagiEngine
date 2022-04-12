@@ -7,11 +7,14 @@ namespace PH {
 	class OpenGLVertexBuffer :public VertexBuffer
 	{
 	public:
+		OpenGLVertexBuffer(ph_uint32 size);
 		OpenGLVertexBuffer(float* vertices, ph_uint32 size);
 		~OpenGLVertexBuffer();
 
 		void Bind() const override;
 		void Unbind() const override;
+
+		void SetData(const void* data, ph_uint32 size);
 
 		const BufferLayout& GetLayout() const override { return layout_; }
 		void SetLayout(const BufferLayout& layout) override { layout_ = layout; }

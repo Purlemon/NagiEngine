@@ -26,9 +26,10 @@ namespace PH {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
-	void OpenGLRendererAPI::DrawIndexed(const PH::Ref<VertexArray>& vertex_array)
+	void OpenGLRendererAPI::DrawIndexed(const PH::Ref<VertexArray>& vertex_array, ph_uint32 index_count)
 	{
-		glDrawElements(GL_TRIANGLES, vertex_array->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+		ph_uint32 count = index_count ? index_count : vertex_array->GetIndexBuffer()->GetCount();
+		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 

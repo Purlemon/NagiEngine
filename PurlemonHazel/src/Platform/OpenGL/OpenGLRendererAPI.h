@@ -12,7 +12,7 @@ namespace PH {
 		void SetClearColor(const glm::vec4& color) override;
 		void Clear() override;
 
-		void DrawIndexed(const PH::Ref<VertexArray>& vertex_array) override;
+		void DrawIndexed(const PH::Ref<VertexArray>& vertex_array, ph_uint32 index_count = 0) override;
 	};
 
 }

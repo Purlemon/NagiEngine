@@ -7,9 +7,10 @@ uniform vec4 u_Color;
 uniform float u_TilingFactor;
 
 in vec2 v_TexCoord;
+in vec4 v_Color;
 
 void main()
 {
-	color = texture(u_Texture, v_TexCoord * u_TilingFactor) * u_Color;
-	//color = vec4(0.5f,0.5f,0.5f,1.0f);
+	//color = texture(u_Texture, v_TexCoord * u_TilingFactor) * u_Color;
+	color = v_Color;
 }

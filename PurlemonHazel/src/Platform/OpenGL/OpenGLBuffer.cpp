@@ -39,6 +39,7 @@ namespace PH {
 	void OpenGLVertexBuffer::SetData(const void* data, ph_uint32 size)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, render_id_);
+		// 将数据data填充进render_id_的[0, size]
 		glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
 	}
 

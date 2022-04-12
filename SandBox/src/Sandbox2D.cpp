@@ -73,7 +73,8 @@ void Sandbox2D::OnUpdate(PH::Timestep ts)
 		PH::Renderer2D::BeginScene(camera_controller_.GetCamera());
 		{
 			PH::Renderer2D::DrawQuad({ { 0.0f,0.0f }, { 1.0f,1.0f } }, square_color_);
-			PH::Renderer2D::DrawQuad(quad_props_, tex2d_props_);
+			PH::Renderer2D::DrawQuad({ { -1.0f,-1.0f }, { 0.5f,0.5f } }, square_color_);
+			//PH::Renderer2D::DrawQuad(quad_props_, tex2d_props_);
 		}
 		PH::Renderer2D::EndScene();
 	}

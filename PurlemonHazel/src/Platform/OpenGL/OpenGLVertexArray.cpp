@@ -51,7 +51,7 @@ namespace PH {
 		glBindVertexArray(render_id_);
 		vertex_buffer->Bind();
 		
-		unsigned int index = 0;
+		ph_uint32 index = 0;
 		const auto& layout = vertex_buffer->GetLayout();
 		for (const auto& element : layout) {
 			glEnableVertexAttribArray(index);

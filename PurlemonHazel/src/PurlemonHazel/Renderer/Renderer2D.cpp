@@ -30,22 +30,22 @@ namespace PH {
 		};
 
 		Ref<PH::VertexBuffer>square_vb;
-		square_vb.reset(VertexBuffer::Create(square_vertices, sizeof(square_vertices)));
+		square_vb = VertexBuffer::Create(square_vertices, sizeof(square_vertices));
 		square_vb->SetLayout({
 			{ ShaderDataType::Float3, "a_Position" },
 			{ ShaderDataType::Float2, "a_TexCoord" },
 			});
 		sData->quad_vertex_array->AddVertexBuffer(square_vb);
 
-		unsigned int square_indices[6] = { 0,1,2,2,3,0 };
+		ph_uint32 square_indices[6] = { 0,1,2,2,3,0 };
 		Ref<IndexBuffer>square_ib;
-		square_ib.reset(IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(unsigned int)));
+		square_ib = IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(ph_uint32));
 		sData->quad_vertex_array->SetIndexBuffer(square_ib);
 	
 		// 在GPU中用0xffffffff生成一个纹理
 		sData->white_texture = Texture2D::Create(1, 1);
-		unsigned int white_texture_data = 0xffffffff; // {1.0f, 1.0f, 1.0f, 1.0f}
-		sData->white_texture->SetData(&white_texture_data, sizeof(unsigned int));
+		ph_uint32 white_texture_data = 0xffffffff; // {1.0f, 1.0f, 1.0f, 1.0f}
+		sData->white_texture->SetData(&white_texture_data, sizeof(ph_uint32));
 
 		sData->texture_shader = Shader::Create("texture", "assets/shaders/vertex/texture.vert", "assets/shaders/fragment/texture.frag");
 		sData->texture_shader->Bind();

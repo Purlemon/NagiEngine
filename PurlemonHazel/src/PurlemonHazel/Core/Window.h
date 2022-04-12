@@ -11,12 +11,12 @@ namespace PH {
 	struct WindowProps
 	{
 		std::string title;
-		unsigned int width;
-		unsigned int height;
+		ph_uint32 width;
+		ph_uint32 height;
 
 		WindowProps(const std::string& t = "PurlemonHazel",
-			unsigned int w = 1280,
-			unsigned int h =720)
+			ph_uint32 w = 1280,
+			ph_uint32 h =720)
 			:title(t),width(w),height(h){ }
 			
 	};
@@ -31,8 +31,8 @@ namespace PH {
 
 		virtual void OnUpdate() = 0;
 
-		virtual unsigned int GetWidth()const = 0;
-		virtual unsigned int GetHeight()const = 0;
+		virtual ph_uint32 GetWidth()const = 0;
+		virtual ph_uint32 GetHeight()const = 0;
 
 		// ¥∞ø⁄ Ù–‘
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;

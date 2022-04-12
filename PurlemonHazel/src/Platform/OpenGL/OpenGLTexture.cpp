@@ -37,7 +37,7 @@ namespace PH {
 		stbi_image_free(data);
 	}
 
-	OpenGLTexture2D::OpenGLTexture2D(unsigned int width, unsigned int height)
+	OpenGLTexture2D::OpenGLTexture2D(ph_uint32 width, ph_uint32 height)
 		:width_(width),height_(height)
 	{
 		internal_format_ = GL_RGBA8;
@@ -58,14 +58,14 @@ namespace PH {
 		glDeleteTextures(1, &render_id_);
 	}
 
-	void OpenGLTexture2D::SetData(void* data, unsigned int size)
+	void OpenGLTexture2D::SetData(void* data, ph_uint32 size)
 	{
-		unsigned int byte_per_pixel = (data_format_ == GL_RGBA ? 4 : 3);
+		ph_uint32 byte_per_pixel = (data_format_ == GL_RGBA ? 4 : 3);
 		PH_CORE_ASSERT(size == width_ * height_ * byte_per_pixel, "data必须指向全部纹理!");
 		glTextureSubImage2D(render_id_, 0, 0, 0, width_, height_, data_format_, GL_UNSIGNED_BYTE, data);
 	}
 
-	void OpenGLTexture2D::Bind(unsigned int slot) const
+	void OpenGLTexture2D::Bind(ph_uint32 slot) const
 	{
 		glBindTextureUnit(slot, render_id_);
 	}

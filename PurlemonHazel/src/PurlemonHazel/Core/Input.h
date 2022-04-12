@@ -9,12 +9,12 @@ namespace PH {
 	class PH_API Input
 	{
 	public:
-		inline static bool IsKeyPressed(int keycode) { return instance_->IsKeyPressedImpl(keycode); }
+		static bool IsKeyPressed(int keycode) { return instance_->IsKeyPressedImpl(keycode); }
 	
-		inline static bool IsMouseButtonPressed(int button) { return instance_->IsMouseButtonPressedImpl(button); }
-		inline static std::pair<float, float> GetMousePosition() { return instance_->GetMousePositionImpl(); }
-		inline static float GetMouseX() { return instance_->GetMouseXImpl(); }
-		inline static float GetMouseY() { return instance_->GetMouseYImpl(); }
+		static bool IsMouseButtonPressed(int button) { return instance_->IsMouseButtonPressedImpl(button); }
+		static std::pair<float, float> GetMousePosition() { return instance_->GetMousePositionImpl(); }
+		static float GetMouseX() { return instance_->GetMouseXImpl(); }
+		static float GetMouseY() { return instance_->GetMouseYImpl(); }
 	protected:
 		// 子类实现接口
 		virtual bool IsKeyPressedImpl(int keycode) = 0; 

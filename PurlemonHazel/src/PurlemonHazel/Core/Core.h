@@ -28,6 +28,9 @@
 
 #define PH_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
 
+typedef unsigned int ph_uint32;
+typedef char ph_uint8;
+
 namespace PH {
 
 	// 便于之后更改实现

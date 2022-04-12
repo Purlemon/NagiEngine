@@ -40,7 +40,7 @@ namespace PH {
 		virtual std::string ToString()const { return GetName(); } // only debug
 
 		// 返回非0则在这个分类里
-		inline bool IsInCategory(EventCategory category)
+		bool IsInCategory(EventCategory category)
 		{
 			return GetCategoryFlags() & category;
 		}

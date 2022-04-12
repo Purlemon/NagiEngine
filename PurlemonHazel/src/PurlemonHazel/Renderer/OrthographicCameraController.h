@@ -16,8 +16,8 @@ namespace PH {
 		void OnUpdate(Timestep ts);
 		void OnEvent(Event& e);
 
-		inline OrthographicCamera& GetCamera() { return camera_; }
-		inline const OrthographicCamera& GetCamera() const { return camera_; }
+		OrthographicCamera& GetCamera() { return camera_; }
+		const OrthographicCamera& GetCamera() const { return camera_; }
 	
 		float GetZoomLevel() const { return zoom_level_; }
 		void SetZoomLevel(float level) { zoom_level_ = level; }

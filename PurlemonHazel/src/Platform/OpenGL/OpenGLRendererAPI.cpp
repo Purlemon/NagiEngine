@@ -11,7 +11,7 @@ namespace PH {
 		glEnable(GL_DEPTH_TEST);
 	}
 
-	void OpenGLRendererAPI::SetViewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
+	void OpenGLRendererAPI::SetViewport(ph_uint32 x, ph_uint32 y, ph_uint32 width, ph_uint32 height)
 	{
 		glViewport(x, y, width, height);
 	}

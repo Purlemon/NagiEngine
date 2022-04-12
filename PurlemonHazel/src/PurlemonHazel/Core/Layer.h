@@ -20,7 +20,7 @@ namespace PH {
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 
-		inline const std::string& GetName()const { return debug_name_; }
+		const std::string& GetName()const { return debug_name_; }
 
 	protected:
 		std::string debug_name_;

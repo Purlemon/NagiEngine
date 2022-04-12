@@ -13,7 +13,7 @@ namespace PH {
 		None = 0, Float, Float2, Float3, Float4, Mat3, Mat4, Int, Int2, Int3, Int4, Bool
 	};
 
-	static unsigned int ShaderDataTypeSize(ShaderDataType type) // 每个buffer块的大小
+	static ph_uint32 ShaderDataTypeSize(ShaderDataType type) // 每个buffer块的大小
 	{
 		switch (type) {
 			case PH::ShaderDataType::Float:		return 4;
@@ -37,8 +37,8 @@ namespace PH {
 	{
 		std::string name;
 		ShaderDataType type;
-		unsigned int size;
-		unsigned int offset;
+		ph_uint32 size;
+		ph_uint32 offset;
 		bool normalized;
 
 		BufferElement(){ }
@@ -48,7 +48,7 @@ namespace PH {
 		{
 		}
 
-		unsigned int GetComponentCount()const // 每个buffer块组成元素的数量
+		ph_uint32 GetComponentCount()const // 每个buffer块组成元素的数量
 		{
 			switch (type) {
 				case PH::ShaderDataType::Float:		return 1;
@@ -80,8 +80,8 @@ namespace PH {
 			CalculateOffsetsAndStride();
 		}
 
-		inline const std::vector<BufferElement>& GetElements()const { return elements_; }
-		inline unsigned int GetStride()const { return stride_; }
+		const std::vector<BufferElement>& GetElements()const { return elements_; }
+		ph_uint32 GetStride()const { return stride_; }
 
 		std::vector<BufferElement>::iterator begin() { return elements_.begin(); }
 		std::vector<BufferElement>::iterator end() { return elements_.end(); }
@@ -90,7 +90,7 @@ namespace PH {
 	private:
 		void CalculateOffsetsAndStride()
 		{
-			unsigned int offset = 0;
+			ph_uint32 offset = 0;
 			stride_ = 0;
 			for (auto& element : elements_) {
 				element.offset = offset;
@@ -100,7 +100,7 @@ namespace PH {
 		}
 	private:
 		std::vector<BufferElement>elements_;
-		unsigned int stride_;
+		ph_uint32 stride_;
 	};
 
 	// -----------------------------
@@ -118,7 +118,7 @@ namespace PH {
 		virtual const BufferLayout& GetLayout()const = 0;
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 
-		static VertexBuffer* Create(float* vertices, unsigned int size); // 起到构造函数的作用
+		static Ref<VertexBuffer> Create(float* vertices, ph_uint32 size); // 起到构造函数的作用
 	};
 
 	class IndexBuffer
@@ -129,9 +129,9 @@ namespace PH {
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 
-		virtual unsigned int GetCount()const = 0;
+		virtual ph_uint32 GetCount()const = 0;
 
-		static IndexBuffer* Create(unsigned int* indices, unsigned int count);
+		static Ref<IndexBuffer> Create(ph_uint32* indices, ph_uint32 count);
 	};
 
 }

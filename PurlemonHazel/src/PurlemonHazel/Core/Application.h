@@ -27,8 +27,8 @@ namespace PH {
 
 		void OnEvent(Event& e);
 
-		inline static Application& Get() { return *instance_; }
-		inline Window& GetWindow() { return *window_; }
+		static Application& Get() { return *instance_; }
+		Window& GetWindow() { return *window_; }
 	private:
 		bool OnWindowClose(class WindowCloseEvent& e);
 		bool OnWindowResize(class WindowResizeEvent& e);

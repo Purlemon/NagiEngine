@@ -97,7 +97,7 @@ namespace PH {
 			}
 		});
 
-		glfwSetCharCallback(window_, [](GLFWwindow* window,unsigned int keycode) {
+		glfwSetCharCallback(window_, [](GLFWwindow* window,ph_uint32 keycode) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			KeyTypedEvent event(keycode);

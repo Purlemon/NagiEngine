@@ -31,13 +31,13 @@ public:
 			{PH::ShaderDataType::Float4, "a_Color"},
 		};
 		PH::Ref<PH::VertexBuffer>vertex_buffer_;
-		vertex_buffer_.reset(PH::VertexBuffer::Create(vertices, sizeof(vertices)));
+		vertex_buffer_ = PH::VertexBuffer::Create(vertices, sizeof(vertices));
 		vertex_buffer_->SetLayout(layout);
 		vertex_array_->AddVertexBuffer(vertex_buffer_);
 
-		unsigned int indices[3] = { 0,1,2 };
+		ph_uint32 indices[3] = { 0,1,2 };
 		PH::Ref<PH::IndexBuffer>index_buffer_;
-		index_buffer_.reset(PH::IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int)));
+		index_buffer_ = PH::IndexBuffer::Create(indices, sizeof(indices) / sizeof(ph_uint32));
 		vertex_array_->SetIndexBuffer(index_buffer_);
 
 		// Õý·½ÐÎ
@@ -51,16 +51,16 @@ public:
 		};
 
 		PH::Ref<PH::VertexBuffer>square_vb;
-		square_vb.reset(PH::VertexBuffer::Create(square_vertices, sizeof(square_vertices)));
+		square_vb = PH::VertexBuffer::Create(square_vertices, sizeof(square_vertices));
 		square_vb->SetLayout({
 			{ PH::ShaderDataType::Float3, "a_Position" },
 			{ PH::ShaderDataType::Float2, "a_Position" }
 			});
 		square_va_->AddVertexBuffer(square_vb);
 
-		unsigned int square_indices[6] = { 0,1,2,2,3,0 };
+		ph_uint32 square_indices[6] = { 0,1,2,2,3,0 };
 		PH::Ref<PH::IndexBuffer>square_ib;
-		square_ib.reset(PH::IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(unsigned int)));
+		square_ib = PH::IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(ph_uint32));
 		square_va_->SetIndexBuffer(square_ib);
 
 		auto tex_shader_ = shader_lib_.Load("color", "assets/shaders/vertex/color.vert", "assets/shaders/fragment/color.frag");

@@ -23,7 +23,7 @@ namespace PH {
 		return nullptr;
 	}
 
-	Ref<Texture2D> Texture2D::Create(unsigned int width, unsigned int height)
+	Ref<Texture2D> Texture2D::Create(ph_uint32 width, ph_uint32 height)
 	{
 		switch (Renderer::GetAPI()) {
 			case RendererAPI::API::None:

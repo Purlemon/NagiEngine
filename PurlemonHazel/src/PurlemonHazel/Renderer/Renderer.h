@@ -11,7 +11,7 @@ namespace PH {
 	{
 	public:
 		static void Init();
-		static void OnWindowResize(unsigned int width, unsigned int height);
+		static void OnWindowResize(ph_uint32 width, ph_uint32 height);
 
 		static void BeginScene(OrthographicCamera& camera);
 		static void EndScene();
@@ -23,7 +23,7 @@ namespace PH {
 			const glm::mat4& transform = glm::mat4(1.0f)
 		);
 
-		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
+		static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 
 	private:
 		struct SceneData

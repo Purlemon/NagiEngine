@@ -9,11 +9,11 @@ namespace PH {
 	class PH_API WindowResizeEvent :public Event
 	{
 	public:
-		WindowResizeEvent(unsigned int width,unsigned int height)
+		WindowResizeEvent(ph_uint32 width, ph_uint32 height)
 			:width_(width),height_(height){ }
 
-		inline unsigned int GetWidth()const { return width_; }
-		inline unsigned int GetHeight()const { return height_; }
+		ph_uint32 GetWidth()const { return width_; }
+		ph_uint32 GetHeight()const { return height_; }
 
 		std::string ToString() const override
 		{
@@ -26,7 +26,7 @@ namespace PH {
 	    EVENT_CLASS_CATEGORY(kEventCategoryApplication)
 
 	private:
-		unsigned int width_, height_;
+		ph_uint32 width_, height_;
 	};
 
 	class PH_API WindowCloseEvent :public Event

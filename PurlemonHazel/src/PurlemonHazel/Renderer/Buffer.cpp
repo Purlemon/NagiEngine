@@ -7,7 +7,7 @@
 
 namespace PH {
 
-	VertexBuffer* VertexBuffer::Create(float* vertices, unsigned int size)
+	Ref<VertexBuffer> VertexBuffer::Create(float* vertices, ph_uint32 size)
 	{
 		switch (Renderer::GetAPI()) {
 			case RendererAPI::API::None:
@@ -17,7 +17,7 @@ namespace PH {
 			}
 			case RendererAPI::API::OpenGL:
 			{
-				return new OpenGLVertexBuffer(vertices, size);
+				return CreateRef<OpenGLVertexBuffer>(vertices, size);
 			}
 		}
 
@@ -25,7 +25,7 @@ namespace PH {
 		return nullptr;
 	}
 
-	IndexBuffer* IndexBuffer::Create(unsigned int* indices, unsigned int count)
+	Ref<IndexBuffer> IndexBuffer::Create(ph_uint32* indices, ph_uint32 count)
 	{
 		switch (Renderer::GetAPI()) {
 			case RendererAPI::API::None:
@@ -35,7 +35,7 @@ namespace PH {
 			}
 			case RendererAPI::API::OpenGL:
 			{
-				return new OpenGLIndexBuffer(indices, count);
+				return CreateRef<OpenGLIndexBuffer>(indices, count);
 			}
 		}
 

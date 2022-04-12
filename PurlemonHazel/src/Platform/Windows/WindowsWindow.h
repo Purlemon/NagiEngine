@@ -15,13 +15,13 @@ namespace PH {
 
 		void OnUpdate()override;
 
-		inline unsigned int GetWidth() const override { return data_.width; }
-		inline unsigned int GetHeight() const override { return data_.height; }
+		ph_uint32 GetWidth() const override { return data_.width; }
+		ph_uint32 GetHeight() const override { return data_.height; }
 
-		inline void* GetNativeWindow()const override { return window_; }
+		void* GetNativeWindow()const override { return window_; }
 
 		// ¥∞ø⁄ Ù–‘
-		inline void SetEventCallback(const EventCallbackFn& callback) override
+		void SetEventCallback(const EventCallbackFn& callback) override
 		{
 			data_.event_callback = callback;
 		}
@@ -37,7 +37,7 @@ namespace PH {
 		struct WindowData
 		{
 			std::string title;
-			unsigned int width, height;
+			ph_uint32 width, height;
 			bool vsync;
 
 			EventCallbackFn event_callback;

@@ -8,27 +8,27 @@ namespace PH {
 	class RenderCommand
 	{
 	public:
-		inline static void Init()
+		static void Init()
 		{
 			renderer_api_->Init();
 		}
 
-		inline static void SetViewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
+		static void SetViewport(ph_uint32 x, ph_uint32 y, ph_uint32 width, ph_uint32 height)
 		{
 			return renderer_api_->SetViewport(x, y, width, height);
 		}
 
-		inline static void SetClearColor(const glm::vec4& color)
+		static void SetClearColor(const glm::vec4& color)
 		{
 			return renderer_api_->SetClearColor(color);
 		}
 
-		inline static void Clear()
+		static void Clear()
 		{
 			return renderer_api_->Clear();
 		}
 
-		inline static void DrawIndexed(const PH::Ref<VertexArray>& vertex_array)
+		static void DrawIndexed(const PH::Ref<VertexArray>& vertex_array)
 		{ 
 			return renderer_api_->DrawIndexed(vertex_array); 
 		}

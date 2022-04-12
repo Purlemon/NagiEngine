@@ -13,7 +13,7 @@ namespace PH {
 		Renderer2D::Init();
 	}
 
-	void Renderer::OnWindowResize(unsigned int width, unsigned int height)
+	void Renderer::OnWindowResize(ph_uint32 width, ph_uint32 height)
 	{
 		RenderCommand::SetViewport(0, 0, width, height);
 	}

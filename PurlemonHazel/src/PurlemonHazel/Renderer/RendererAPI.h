@@ -15,13 +15,13 @@ namespace PH {
 		};
 	public:
 		virtual void Init() = 0;
-		virtual void SetViewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height) = 0;
+		virtual void SetViewport(ph_uint32 x, ph_uint32 y, ph_uint32 width, ph_uint32 height) = 0;
 		virtual void SetClearColor(const glm::vec4& color) = 0;
 		virtual void Clear() = 0;
 		
 		virtual void DrawIndexed(const PH::Ref<VertexArray>& vertex_array) = 0;
 	
-		inline static API GetAPI() { return api_; }
+		static API GetAPI() { return api_; }
 	private:
 		static API api_;
 	};

@@ -12,8 +12,8 @@ namespace PH {
 		MouseMovedEvent(float mouse_x,float mouse_y)
 			:mouse_x_(mouse_x),mouse_y_(mouse_y){ }
 
-		inline float GetX()const { return mouse_x_; }
-		inline float GetY()const { return mouse_y_; }
+		float GetX()const { return mouse_x_; }
+		float GetY()const { return mouse_y_; }
 
 		std::string ToString()const override
 		{
@@ -34,8 +34,8 @@ namespace PH {
 		MouseScrolledEvent(float x_offset,float y_offset)
 			:x_offset_(x_offset),y_offset_(y_offset){ }
 
-		inline float GetXOffset()const { return x_offset_; }
-		inline float GetYOffset()const { return y_offset_; }
+		float GetXOffset()const { return x_offset_; }
+		float GetYOffset()const { return y_offset_; }
 
 		std::string ToString()const override
 		{
@@ -54,7 +54,7 @@ namespace PH {
 	class PH_API MouseButtonEvent :public Event
 	{
 	public:
-		inline int GetMouseButton()const { return button_; }
+		int GetMouseButton()const { return button_; }
 
 		EVENT_CLASS_CATEGORY(kEventCategoryInput | kEventCategoryMouse | kEventCategoryMouseButton)
 

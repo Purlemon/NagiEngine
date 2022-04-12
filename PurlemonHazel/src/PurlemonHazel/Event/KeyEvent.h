@@ -9,7 +9,7 @@ namespace PH {
 	class PH_API KeyEvent : public Event
 	{ // ³éÏóÀà
 	public:
-		inline int GetKeyCode() const { return key_code_; }
+		int GetKeyCode() const { return key_code_; }
 
 		EVENT_CLASS_CATEGORY(kEventCategoryInput | kEventCategoryKeyboard)
 	protected:
@@ -24,7 +24,7 @@ namespace PH {
 		KeyPressedEvent(int key_code,int repeat_count)
 			:KeyEvent(key_code),repeat_count_(repeat_count){ }
 
-		inline int GetRepeatCount()const { return repeat_count_; }
+		int GetRepeatCount()const { return repeat_count_; }
 
 		std::string ToString()const override
 		{

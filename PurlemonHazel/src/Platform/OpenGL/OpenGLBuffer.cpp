@@ -8,7 +8,7 @@ namespace PH {
 	// OpenGLVertexBuffer
 	// ------------------------------------------
 
-	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, unsigned int size)
+	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, ph_uint32 size)
 	{
 		glCreateBuffers(1, &render_id_);
 		glBindBuffer(GL_ARRAY_BUFFER, render_id_);
@@ -33,12 +33,12 @@ namespace PH {
 	// OpenGLIndexBuffer
 	// ------------------------------------------
 
-	OpenGLIndexBuffer::OpenGLIndexBuffer(unsigned int* indices, unsigned int count)
+	OpenGLIndexBuffer::OpenGLIndexBuffer(ph_uint32* indices, ph_uint32 count)
 		:count_(count)
 	{
 		glCreateBuffers(1, &render_id_);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, render_id_);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(ph_uint32), indices, GL_STATIC_DRAW);
 	}
 
 	OpenGLIndexBuffer::~OpenGLIndexBuffer()

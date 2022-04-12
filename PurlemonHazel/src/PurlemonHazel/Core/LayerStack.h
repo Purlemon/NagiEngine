@@ -20,12 +20,12 @@ namespace PH {
 		void PopLayer(Layer* layer);      
 		void PopOverlay(Layer* overlay); 
 
-		inline LayersIter begin() { return layers_.begin(); }
-		inline LayersIter end() { return layers_.end(); }
+		LayersIter begin() { return layers_.begin(); }
+		LayersIter end() { return layers_.end(); }
 
 	private:
 		std::vector<Layer*>layers_;
-		unsigned int layer_insert_index_ = 0;;
+		ph_uint32 layer_insert_index_ = 0;;
 	};
 
 }

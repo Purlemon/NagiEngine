@@ -1,5 +1,5 @@
 #include "Sandbox2D.h"
-#include "PurlemonHazel/Core/EntryPoint.h"
+#include "NagiEngine/Core/EntryPoint.h"
 
 #include "imgui.h"
 
@@ -52,7 +52,7 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
-	tex2d_props_.texture = PH::Texture2D::Create("assets/textures/test.jpg");
+	tex2d_props_.texture = Nagi::Texture2D::Create("assets/textures/test.jpg");
 }
 
 void Sandbox2D::OnDetach()
@@ -60,23 +60,23 @@ void Sandbox2D::OnDetach()
 
 }
 
-void Sandbox2D::OnUpdate(PH::Timestep ts)
+void Sandbox2D::OnUpdate(Nagi::Timestep ts)
 {
 	camera_controller_.OnUpdate(ts);
 	
 	// Render
-	PH::RenderCommand::SetClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
-	PH::RenderCommand::Clear();
+	Nagi::RenderCommand::SetClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
+	Nagi::RenderCommand::Clear();
 
 	{
 		PROFILE_SCOPE("Renderer");
-		PH::Renderer2D::BeginScene(camera_controller_.GetCamera());
+		Nagi::Renderer2D::BeginScene(camera_controller_.GetCamera());
 		{
-			PH::Renderer2D::DrawQuad({ { 0.0f,0.0f }, { 1.0f,1.0f } }, square_color_);
-			PH::Renderer2D::DrawQuad({ { -1.0f,-1.0f }, { 0.5f,0.5f } }, square_color_);
-			//PH::Renderer2D::DrawQuad(quad_props_, tex2d_props_);
+			Nagi::Renderer2D::DrawQuad({ { 0.0f,0.0f }, { 1.0f,1.0f } }, square_color_);
+			Nagi::Renderer2D::DrawQuad({ { -1.0f,-1.0f }, { 0.5f,0.5f } }, square_color_);
+			//Nagi::Renderer2D::DrawQuad(quad_props_, tex2d_props_);
 		}
-		PH::Renderer2D::EndScene();
+		Nagi::Renderer2D::EndScene();
 	}
 }
 
@@ -101,7 +101,7 @@ void Sandbox2D::OnImGuiRender()
 	ImGui::End();
 }
 
-void Sandbox2D::OnEvent(PH::Event& event)
+void Sandbox2D::OnEvent(Nagi::Event& event)
 {
 	camera_controller_.OnEvent(event);
 }

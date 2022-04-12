@@ -57,17 +57,17 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>PH_PLATFORM_WINDOWS;IMGUI_API=__declspec(dllimport)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NAGI_PLATFORM_WINDOWS;IMGUI_API=__declspec(dllimport)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AssemblerOutput>AssemblyCode</AssemblerOutput>
-      <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\glm;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\src;$(SolutionDir)PurlemonHazel\vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)NagiEngine\vendor\glm;$(SolutionDir)NagiEngine\vendor\spdlog\include;$(SolutionDir)NagiEngine\src;$(SolutionDir)NagiEngine\vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies;$(SolutionDir)bin\$(Configuration)-$(Platform)\PurlemonHazel\;$(SolutionDir)PurlemonHazel\vendor\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>PurlemonHazel.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies;$(SolutionDir)bin\$(Configuration)-$(Platform)\NagiEngine\;$(SolutionDir)NagiEngine\vendor\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>NagiEngine.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -76,9 +76,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>PH_PLATFORM_WINDOWS;IMGUI_API=__declspec(dllimport)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NAGI_PLATFORM_WINDOWS;IMGUI_API=__declspec(dllimport)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)PurlemonHazel\vendor\glm;$(SolutionDir)PurlemonHazel\vendor\spdlog\include;$(SolutionDir)PurlemonHazel\src;$(SolutionDir)PurlemonHazel\vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)NagiEngine\vendor\glm;$(SolutionDir)NagiEngine\vendor\spdlog\include;$(SolutionDir)NagiEngine\src;$(SolutionDir)NagiEngine\vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -86,8 +86,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies;$(SolutionDir)bin\$(Configuration)-$(Platform)\PurlemonHazel\;$(SolutionDir)PurlemonHazel\vendor\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>PurlemonHazel.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies;$(SolutionDir)bin\$(Configuration)-$(Platform)\NagiEngine\;$(SolutionDir)NagiEngine\vendor\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>NagiEngine.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -95,7 +95,7 @@
     <ClCompile Include="src\Sandbox2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PurlemonHazel\PurlemonHazel.vcxproj">
+    <ProjectReference Include="..\NagiEngine\NagiEngine.vcxproj">
       <Project>{f9007d2c-9abf-4149-922d-623b06530226}</Project>
     </ProjectReference>
   </ItemGroup>

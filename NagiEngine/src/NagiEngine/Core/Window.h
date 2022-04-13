@@ -11,12 +11,12 @@ namespace Nagi {
 	struct WindowProps
 	{
 		std::string title;
-		ph_uint32 width;
-		ph_uint32 height;
+		ng_uint32 width;
+		ng_uint32 height;
 
 		WindowProps(const std::string& t = "NagiEngine",
-			ph_uint32 w = 1280,
-			ph_uint32 h =720)
+			ng_uint32 w = 1280,
+			ng_uint32 h =720)
 			:title(t),width(w),height(h){ }
 			
 	};
@@ -31,8 +31,8 @@ namespace Nagi {
 
 		virtual void OnUpdate() = 0;
 
-		virtual ph_uint32 GetWidth()const = 0;
-		virtual ph_uint32 GetHeight()const = 0;
+		virtual ng_uint32 GetWidth()const = 0;
+		virtual ng_uint32 GetHeight()const = 0;
 
 		// ¥∞ø⁄ Ù–‘
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;

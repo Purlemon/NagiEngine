@@ -2,6 +2,9 @@
 
 #include <memory>
 
+// 解决vs预处理定义失效
+#define NAGI_PLATFORM_WINDOWS
+
 #ifdef NAGI_PLATFORM_WINDOWS // 在windows生效
 	#if NAGI_DYNAMIC_LINK
 		#ifdef NAGI_BUILD_DLL // 在Nagi中定义
@@ -28,8 +31,9 @@
 
 #define NAGI_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
 
-typedef unsigned int ph_uint32;
-typedef char ph_uint8;
+typedef unsigned int ng_uint32;
+typedef unsigned int ng_sizei;
+typedef char ng_uint8;
 
 namespace Nagi {
 

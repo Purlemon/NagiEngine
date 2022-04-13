@@ -37,7 +37,7 @@ namespace Nagi {
 		stbi_image_free(data);
 	}
 
-	OpenGLTexture2D::OpenGLTexture2D(ph_uint32 width, ph_uint32 height)
+	OpenGLTexture2D::OpenGLTexture2D(ng_uint32 width, ng_uint32 height)
 		:width_(width),height_(height)
 	{
 		internal_format_ = GL_RGBA8;
@@ -58,15 +58,16 @@ namespace Nagi {
 		glDeleteTextures(1, &render_id_);
 	}
 
-	void OpenGLTexture2D::SetData(void* data, ph_uint32 size)
+	void OpenGLTexture2D::SetData(void* data, ng_uint32 size)
 	{
-		ph_uint32 byte_per_pixel = (data_format_ == GL_RGBA ? 4 : 3);
+		ng_uint32 byte_per_pixel = (data_format_ == GL_RGBA ? 4 : 3);
 		NAGI_CORE_ASSERT(size == width_ * height_ * byte_per_pixel, "data必须指向全部纹理!");
 		glTextureSubImage2D(render_id_, 0, 0, 0, width_, height_, data_format_, GL_UNSIGNED_BYTE, data);
 	}
 
-	void OpenGLTexture2D::Bind(ph_uint32 slot) const
+	void OpenGLTexture2D::Bind(ng_uint32 slot) const
 	{
+		// 将纹理绑定到指定的(slot)纹理单元
 		glBindTextureUnit(slot, render_id_);
 	}
 

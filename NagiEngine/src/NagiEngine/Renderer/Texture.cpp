@@ -23,7 +23,7 @@ namespace Nagi {
 		return nullptr;
 	}
 
-	Ref<Texture2D> Texture2D::Create(ph_uint32 width, ph_uint32 height)
+	Ref<Texture2D> Texture2D::Create(ng_uint32 width, ng_uint32 height)
 	{
 		switch (Renderer::GetAPI()) {
 			case RendererAPI::API::None:

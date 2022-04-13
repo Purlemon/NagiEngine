@@ -53,6 +53,7 @@ Sandbox2D::Sandbox2D()
 void Sandbox2D::OnAttach()
 {
 	tex2d_props_.texture = Nagi::Texture2D::Create("assets/textures/test.jpg");
+	tex2d_test2_props_.texture=Nagi::Texture2D::Create("assets/textures/2.png");
 }
 
 void Sandbox2D::OnDetach()
@@ -73,8 +74,8 @@ void Sandbox2D::OnUpdate(Nagi::Timestep ts)
 		Nagi::Renderer2D::BeginScene(camera_controller_.GetCamera());
 		{
 			Nagi::Renderer2D::DrawQuad({ { 0.0f,0.0f }, { 1.0f,1.0f } }, square_color_);
-			Nagi::Renderer2D::DrawQuad({ { -1.0f,-1.0f }, { 0.5f,0.5f } }, square_color_);
-			//Nagi::Renderer2D::DrawQuad(quad_props_, tex2d_props_);
+			Nagi::Renderer2D::DrawQuad({ { -1.0f,-1.0f }, { 0.5f,0.5f } }, tex2d_test2_props_);
+			Nagi::Renderer2D::DrawQuad(quad_props_, tex2d_props_);
 		}
 		Nagi::Renderer2D::EndScene();
 	}
@@ -89,7 +90,6 @@ void Sandbox2D::OnImGuiRender()
 	ImGui::DragFloat2("Size", glm::value_ptr(quad_props_.size));
 	ImGui::DragFloat("Rotation",&quad_props_.rotation);
 	ImGui::DragFloat("Texture Tiling Factor", &tex2d_props_.tiling_factor);
-	ImGui::ColorEdit4("Texture Tintcolor", glm::value_ptr(tex2d_props_.tintcolor));
 	for (auto& result : profile_results_) {
 		char label[50];
 		strcpy_s(label, "%.3fms ");

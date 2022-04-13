@@ -15,8 +15,8 @@ namespace Nagi {
 
 		void OnUpdate()override;
 
-		ph_uint32 GetWidth() const override { return data_.width; }
-		ph_uint32 GetHeight() const override { return data_.height; }
+		ng_uint32 GetWidth() const override { return data_.width; }
+		ng_uint32 GetHeight() const override { return data_.height; }
 
 		void* GetNativeWindow()const override { return window_; }
 
@@ -37,7 +37,7 @@ namespace Nagi {
 		struct WindowData
 		{
 			std::string title;
-			ph_uint32 width, height;
+			ng_uint32 width, height;
 			bool vsync;
 
 			EventCallbackFn event_callback;

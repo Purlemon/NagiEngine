@@ -51,16 +51,26 @@ namespace Nagi {
 		glBindVertexArray(render_id_);
 		vertex_buffer->Bind();
 		
-		ph_uint32 index = 0;
+		ng_uint32 index = 0;
 		const auto& layout = vertex_buffer->GetLayout();
 		for (const auto& element : layout) {
 			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index,
-				element.GetComponentCount(),
-				ShaderDataTypeToOpenGLBaseType(element.type),
-				element.normalized ? GL_TRUE : GL_FALSE,
-				layout.GetStride(),
-				(const void*)element.offset);
+			// 传入int用glVertexAttribIPointer，否则会被转换为float
+			if (ShaderDataTypeToOpenGLBaseType(element.type) == GL_INT) {
+				glVertexAttribIPointer(index,
+					element.GetComponentCount(),
+					ShaderDataTypeToOpenGLBaseType(element.type),
+					layout.GetStride(),
+					(const void*)element.offset);
+			}
+			else {
+				glVertexAttribPointer(index,
+					element.GetComponentCount(),
+					ShaderDataTypeToOpenGLBaseType(element.type),
+					element.normalized ? GL_TRUE : GL_FALSE,
+					layout.GetStride(),
+					(const void*)element.offset);
+			}
 			++index;
 		}
 		

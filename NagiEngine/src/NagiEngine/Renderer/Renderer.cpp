@@ -13,7 +13,7 @@ namespace Nagi {
 		Renderer2D::Init();
 	}
 
-	void Renderer::OnWindowResize(ph_uint32 width, ph_uint32 height)
+	void Renderer::OnWindowResize(ng_uint32 width, ng_uint32 height)
 	{
 		RenderCommand::SetViewport(0, 0, width, height);
 	}

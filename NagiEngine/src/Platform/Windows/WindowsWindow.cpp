@@ -97,7 +97,7 @@ namespace Nagi {
 			}
 		});
 
-		glfwSetCharCallback(window_, [](GLFWwindow* window,ph_uint32 keycode) {
+		glfwSetCharCallback(window_, [](GLFWwindow* window,ng_uint32 keycode) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			KeyTypedEvent event(keycode);

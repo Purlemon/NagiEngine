@@ -11,7 +11,7 @@ namespace Nagi {
 	{
 	public:
 		static void Init();
-		static void OnWindowResize(ph_uint32 width, ph_uint32 height);
+		static void OnWindowResize(ng_uint32 width, ng_uint32 height);
 
 		static void BeginScene(OrthographicCamera& camera);
 		static void EndScene();

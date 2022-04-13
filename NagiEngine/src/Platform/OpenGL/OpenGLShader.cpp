@@ -37,6 +37,11 @@ namespace Nagi {
 		UploadUniformInt(name, val);
 	}
 
+	void OpenGLShader::SetIntArray(const std::string& name, int* vals, ng_uint32 size)
+	{
+		UploadUniformIntArray(name, vals, size);
+	}
+
 	void OpenGLShader::SetFloat(const std::string& name, float val)
 	{
 		UploadUniformFloat(name, val);
@@ -74,6 +79,12 @@ namespace Nagi {
 	{
 		GLint location = glGetUniformLocation(render_id_, name.c_str());
 		glUniform1i(location, value);
+	}
+
+	void OpenGLShader::UploadUniformIntArray(const std::string& name, int* vals, ng_uint32 size)
+	{
+		GLint location = glGetUniformLocation(render_id_, name.c_str());
+		glUniform1iv(location, size, vals);
 	}
 
 	void OpenGLShader::UploadUniformFloat(const std::string& name, float value)

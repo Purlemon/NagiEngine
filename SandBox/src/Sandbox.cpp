@@ -35,9 +35,9 @@ public:
 		vertex_buffer_->SetLayout(layout);
 		vertex_array_->AddVertexBuffer(vertex_buffer_);
 
-		ph_uint32 indices[3] = { 0,1,2 };
+		ng_uint32 indices[3] = { 0,1,2 };
 		Nagi::Ref<Nagi::IndexBuffer>index_buffer_;
-		index_buffer_ = Nagi::IndexBuffer::Create(indices, sizeof(indices) / sizeof(ph_uint32));
+		index_buffer_ = Nagi::IndexBuffer::Create(indices, sizeof(indices) / sizeof(ng_uint32));
 		vertex_array_->SetIndexBuffer(index_buffer_);
 
 		// Õý·½ÐÎ
@@ -58,9 +58,9 @@ public:
 			});
 		square_va_->AddVertexBuffer(square_vb);
 
-		ph_uint32 square_indices[6] = { 0,1,2,2,3,0 };
+		ng_uint32 square_indices[6] = { 0,1,2,2,3,0 };
 		Nagi::Ref<Nagi::IndexBuffer>square_ib;
-		square_ib = Nagi::IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(ph_uint32));
+		square_ib = Nagi::IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(ng_uint32));
 		square_va_->SetIndexBuffer(square_ib);
 
 		auto tex_shader_ = shader_lib_.Load("color", "assets/shaders/vertex/color.vert", "assets/shaders/fragment/color.frag");

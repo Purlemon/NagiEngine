@@ -25,7 +25,7 @@ namespace Nagi {
 
 	private:
 		std::vector<Layer*>layers_;
-		ph_uint32 layer_insert_index_ = 0;;
+		ng_uint32 layer_insert_index_ = 0;;
 	};
 
 }

@@ -13,7 +13,7 @@ namespace Nagi {
 		None = 0, Float, Float2, Float3, Float4, Mat3, Mat4, Int, Int2, Int3, Int4, Bool
 	};
 
-	static ph_uint32 ShaderDataTypeSize(ShaderDataType type) // 每个buffer块的大小
+	static ng_uint32 ShaderDataTypeSize(ShaderDataType type) // 每个buffer块的大小
 	{
 		switch (type) {
 			case Nagi::ShaderDataType::Float:		return 4;
@@ -37,8 +37,8 @@ namespace Nagi {
 	{
 		std::string name;
 		ShaderDataType type;
-		ph_uint32 size;
-		ph_uint32 offset;
+		ng_uint32 size;
+		ng_uint32 offset;
 		bool normalized;
 
 		BufferElement(){ }
@@ -48,7 +48,7 @@ namespace Nagi {
 		{
 		}
 
-		ph_uint32 GetComponentCount()const // 每个buffer块组成元素的数量
+		ng_uint32 GetComponentCount()const // 每个buffer块组成元素的数量
 		{
 			switch (type) {
 				case Nagi::ShaderDataType::Float:		return 1;
@@ -81,7 +81,7 @@ namespace Nagi {
 		}
 
 		const std::vector<BufferElement>& GetElements()const { return elements_; }
-		ph_uint32 GetStride()const { return stride_; }
+		ng_uint32 GetStride()const { return stride_; }
 
 		std::vector<BufferElement>::iterator begin() { return elements_.begin(); }
 		std::vector<BufferElement>::iterator end() { return elements_.end(); }
@@ -90,7 +90,7 @@ namespace Nagi {
 	private:
 		void CalculateOffsetsAndStride()
 		{
-			ph_uint32 offset = 0;
+			ng_uint32 offset = 0;
 			stride_ = 0;
 			for (auto& element : elements_) {
 				element.offset = offset;
@@ -100,7 +100,7 @@ namespace Nagi {
 		}
 	private:
 		std::vector<BufferElement>elements_;
-		ph_uint32 stride_;
+		ng_uint32 stride_;
 	};
 
 	// -----------------------------
@@ -115,13 +115,13 @@ namespace Nagi {
 		virtual void Bind() const= 0;
 		virtual void Unbind() const = 0;
 
-		virtual void SetData(const void* data, ph_uint32 size) = 0;
+		virtual void SetData(const void* data, ng_uint32 size) = 0;
 
 		virtual const BufferLayout& GetLayout()const = 0;
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 
-		static Ref<VertexBuffer> Create(float* vertices, ph_uint32 size); // 起到构造函数的作用
-		static Ref<VertexBuffer> Create(ph_uint32 size); // 起到构造函数的作用
+		static Ref<VertexBuffer> Create(float* vertices, ng_uint32 size); // 起到构造函数的作用
+		static Ref<VertexBuffer> Create(ng_uint32 size); // 起到构造函数的作用
 	};
 
 	class IndexBuffer
@@ -132,9 +132,9 @@ namespace Nagi {
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 
-		virtual ph_uint32 GetCount()const = 0;
+		virtual ng_uint32 GetCount()const = 0;
 
-		static Ref<IndexBuffer> Create(ph_uint32* indices, ph_uint32 count);
+		static Ref<IndexBuffer> Create(ng_uint32* indices, ng_uint32 count);
 	};
 
 }

@@ -13,7 +13,7 @@ namespace Nagi {
 			renderer_api_->Init();
 		}
 
-		static void SetViewport(ph_uint32 x, ph_uint32 y, ph_uint32 width, ph_uint32 height)
+		static void SetViewport(ng_uint32 x, ng_uint32 y, ng_uint32 width, ng_uint32 height)
 		{
 			return renderer_api_->SetViewport(x, y, width, height);
 		}
@@ -28,7 +28,7 @@ namespace Nagi {
 			return renderer_api_->Clear();
 		}
 
-		static void DrawIndexed(const Nagi::Ref<VertexArray>& vertex_array, ph_uint32 count = 0)
+		static void DrawIndexed(const Nagi::Ref<VertexArray>& vertex_array, ng_uint32 count = 0)
 		{ 
 			return renderer_api_->DrawIndexed(vertex_array, count);
 		}

@@ -18,11 +18,12 @@ private:
 	Nagi::Ref<Nagi::Shader> shader_;
 	Nagi::Ref<Nagi::VertexArray>square_va_;
 	Nagi::Texture2DPorps tex2d_props_;
+	Nagi::Texture2DPorps tex2d_test2_props_;
 
 	Nagi::OrthographicCameraController camera_controller_;
 
 	glm::vec4 square_color_ = { 0.2f, 0.3f, 0.8f, 1.0f };
-	Nagi::QuadProps quad_props_ = { glm::vec2(0.0f), {10.0f, 10.0f} };
+	Nagi::QuadProps quad_props_ = { glm::vec2(-2.0f), {2.0f, 2.0f} };
 
 	// –‘ƒ‹≈‰÷√
 	struct ProfileResult

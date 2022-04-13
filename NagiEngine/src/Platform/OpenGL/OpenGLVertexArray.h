@@ -19,7 +19,7 @@ namespace Nagi {
 		const std::vector<Nagi::Ref<VertexBuffer>>& GetVertexBuffers()const override { return vertex_buffers_; }
 		const Nagi::Ref<IndexBuffer>& GetIndexBuffer()const override { return index_buffers_;  }
 	private:
-		ph_uint32 render_id_;
+		ng_uint32 render_id_;
 		std::vector<Nagi::Ref<VertexBuffer>>vertex_buffers_;
 		Nagi::Ref<IndexBuffer>index_buffers_;
 	};

@@ -17,6 +17,7 @@ namespace Nagi {
 
 		// ∏ﬂ≤„API
 		void SetInt(const std::string& name, int val) override;
+		void SetIntArray(const std::string& name, int* vals, ng_uint32 size);
 		void SetFloat(const std::string& name, float val) override;
 		void SetFloat3(const std::string& name, const glm::vec3& val) override;
 		void SetFloat4(const std::string& name, const glm::vec4& val) override;
@@ -28,6 +29,7 @@ namespace Nagi {
 		void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
 		
 		void UploadUniformInt(const std::string& name, int value);
+		void UploadUniformIntArray(const std::string& name, int* vals, ng_uint32 size);
 
 		void UploadUniformFloat(const std::string& name, float value);
 		void UploadUniformFloat2(const std::string& name, const glm::vec2& vec);

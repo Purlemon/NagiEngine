@@ -6,6 +6,7 @@
 
 namespace Nagi {
 
+	// 描述四边形信息
 	struct QuadProps
 	{
 		glm::vec3 position;
@@ -18,16 +19,16 @@ namespace Nagi {
 			:position(glm::vec3(this_position.x, this_position.y, 0.0f)), size(this_size), rotation(this_rotation) {}
 	};
 
+	// 描述2D纹理信息
 	struct Texture2DPorps
 	{
 		Ref<Texture2D> texture;
-		float tiling_factor;
-		glm::vec4 tintcolor;
+		float tiling_factor;	// 对纹理重复的系数
 
 		Texture2DPorps()
 			:Texture2DPorps(nullptr) { }
-		Texture2DPorps(const Ref<Texture2D>& this_texture, float this_tiling_factor = 1.0f, const glm::vec4& this_tintcolor = glm::vec4(1.0f))
-			:texture(this_texture), tiling_factor(this_tiling_factor), tintcolor(this_tintcolor) {}
+		Texture2DPorps(const Ref<Texture2D>& this_texture, float this_tiling_factor = 1.0f)
+			:texture(this_texture), tiling_factor(this_tiling_factor) {}
 		
 	};
 

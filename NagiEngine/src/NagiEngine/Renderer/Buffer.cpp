@@ -7,7 +7,7 @@
 
 namespace Nagi {
 
-	Ref<VertexBuffer> VertexBuffer::Create(ph_uint32 size)
+	Ref<VertexBuffer> VertexBuffer::Create(ng_uint32 size)
 	{
 		switch (Renderer::GetAPI()) {
 		case RendererAPI::API::None:
@@ -25,7 +25,7 @@ namespace Nagi {
 		return nullptr;
 	}
 
-	Ref<VertexBuffer> VertexBuffer::Create(float* vertices, ph_uint32 size)
+	Ref<VertexBuffer> VertexBuffer::Create(float* vertices, ng_uint32 size)
 	{
 		switch (Renderer::GetAPI()) {
 			case RendererAPI::API::None:
@@ -43,7 +43,7 @@ namespace Nagi {
 		return nullptr;
 	}
 
-	Ref<IndexBuffer> IndexBuffer::Create(ph_uint32* indices, ph_uint32 count)
+	Ref<IndexBuffer> IndexBuffer::Create(ng_uint32* indices, ng_uint32 count)
 	{
 		switch (Renderer::GetAPI()) {
 			case RendererAPI::API::None:

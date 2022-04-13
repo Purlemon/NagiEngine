@@ -9,11 +9,11 @@ namespace Nagi {
 	class NAGI_API WindowResizeEvent :public Event
 	{
 	public:
-		WindowResizeEvent(ph_uint32 width, ph_uint32 height)
+		WindowResizeEvent(ng_uint32 width, ng_uint32 height)
 			:width_(width),height_(height){ }
 
-		ph_uint32 GetWidth()const { return width_; }
-		ph_uint32 GetHeight()const { return height_; }
+		ng_uint32 GetWidth()const { return width_; }
+		ng_uint32 GetHeight()const { return height_; }
 
 		std::string ToString() const override
 		{
@@ -26,7 +26,7 @@ namespace Nagi {
 	    EVENT_CLASS_CATEGORY(kEventCategoryApplication)
 
 	private:
-		ph_uint32 width_, height_;
+		ng_uint32 width_, height_;
 	};
 
 	class NAGI_API WindowCloseEvent :public Event

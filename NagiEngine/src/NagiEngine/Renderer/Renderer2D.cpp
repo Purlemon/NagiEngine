@@ -35,9 +35,9 @@ namespace Nagi {
 	// 2D渲染数据
 	struct Renderer2DData
 	{
-		const ng_uint32 max_quads = 5000;
-		const ng_uint32 max_vertices = max_quads * 4;
-		const ng_uint32 max_indices = max_quads * 6;
+		static const ng_uint32 max_quads = 10000;	// 批处理一次DrawCall绘制的最大Quad个数
+		static const ng_uint32 max_vertices = max_quads * 4;
+		static const ng_uint32 max_indices = max_quads * 6;
 		static const ng_uint32 max_texure_slots = 32;	// TODO：查询GPU一次支持多少个纹理单元
 		
 		// 四边形四个顶点的默认位置，设计成vec4是为了方便矩阵运算, 注意点的w为1
@@ -66,8 +66,9 @@ namespace Nagi {
 		QuadVertex* quad_vertex_buffer_base = nullptr;	// QuadVertex数组头指针
 		QuadVertex* quad_vertex_buffer_ptr = nullptr;	// 在QuadVertex数组中移动
 
-		std::array<Ref<Texture2D>, max_texure_slots>texture_slots;	// 相当于纹理map，记录已经存在纹理单元的纹理
-		ng_uint32 texture_slot_index = 1;	// 0 = white texture
+		std::unordered_map<Ref<Texture2D>, ng_sizei> add_texture_map; // 记录已经添加的纹理
+
+		Renderer2D::FrameStatistics frame_state;
 	};
 
 	static Renderer2DData sData;
@@ -86,7 +87,7 @@ namespace Nagi {
 			});
 		sData.quad_vertex_array->AddVertexBuffer(sData.quad_vertex_buffer);
 
-		sData.quad_vertex_buffer_base = new QuadVertex[sData.max_quads];
+		sData.quad_vertex_buffer_base = new QuadVertex[sData.max_vertices];
 		// 设置顶点索引数组
 		ng_uint32* quad_indices = new ng_uint32[sData.max_indices];
 		ng_uint32 offset = 0;
@@ -123,15 +124,14 @@ namespace Nagi {
 		sData.texture_shader->Bind();
 		sData.texture_shader->SetIntArray("u_Textures", samplers, sData.max_texure_slots);
 
-		sData.texture_slots[0] = sData.white_texture;
+		//sData.texture_slots[0] = sData.white_texture;
+		sData.add_texture_map[sData.white_texture] = 0;
+		sData.white_texture->Bind(0);
 	}
 
 	void Renderer2D::Shutdown()
 	{
-		sData.quad_index_count = 0;
-		sData.quad_vertex_buffer_ptr = sData.quad_vertex_buffer_base;
-
-sData.texture_slot_index = 1;
+		
 	}
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
@@ -145,26 +145,45 @@ sData.texture_slot_index = 1;
 
 	void Renderer2D::EndScene()
 	{
-		// 计算所用的顶点数组大小
-		ng_uint32 data_size = sizeof(QuadVertex) * (sData.quad_vertex_buffer_ptr - sData.quad_vertex_buffer_base);
-		sData.quad_vertex_buffer->SetData(sData.quad_vertex_buffer_base, data_size);
-
 		Flush();
 	}
 
 	void Renderer2D::Flush()
 	{
-		// 纹理按顺序绑定到纹理单元
-		for (ng_uint32 i = 0; i < sData.texture_slot_index; ++i) {
-			sData.texture_slots[i]->Bind(i);
-		}
+		// 计算所用的顶点数组大小
+		ng_uint32 data_size = sizeof(QuadVertex) * (sData.quad_vertex_buffer_ptr - sData.quad_vertex_buffer_base);
+		sData.quad_vertex_buffer->SetData(sData.quad_vertex_buffer_base, data_size);
 
 		RenderCommand::DrawIndexed(sData.quad_vertex_array, sData.quad_index_count);
+		++sData.frame_state.batch_count;
 	}
+
+	void Renderer2D::FlushAndReset()
+	{
+		EndScene();
+		ResetBatchParams();
+	}
+
+	void Renderer2D::ResetBatchParams()
+	{
+		sData.quad_index_count = 0;
+		sData.quad_vertex_buffer_ptr = sData.quad_vertex_buffer_base;
+		sData.add_texture_map.clear();
+		sData.add_texture_map[sData.white_texture] = 0;
+	}
+
+	// 绘制具体图形方法
+	// ----------------------------------------------
 
 	void Renderer2D::DrawQuad(const QuadProps& quad_props, const glm::vec4& color)
 	{
+		// 当前drawcall数据够多了，换下一批
+		if (sData.quad_index_count >= Renderer2DData::max_indices) {
+			FlushAndReset();
+		}
+
 		const float tex_index = 0.0f; // White Texture
+		sData.white_texture->Bind(0);
 		const float tiling_factor = 1.0f;
 
 		glm::vec3 position = glm::vec3(quad_props.position.x, quad_props.position.y, quad_props.position.z) / 100.0f;
@@ -184,10 +203,16 @@ sData.texture_slot_index = 1;
 		}
 		// 四边形 = 两个三角形，顶点索引+6
 		sData.quad_index_count += 6;
+
+		++sData.frame_state.quad_count;
 	}
 
 	void Renderer2D::DrawQuad(const QuadProps& quad_props, const Texture2DPorps& tex2d_porps)
 	{
+		if (sData.quad_index_count >= Renderer2DData::max_indices) {
+			FlushAndReset();
+		}
+
 		glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 		glm::vec3 position = glm::vec3(quad_props.position.x, quad_props.position.y, quad_props.position.z) / 100.0f;
@@ -196,19 +221,13 @@ sData.texture_slot_index = 1;
 			glm::scale(glm::mat4(1.0f), glm::vec3(quad_props.size.x, quad_props.size.y, 1.0f) / 10.0f) *
 			glm::rotate(glm::mat4(1.0f), glm::radians(quad_props.rotation), glm::vec3(0.0f, 0.0f, 1.0f));
 
-		int texture_index = 0;
-		// 遍历当前纹理slots，如果所需的纹理已经存在就用这个，不在就将其加入slots
-		for (ng_sizei i = 1; i < sData.texture_slot_index; ++i) {
-			if (*(sData.texture_slots[i].get()) == *tex2d_porps.texture.get()) {
-				texture_index = i;
-				break;
-			}
+		// 如果纹理已经在map中，直接使用；否则加入map分配纹理单元id
+		if (!sData.add_texture_map.count(tex2d_porps.texture)) {
+			ng_sizei texture_unit_id = std::min((ng_sizei)sData.add_texture_map.size(), sData.max_texure_slots);
+			sData.add_texture_map[tex2d_porps.texture] = texture_unit_id;
+			tex2d_porps.texture->Bind(texture_unit_id);
 		}
-		if (texture_index == 0) {
-			texture_index = sData.texture_slot_index;
-			sData.texture_slots[sData.texture_slot_index] = tex2d_porps.texture;
-			++sData.texture_slot_index;
-		}
+		int texture_index = sData.add_texture_map[tex2d_porps.texture];
 
 		for (ng_sizei i = 0; i < 4; ++i) {
 			sData.quad_vertex_buffer_ptr->position = transform * sData.quad_vertices[i];
@@ -220,5 +239,21 @@ sData.texture_slot_index = 1;
 		}
 		sData.quad_index_count += 6;
 
+		++sData.frame_state.quad_count;
 	}
+
+	// 帧状态统计方法
+	// -------------------------------------------------------
+
+	void Renderer2D::ResetStatistics()
+	{
+		sData.frame_state.batch_count = 0;
+		sData.frame_state.quad_count = 0;
+	}
+
+	Renderer2D::FrameStatistics Renderer2D::GetStatistics()
+	{
+		return sData.frame_state;
+	}
+
 }

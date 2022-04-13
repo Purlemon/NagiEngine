@@ -23,8 +23,9 @@ private:
 	Nagi::OrthographicCameraController camera_controller_;
 
 	glm::vec4 square_color_ = { 0.2f, 0.3f, 0.8f, 1.0f };
-	Nagi::QuadProps quad_props_ = { glm::vec2(-2.0f), {2.0f, 2.0f} };
-	Nagi::QuadProps quad_tex_props_ = { glm::vec2(2.0f), {4.0f, 4.0f} };
+	Nagi::QuadProps quad_props_ = { glm::vec2(-2.0f), {10.0f, 10.0f} };
+	Nagi::QuadProps quad_tex_props_ = { glm::vec2(2.0f), {20.0f, 20.0f} };
+	Nagi::QuadProps quad_tex2_props_ = { glm::vec2(1.0f), {10.0f, 10.0f} };
 
 	// –‘ƒ‹≈‰÷√
 	struct ProfileResult
@@ -33,4 +34,5 @@ private:
 		float Time;
 	};
 	std::vector<ProfileResult> profile_results_;
+	float fps_ = 0.0f;
 };

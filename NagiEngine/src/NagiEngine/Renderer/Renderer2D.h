@@ -45,6 +45,20 @@ namespace Nagi {
 		static void DrawQuad(const QuadProps& quad_props, const glm::vec4& color);
 		static void DrawQuad(const QuadProps& quad_props, const Texture2DPorps& tex2d_porps);
 
+		// 帧状态统计
+		struct FrameStatistics
+		{
+			ng_sizei quad_count;
+			ng_sizei batch_count;
+
+			ng_sizei GetTriangleCount() { return quad_count * 2; }
+		};
+		static void ResetStatistics();
+		static FrameStatistics GetStatistics();
+
+	private:
+		static void FlushAndReset();	// 超过一次DrawCall最大quad数时再次DrawCall
+		static void ResetBatchParams();	// 批处理完成绘制后, 若要调用新的DrawCall重置参数
 	};
 
 }

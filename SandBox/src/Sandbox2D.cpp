@@ -73,9 +73,9 @@ void Sandbox2D::OnUpdate(Nagi::Timestep ts)
 		PROFILE_SCOPE("Renderer");
 		Nagi::Renderer2D::BeginScene(camera_controller_.GetCamera());
 		{
-			Nagi::Renderer2D::DrawQuad({ { 0.0f,0.0f }, { 1.0f,1.0f } }, square_color_);
+			Nagi::Renderer2D::DrawQuad(quad_props_, square_color_);
 			Nagi::Renderer2D::DrawQuad({ { -1.0f,-1.0f }, { 0.5f,0.5f } }, tex2d_test2_props_);
-			Nagi::Renderer2D::DrawQuad(quad_props_, tex2d_props_);
+			Nagi::Renderer2D::DrawQuad(quad_tex_props_, tex2d_props_);
 		}
 		Nagi::Renderer2D::EndScene();
 	}
@@ -90,6 +90,8 @@ void Sandbox2D::OnImGuiRender()
 	ImGui::DragFloat2("Size", glm::value_ptr(quad_props_.size));
 	ImGui::DragFloat("Rotation",&quad_props_.rotation);
 	ImGui::DragFloat("Texture Tiling Factor", &tex2d_props_.tiling_factor);
+	ImGui::DragFloat3("Tex Position", glm::value_ptr(quad_tex_props_.position));
+	ImGui::DragFloat2("Tex Size", glm::value_ptr(quad_tex_props_.size));
 	for (auto& result : profile_results_) {
 		char label[50];
 		strcpy_s(label, "%.3fms ");

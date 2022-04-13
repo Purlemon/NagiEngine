@@ -39,15 +39,32 @@ namespace Nagi {
 		const ng_uint32 max_vertices = max_quads * 4;
 		const ng_uint32 max_indices = max_quads * 6;
 		static const ng_uint32 max_texure_slots = 32;	// TODO：查询GPU一次支持多少个纹理单元
+		
+		// 四边形四个顶点的默认位置，设计成vec4是为了方便矩阵运算, 注意点的w为1
+		const glm::vec4 quad_vertices[4] = {
+			{ -0.5f, -0.5f, 0.0f, 1.0f },	// 左下
+			{  0.5f, -0.5f, 0.0f, 1.0f },	// 右下
+			{  0.5f,  0.5f, 0.0f, 1.0f },	// 右上
+			{ -0.5f,  0.5f, 0.0f, 1.0f }	// 左上
+		};
+
+		// 四边形四个顶点的默认纹理坐标
+		const glm::vec2 quad_texcoords[4] = {
+			{ 0.0f, 0.0f },		// 左下
+			{ 1.0f, 0.0f },		// 右下
+			{ 1.0f, 1.0f },		// 右上
+			{ 0.0f, 1.0f }		// 左上
+		};
 
 		Ref<VertexArray> quad_vertex_array;
 		Ref<VertexBuffer> quad_vertex_buffer;
 		Ref<Shader> texture_shader;
 		Ref<Texture2D> white_texture;
 
+		// 将分配一个QuadVertex数组，QuadVertex连续存储，用quad_vertex_buffer_ptr对每个QuadVertex操作
 		ng_uint32 quad_index_count = 0;
-		QuadVertex* quad_vertex_buffer_base = nullptr;	// 顶点数组头指针
-		QuadVertex* quad_vertex_buffer_ptr = nullptr;	// 在顶点数组中移动
+		QuadVertex* quad_vertex_buffer_base = nullptr;	// QuadVertex数组头指针
+		QuadVertex* quad_vertex_buffer_ptr = nullptr;	// 在QuadVertex数组中移动
 
 		std::array<Ref<Texture2D>, max_texure_slots>texture_slots;	// 相当于纹理map，记录已经存在纹理单元的纹理
 		ng_uint32 texture_slot_index = 1;	// 0 = white texture
@@ -147,68 +164,37 @@ sData.texture_slot_index = 1;
 
 	void Renderer2D::DrawQuad(const QuadProps& quad_props, const glm::vec4& color)
 	{
-#if 1	// 批渲染
-
-		glm::vec3 position = quad_props.position;
-		glm::vec2 size = quad_props.size;
-
 		const float tex_index = 0.0f; // White Texture
 		const float tiling_factor = 1.0f;
 
-		sData.quad_vertex_buffer_ptr->position = position;
-		sData.quad_vertex_buffer_ptr->color = color;
-		sData.quad_vertex_buffer_ptr->texcoord = { 0.0f, 0.0f };
-		sData.quad_vertex_buffer_ptr->tex_index = tex_index;
-		sData.quad_vertex_buffer_ptr->tiling_factor = tiling_factor;
-		++sData.quad_vertex_buffer_ptr;
-
-		sData.quad_vertex_buffer_ptr->position = { position.x + size.x, position.y, 0.0f };
-		sData.quad_vertex_buffer_ptr->color = color;
-		sData.quad_vertex_buffer_ptr->texcoord = { 1.0f, 0.0f };
-		sData.quad_vertex_buffer_ptr->tex_index = tex_index;
-		sData.quad_vertex_buffer_ptr->tiling_factor = tiling_factor;
-		++sData.quad_vertex_buffer_ptr;
-
-		sData.quad_vertex_buffer_ptr->position = { position.x + size.x, position.y + size.y, 0.0f };
-		sData.quad_vertex_buffer_ptr->color = color;
-		sData.quad_vertex_buffer_ptr->texcoord = { 1.0f, 1.0f };
-		sData.quad_vertex_buffer_ptr->tex_index = tex_index;
-		sData.quad_vertex_buffer_ptr->tiling_factor = tiling_factor;
-		++sData.quad_vertex_buffer_ptr;
-
-		sData.quad_vertex_buffer_ptr->position = { position.x, position.y + size.y, 0.0f };
-		sData.quad_vertex_buffer_ptr->color = color;
-		sData.quad_vertex_buffer_ptr->texcoord = { 0.0f, 1.0f };
-		sData.quad_vertex_buffer_ptr->tex_index = tex_index;
-		sData.quad_vertex_buffer_ptr->tiling_factor = tiling_factor;
-		++sData.quad_vertex_buffer_ptr;
-
-		sData.quad_index_count += 6;
-
-#else	// 单个对象渲染
-
-		sData.white_texture->Bind(0);
-		sData.texture_shader->SetFloat4("u_Color", color);
-		sData.texture_shader->SetFloat("u_TilingFactor", 1.0f);
-
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), quad_props.position / 100.0f) *
+		glm::vec3 position = glm::vec3(quad_props.position.x, quad_props.position.y, quad_props.position.z) / 100.0f;
+		position.z = std::max(std::min(position.z, 1.0f), -1.0f);// z不能超过[-1,1]的NDC裁剪平面
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
 			glm::scale(glm::mat4(1.0f), glm::vec3(quad_props.size.x, quad_props.size.y, 1.0f) / 10.0f) *
 			glm::rotate(glm::mat4(1.0f), glm::radians(quad_props.rotation), glm::vec3(0.0f, 0.0f, 1.0f));
-		sData.texture_shader->SetMat4("u_Transform", transform);
 
-		sData.quad_vertex_array->Bind();
-		RenderCommand::DrawIndexed(sData.quad_vertex_array);
-
-#endif // 1
+		// 对四边形四个顶点分别设置Vertex数据
+		for (ng_sizei i = 0; i < 4; ++i) {
+			sData.quad_vertex_buffer_ptr->position = transform * sData.quad_vertices[i];// 在CPU内完成model矩阵的运算
+			sData.quad_vertex_buffer_ptr->color = color;
+			sData.quad_vertex_buffer_ptr->texcoord = sData.quad_texcoords[i];
+			sData.quad_vertex_buffer_ptr->tex_index = tex_index;
+			sData.quad_vertex_buffer_ptr->tiling_factor = tiling_factor;
+			++sData.quad_vertex_buffer_ptr;
+		}
+		// 四边形 = 两个三角形，顶点索引+6
+		sData.quad_index_count += 6;
 	}
 
 	void Renderer2D::DrawQuad(const QuadProps& quad_props, const Texture2DPorps& tex2d_porps)
 	{
-#if 1	// 批渲染
-
-		glm::vec3 position = quad_props.position;
-		glm::vec2 size = quad_props.size;
 		glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+		glm::vec3 position = glm::vec3(quad_props.position.x, quad_props.position.y, quad_props.position.z) / 100.0f;
+		position.z = std::max(std::min(position.z, 1.0f), -1.0f);
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
+			glm::scale(glm::mat4(1.0f), glm::vec3(quad_props.size.x, quad_props.size.y, 1.0f) / 10.0f) *
+			glm::rotate(glm::mat4(1.0f), glm::radians(quad_props.rotation), glm::vec3(0.0f, 0.0f, 1.0f));
 
 		int texture_index = 0;
 		// 遍历当前纹理slots，如果所需的纹理已经存在就用这个，不在就将其加入slots
@@ -224,52 +210,15 @@ sData.texture_slot_index = 1;
 			++sData.texture_slot_index;
 		}
 
-		sData.quad_vertex_buffer_ptr->position = position;
-		sData.quad_vertex_buffer_ptr->color = color;
-		sData.quad_vertex_buffer_ptr->texcoord = { 0.0f, 0.0f };
-		sData.quad_vertex_buffer_ptr->tex_index = texture_index;
-		sData.quad_vertex_buffer_ptr->tiling_factor = tex2d_porps.tiling_factor;
-		++sData.quad_vertex_buffer_ptr;
-
-		sData.quad_vertex_buffer_ptr->position = { position.x + size.x, position.y, 0.0f };
-		sData.quad_vertex_buffer_ptr->color = color;
-		sData.quad_vertex_buffer_ptr->texcoord = { 1.0f, 0.0f };
-		sData.quad_vertex_buffer_ptr->tex_index = texture_index;
-		sData.quad_vertex_buffer_ptr->tiling_factor = tex2d_porps.tiling_factor;
-		++sData.quad_vertex_buffer_ptr;
-
-		sData.quad_vertex_buffer_ptr->position = { position.x + size.x, position.y + size.y, 0.0f };
-		sData.quad_vertex_buffer_ptr->color = color;
-		sData.quad_vertex_buffer_ptr->texcoord = { 1.0f, 1.0f };
-		sData.quad_vertex_buffer_ptr->tex_index = texture_index;
-		sData.quad_vertex_buffer_ptr->tiling_factor = tex2d_porps.tiling_factor;
-		++sData.quad_vertex_buffer_ptr;
-
-		sData.quad_vertex_buffer_ptr->position = { position.x, position.y + size.y, 0.0f };
-		sData.quad_vertex_buffer_ptr->color = color;
-		sData.quad_vertex_buffer_ptr->texcoord = { 0.0f, 1.0f };
-		sData.quad_vertex_buffer_ptr->tex_index = texture_index;
-		sData.quad_vertex_buffer_ptr->tiling_factor = tex2d_porps.tiling_factor;
-		++sData.quad_vertex_buffer_ptr;
-
+		for (ng_sizei i = 0; i < 4; ++i) {
+			sData.quad_vertex_buffer_ptr->position = transform * sData.quad_vertices[i];
+			sData.quad_vertex_buffer_ptr->color = color;
+			sData.quad_vertex_buffer_ptr->texcoord = sData.quad_texcoords[i];
+			sData.quad_vertex_buffer_ptr->tex_index = texture_index;
+			sData.quad_vertex_buffer_ptr->tiling_factor = tex2d_porps.tiling_factor;
+			++sData.quad_vertex_buffer_ptr;
+		}
 		sData.quad_index_count += 6;
-
-
-	#else	// 单个对象渲染
-
-		tex2d_porps.texture->Bind(0);
-		sData.texture_shader->SetFloat4("u_Color", tex2d_porps.tintcolor);
-		sData.texture_shader->SetFloat("u_TilingFactor", tex2d_porps.tiling_factor);
-
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), quad_props.position / 100.0f) *
-			glm::scale(glm::mat4(1.0f), glm::vec3(quad_props.size.x, quad_props.size.y, 1.0f) / 10.0f) *
-			glm::rotate(glm::mat4(1.0f), glm::radians(quad_props.rotation), glm::vec3(0.0f, 0.0f, 1.0f));
-		sData.texture_shader->SetMat4("u_Transform", transform);
-
-		sData.quad_vertex_array->Bind();
-		RenderCommand::DrawIndexed(sData.quad_vertex_array);
-			
-	#endif // 1
 
 	}
 }

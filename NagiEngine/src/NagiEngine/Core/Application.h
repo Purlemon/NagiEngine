@@ -27,6 +27,8 @@ namespace Nagi {
 
 		void OnEvent(Event& e);
 
+		void Close();
+
 		static Application& Get() { return *instance_; }
 		Window& GetWindow() { return *window_; }
 	private:

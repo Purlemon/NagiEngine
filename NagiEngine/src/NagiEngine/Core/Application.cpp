@@ -44,6 +44,11 @@ namespace Nagi {
 		layer->OnAttach();
 	}
 
+	void Application::Close()
+	{
+		running_ = false;
+	}
+
 	void Application::OnEvent(Event& e)
 	{
 		

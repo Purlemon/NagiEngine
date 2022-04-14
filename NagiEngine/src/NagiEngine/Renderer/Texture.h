@@ -12,6 +12,7 @@ namespace Nagi {
 
 		virtual ng_uint32 GetWidth()const = 0;
 		virtual ng_uint32 GetHeight()const = 0;
+		virtual ng_uint32 GetId()const = 0;
 
 		// 对GPU的一块内存更新
 		virtual void SetData(void* data, ng_uint32 size) = 0;

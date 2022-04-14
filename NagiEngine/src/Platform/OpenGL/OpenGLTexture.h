@@ -17,6 +17,7 @@ namespace Nagi {
 
 		ng_uint32 GetWidth()const override { return width_; }
 		ng_uint32 GetHeight()const override { return height_; }
+		ng_uint32 GetId()const override { return render_id_; }
 
 		void Bind(ng_uint32 slot)const override;
 

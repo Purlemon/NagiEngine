@@ -57,7 +57,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>IMGUI_API=__declspec(dllimport)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>//IMGUI_API=__declspec(dllimport)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AssemblerOutput>AssemblyCode</AssemblerOutput>
       <AdditionalIncludeDirectories>$(SolutionDir)NagiEngine\vendor\glm;$(SolutionDir)NagiEngine\vendor\spdlog\include;$(SolutionDir)NagiEngine\src;$(SolutionDir)NagiEngine\vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -76,7 +76,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>IMGUI_API=__declspec(dllimport)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>//IMGUI_API=__declspec(dllimport)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)NagiEngine\vendor\glm;$(SolutionDir)NagiEngine\vendor\spdlog\include;$(SolutionDir)NagiEngine\src;$(SolutionDir)NagiEngine\vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>

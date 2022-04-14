@@ -24,11 +24,18 @@ namespace Nagi {
 	{
 		Ref<Texture2D> texture;
 		float tiling_factor;	// 对纹理重复的系数
+		glm::vec4 tint_color;	// 颜色滤镜
 
 		Texture2DPorps()
 			:Texture2DPorps(nullptr) { }
-		Texture2DPorps(const Ref<Texture2D>& this_texture, float this_tiling_factor = 1.0f)
-			:texture(this_texture), tiling_factor(this_tiling_factor) {}
+
+		Texture2DPorps(const Ref<Texture2D>& this_texture, const glm::vec4& this_tint_color)
+			:Texture2DPorps(this_texture, 1.0f, this_tint_color){ }
+
+		Texture2DPorps(const Ref<Texture2D>& this_texture, 
+			float this_tiling_factor = 1.0f, 
+			const glm::vec4& this_tint_color = glm::vec4(1.0f))
+			:texture(this_texture), tiling_factor(this_tiling_factor), tint_color(this_tint_color) { }
 		
 	};
 

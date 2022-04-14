@@ -221,7 +221,7 @@ namespace Nagi {
 			FlushAndReset();
 		}
 
-		glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
+		glm::vec4 color = tex2d_porps.tint_color;
 
 		glm::vec3 position = glm::vec3(quad_props.position.x, quad_props.position.y, quad_props.position.z) / 100.0f;
 		position.z = std::max(std::min(position.z, 1.0f), -1.0f);

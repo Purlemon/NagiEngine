@@ -52,8 +52,11 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
+	// 创建纹理对象
 	tex2d_props_.texture = Nagi::Texture2D::Create("assets/textures/test.jpg");
-	tex2d_test2_props_.texture=Nagi::Texture2D::Create("assets/textures/2.png");
+
+	tex2d_test2_props_.texture = Nagi::Texture2D::Create("assets/textures/2.png");
+	tex2d_test2_props_.tint_color = { 0.2f,0.8f,0.1f,1.0f };
 }
 
 void Sandbox2D::OnDetach()

@@ -35,7 +35,7 @@ namespace Nagi {
 	// 2D渲染数据
 	struct Renderer2DData
 	{
-		static const ng_uint32 kMaxQuadsCnt = 100;	// 批处理一次DrawCall绘制的最大Quad个数
+		static const ng_uint32 kMaxQuadsCnt = 10000;	// 批处理一次DrawCall绘制的最大Quad个数
 		static const ng_uint32 kMaxVerticesCnt = kMaxQuadsCnt * 4;
 		static const ng_uint32 kMaxIndicesCnt = kMaxQuadsCnt * 6;
 		static const ng_uint32 kMaxTexureSlots = 32;	// TODO：查询GPU一次支持多少个纹理单元

@@ -59,6 +59,9 @@ void Sandbox2D::OnAttach()
 
 	backboard_tex_.texture= Nagi::Texture2D::Create("assets/textures/Checkerboard.png");
 	backboard_tex_.tiling_factor = 25;
+
+	// °ó¶¨Ö¡»º³å
+	frame_buffer_ = Nagi::Framebuffer::Create({ 1280,720 });
 }
 
 void Sandbox2D::OnDetach()
@@ -72,6 +75,8 @@ void Sandbox2D::OnUpdate(Nagi::Timestep ts)
 	fps_ = 1.0f / ts;
 	quad_tex2_props_.rotation += ts*50;
 	
+	frame_buffer_->Bind();
+
 	// Render
 	Nagi::RenderCommand::SetClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
 	Nagi::RenderCommand::Clear();
@@ -79,8 +84,9 @@ void Sandbox2D::OnUpdate(Nagi::Timestep ts)
 	Nagi::Renderer2D::ResetStatistics();
 	{
 		PROFILE_SCOPE("Renderer");
-
+		
 		Nagi::Renderer2D::BeginScene(camera_controller_.GetCamera());
+		
 		for (float y = -5.0f; y < 5.0f; y += 0.5f) {
 			for (float x = -5.0f; x < 5.0f; x += 0.5f) {
 				glm::vec4 color = { (x + 5.0f) / 10.0f, 0.4f, (y + 5.0f) / 10.0f, 0.7f };
@@ -98,6 +104,7 @@ void Sandbox2D::OnUpdate(Nagi::Timestep ts)
 		}
 		Nagi::Renderer2D::EndScene();
 
+		frame_buffer_->Unbind();
 	}
 }
 
@@ -122,28 +129,28 @@ void Sandbox2D::DrawGui()
 	}
 	profile_results_.clear();
 
-	{
-		char fps[20];
-		strcpy_s(fps, "FPS: ");
-		strcat_s(fps, "%.3f");
-		ImGui::Text(fps, fps_);
-	}
-
 	auto stats = Nagi::Renderer2D::GetStatistics();
 	ImGui::Text("Renderer2D Stats:");
 	ImGui::Text("Draw Calls: %d", stats.batch_count);
 	ImGui::Text("Quads: %d", stats.quad_count);
 	ImGui::Text("Triangles: %d", stats.GetTriangleCount());
 
-	uint32_t backboard_id = backboard_tex_.texture->GetId();
-	ImGui::Image((void*)backboard_id, ImVec2{ 256.0f, 256.0f });
+	uint32_t backboard_id = frame_buffer_->GetColorAttachmentRendererID();
+	ImGui::Image((void*)backboard_id, ImVec2{ (float)frame_buffer_->GetProps().width,(float)frame_buffer_->GetProps().height});
+
+	{
+		char fps[20];
+		strcpy_s(fps, "FPS: ");
+		strcat_s(fps, "%.3f");
+		ImGui::Text(fps, fps_);
+	}
 	ImGui::End();
 }
 
 void Sandbox2D::OnImGuiRender()
 {
 	// Note: Switch this to true to enable dockspace
-	static bool dockingEnabled = false;
+	static bool dockingEnabled = true;
 	if (dockingEnabled) {
 		static bool dockspaceOpen = true;
 		static bool opt_fullscreen_persistant = true;

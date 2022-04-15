@@ -19,6 +19,7 @@ private:
 
 	Nagi::Ref<Nagi::Shader> shader_;
 	Nagi::Ref<Nagi::VertexArray>square_va_;
+	Nagi::Ref<Nagi::Framebuffer>frame_buffer_;
 	Nagi::Texture2DPorps backboard_tex_;
 	Nagi::Texture2DPorps tex2d_props_;
 	Nagi::Texture2DPorps tex2d_test2_props_;

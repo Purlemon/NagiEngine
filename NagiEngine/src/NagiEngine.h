@@ -22,9 +22,11 @@
 #include "NagiEngine/Renderer/RenderCommand.h"
 
 #include "NagiEngine/Renderer/Buffer.h"
+#include "NagiEngine/Renderer/Framebuffer.h"
 #include "NagiEngine/Renderer/Shader.h"
 #include "NagiEngine/Renderer/Texture.h"
 #include "NagiEngine/Renderer/VertexArray.h"
 
 #include "NagiEngine/Renderer/OrthographicCameraController.h"
 // ------------------------------
+

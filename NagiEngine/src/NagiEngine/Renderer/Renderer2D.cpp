@@ -189,7 +189,7 @@ namespace Nagi {
 			FlushAndReset();
 		}
 
-		const float tex_index = 0.0f; // White Texture
+		const int tex_index = 1; // White Texture
 		sData.white_texture->Bind(0);
 		const float tiling_factor = 1.0f;
 

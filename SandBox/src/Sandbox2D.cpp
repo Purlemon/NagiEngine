@@ -6,45 +6,6 @@
 #include "Platform/OpenGL/OpenGLShader.h"
 #include <glm/gtc/type_ptr.hpp>
 
-#include <chrono>
-
-template<typename Fn>
-class Timer
-{
-public:
-	Timer(const char* name, Fn&& func)
-		: m_Name(name), m_Func(func), m_Stopped(false)
-	{
-		m_StartTimepoint = std::chrono::high_resolution_clock::now();
-	}
-
-	~Timer()
-	{
-		if (!m_Stopped)
-			Stop();
-	}
-
-	void Stop()
-	{
-		auto endTimepoint = std::chrono::high_resolution_clock::now();
-
-		long long start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
-		long long end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
-
-		m_Stopped = true;
-
-		float duration = (end - start) * 0.001f;
-		m_Func({ m_Name, duration });
-	}
-private:
-	const char* m_Name;
-	Fn m_Func;
-	std::chrono::time_point<std::chrono::steady_clock> m_StartTimepoint;
-	bool m_Stopped;
-};
-
-#define PROFILE_SCOPE(name) Timer timer(name, [&](ProfileResult pro_res) {profile_results_.push_back(pro_res); })
-
 Sandbox2D::Sandbox2D()
 	:Layer("Sandbox2D"), camera_controller_(1280.0f / 720.0f, true)
 {
@@ -83,7 +44,7 @@ void Sandbox2D::OnUpdate(Nagi::Timestep ts)
 
 	Nagi::Renderer2D::ResetStatistics();
 	{
-		PROFILE_SCOPE("Renderer");
+		NAGI_PROFILE_SCOPE("Renderer");
 		
 		Nagi::Renderer2D::BeginScene(camera_controller_.GetCamera());
 		

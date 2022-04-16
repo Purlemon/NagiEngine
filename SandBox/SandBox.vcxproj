@@ -107,6 +107,7 @@
     <None Include="assets\shaders\fragment\texture.frag" />
     <None Include="assets\shaders\vertex\flat_color.vert" />
     <None Include="assets\shaders\vertex\texture.vert" />
+    <None Include="imgui.ini" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Sandbox2D.h" />

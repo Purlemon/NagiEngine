@@ -29,4 +29,5 @@
 
 #include "NagiEngine/Renderer/OrthographicCameraController.h"
 // ------------------------------
+#include "NagiEngine/Debug/Instrumentor.h"
 

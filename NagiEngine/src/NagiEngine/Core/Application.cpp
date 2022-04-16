@@ -12,12 +12,12 @@ namespace Nagi {
 
 	Application* Application::instance_ = nullptr;
 
-	Application::Application()
+	Application::Application(const std::string& name, ng_uint32 width, ng_uint32 height)
 	{
 		NAGI_CORE_ASSERT(!instance_, "Application“—æ≠¥Ê‘⁄£°");
 		instance_ = this;
 
-		window_ = std::unique_ptr<Window>(Window::Create());
+		window_ = std::unique_ptr<Window>(Window::Create(WindowProps(name, width, height )));
 		window_->SetEventCallback(BIND_EVENT_FN(OnEvent));
 	
 		Renderer::Init();

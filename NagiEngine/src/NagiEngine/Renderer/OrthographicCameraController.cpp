@@ -50,6 +50,12 @@ namespace Nagi {
 		dispatcher.Dispatch<WindowResizeEvent>(NAGI_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
 	}
 
+	void OrthographicCameraController::OnResize(float width, float height)
+	{
+		aspect_ratio_ = width / height;
+		camera_.SetProjection(-aspect_ratio_ * zoom_level_, aspect_ratio_ * zoom_level_, -zoom_level_, zoom_level_);
+	}
+
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
 		zoom_level_ -= e.GetYOffset() * 0.5f;
@@ -60,8 +66,7 @@ namespace Nagi {
 
 	bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e)
 	{
-		aspect_ratio_ = (float)e.GetWidth() / (float)e.GetHeight();
-		camera_.SetProjection(-aspect_ratio_ * zoom_level_, aspect_ratio_ * zoom_level_, -zoom_level_, zoom_level_);
+		OnResize((float)e.GetWidth(), (float)e.GetHeight());
 		return false;
 	}
 

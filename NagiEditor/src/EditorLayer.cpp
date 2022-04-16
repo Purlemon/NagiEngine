@@ -69,6 +69,7 @@ namespace Nagi {
 
 	void EditorLayer::DrawGui()
 	{
+		// ------------------------------------------
 		ImGui::Begin("Settings");
 
 		ImGui::ColorEdit4("Square Color", glm::value_ptr(square_color_));
@@ -87,9 +88,6 @@ namespace Nagi {
 		ImGui::Text("Quads: %d", stats.quad_count);
 		ImGui::Text("Triangles: %d", stats.GetTriangleCount());
 
-		uint32_t backboard_id = frame_buffer_->GetColorAttachmentRendererID();
-		ImGui::Image((void*)backboard_id, ImVec2{ (float)frame_buffer_->GetProps().width,(float)frame_buffer_->GetProps().height });
-
 		{
 			char fps[20];
 			strcpy_s(fps, "FPS: ");
@@ -97,6 +95,24 @@ namespace Nagi {
 			ImGui::Text(fps, fps_);
 		}
 		ImGui::End();
+
+		// --------------------------------------------------
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });// ÉèÖÃÍ¼Æ¬³äÂú´°¿Ú
+		ImGui::Begin("Viewport");
+
+		ImVec2 vp_size = ImGui::GetContentRegionAvail();
+		glm::vec2 viewport_size = { vp_size.x,vp_size.y };
+		if (last_viewport_size_ != viewport_size) {
+			frame_buffer_->ResizeColorAttachment(viewport_size.x, viewport_size.y);
+			last_viewport_size_ = viewport_size;
+
+			camera_controller_.OnResize(vp_size.x, vp_size.y);
+		}
+
+		ImGui::Image((void*)frame_buffer_->GetColorAttachmentRendererID(), vp_size, { 0,1 }, { 1,0 });
+		
+		ImGui::End();
+		ImGui::PopStyleVar();
 	}
 
 	void EditorLayer::OnImGuiRender()

@@ -22,8 +22,12 @@ namespace Nagi {
 	class Framebuffer
 	{
 	public:
+		virtual ~Framebuffer() = default;
+
 		virtual void Bind() = 0;
 		virtual void Unbind() = 0;
+
+		virtual void ResizeColorAttachment(ng_uint32 width,ng_uint32 height) = 0;
 
 		virtual ng_uint32 GetColorAttachmentRendererID() const = 0;
 		virtual ng_uint32 GetDepthAttachmentRendererID() const = 0;

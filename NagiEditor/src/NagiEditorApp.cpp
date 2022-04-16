@@ -9,7 +9,7 @@ namespace Nagi {
 	{
 	public:
 		NagiEditor()
-			: Application("Nagi Editor", 1280, 1280)
+			: Application("Nagi Editor", 1920, 1280)
 		{
 			PushLayer(new EditorLayer());
 		}

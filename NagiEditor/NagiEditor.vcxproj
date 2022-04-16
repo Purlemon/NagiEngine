@@ -172,6 +172,9 @@
       <Project>{270f110f-ee43-49cd-a56e-ace47a0c7dbb}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="imgui.ini" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

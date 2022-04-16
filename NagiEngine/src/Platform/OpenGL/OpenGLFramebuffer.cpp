@@ -38,15 +38,33 @@ namespace Nagi {
 	OpenGLFramebuffer::~OpenGLFramebuffer()
 	{
 		glDeleteFramebuffers(1, &render_id_);
+		glDeleteTextures(1, &color_attchment_id_);
+		glDeleteTextures(1, &depth_attchment_id_);
 	}
 
 	void OpenGLFramebuffer::Bind()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, render_id_);
+		glViewport(0, 0, props_.width, props_.height);
 	}
+
 	void OpenGLFramebuffer::Unbind()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
+
+	void OpenGLFramebuffer::ResizeColorAttachment(ng_uint32 width, ng_uint32 height) 
+	{
+		if (render_id_ != -1) {
+			props_.width = width;
+			props_.height = height;
+
+			glBindTexture(GL_TEXTURE_2D, color_attchment_id_);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+
+			glBindTexture(GL_TEXTURE_2D, depth_attchment_id_);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, width, height, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL);
+		}
 	}
 
 }

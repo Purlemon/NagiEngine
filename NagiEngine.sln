@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Glad", "NagiEngine\vendor\G
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImGui", "NagiEngine\vendor\ImGui\ImGui.vcxproj", "{270F110F-EE43-49CD-A56E-ACE47A0C7DBB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NagiEditor", "NagiEditor\NagiEditor.vcxproj", "{23ED5A47-5F43-4B75-90B7-6C8521174BD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{270F110F-EE43-49CD-A56E-ACE47A0C7DBB}.Release|x64.Build.0 = Release|x64
 		{270F110F-EE43-49CD-A56E-ACE47A0C7DBB}.Release|x86.ActiveCfg = Release|Win32
 		{270F110F-EE43-49CD-A56E-ACE47A0C7DBB}.Release|x86.Build.0 = Release|Win32
+		{23ED5A47-5F43-4B75-90B7-6C8521174BD4}.Debug|x64.ActiveCfg = Debug|x64
+		{23ED5A47-5F43-4B75-90B7-6C8521174BD4}.Debug|x64.Build.0 = Debug|x64
+		{23ED5A47-5F43-4B75-90B7-6C8521174BD4}.Debug|x86.ActiveCfg = Debug|Win32
+		{23ED5A47-5F43-4B75-90B7-6C8521174BD4}.Debug|x86.Build.0 = Debug|Win32
+		{23ED5A47-5F43-4B75-90B7-6C8521174BD4}.Release|x64.ActiveCfg = Release|x64
+		{23ED5A47-5F43-4B75-90B7-6C8521174BD4}.Release|x64.Build.0 = Release|x64
+		{23ED5A47-5F43-4B75-90B7-6C8521174BD4}.Release|x86.ActiveCfg = Release|Win32
+		{23ED5A47-5F43-4B75-90B7-6C8521174BD4}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -88,7 +88,7 @@ namespace Nagi {
 			:MouseButtonEvent(button)
 		{
 		}
-
+		
 		std::string ToString()const override
 		{
 			std::stringstream ss;

@@ -37,6 +37,8 @@ namespace Nagi {
 		QuadProps quad_tex_props_ = { glm::vec3(50.0f,50.0f,1.0f), {20.0f, 20.0f} };
 		QuadProps quad_tex2_props_ = { glm::vec3(10.0f,10.0f,3.0f), {10.0f, 10.0f} };
 
+		// GUI
+		bool viewport_focused_ = false, viewport_hovered_ = false;
 		glm::vec2 last_viewport_size_ = { 0.0f,0.0f };
 
 		// –‘ƒ‹≈‰÷√

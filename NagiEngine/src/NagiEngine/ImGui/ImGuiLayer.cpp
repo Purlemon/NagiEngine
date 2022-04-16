@@ -55,6 +55,15 @@ namespace Nagi {
 		ImGui::DestroyContext();
 	}
 
+	void ImGuiLayer::OnEvent(Event& e)
+	{
+		if (block_events_) {
+			ImGuiIO& io = ImGui::GetIO();
+			e.handled_ |= e.IsInCategory(kEventCategoryMouse) & io.WantCaptureMouse;
+			e.handled_ |= e.IsInCategory(kEventCategoryKeyboard) & io.WantCaptureKeyboard;
+		}
+	}
+
 	void ImGuiLayer::Begin()
 	{
 		ImGui_ImplOpenGL3_NewFrame();

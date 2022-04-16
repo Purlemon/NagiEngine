@@ -3,6 +3,8 @@
 #include "Platform/OpenGL/OpenGLShader.h"
 #include <glm/gtc/type_ptr.hpp>
 
+#include "NagiEngine/Core/Log.h"
+
 namespace Nagi {
 
 	EditorLayer::EditorLayer()
@@ -31,19 +33,31 @@ namespace Nagi {
 
 	void EditorLayer::OnUpdate(Timestep ts)
 	{
-		camera_controller_.OnUpdate(ts);
+		// Resize
+		// 先渲染上一帧size大小的framebuffer，解决resize黑屏问题
+		Nagi::FramebufferProps props = frame_buffer_->GetProps();
+		if(props.width!= last_viewport_size_.x|| props.height != last_viewport_size_.y) {
+			frame_buffer_->ResizeColorAttachment((ng_uint32)last_viewport_size_.x, (ng_uint32)last_viewport_size_.y);
+			camera_controller_.OnResize(last_viewport_size_.x, last_viewport_size_.y);
+		}
+
+		// Update
+		if (viewport_focused_) {
+			camera_controller_.OnUpdate(ts);
+		}
+
 		fps_ = 1.0f / ts;
 		quad_tex2_props_.rotation += ts * 50;
-
-		frame_buffer_->Bind();
-
+		
 		// Render
-		RenderCommand::SetClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
-		RenderCommand::Clear();
-
 		Renderer2D::ResetStatistics();
 		{
-	
+			frame_buffer_->Bind();
+			RenderCommand::SetClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
+			RenderCommand::Clear();
+		}
+		
+		{
 			Renderer2D::BeginScene(camera_controller_.GetCamera());
 
 			for (float y = -5.0f; y < 5.0f; y += 0.5f) {
@@ -100,14 +114,12 @@ namespace Nagi {
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });// 设置图片充满窗口
 		ImGui::Begin("Viewport");
 
-		ImVec2 vp_size = ImGui::GetContentRegionAvail();
-		glm::vec2 viewport_size = { vp_size.x,vp_size.y };
-		if (last_viewport_size_ != viewport_size) {
-			frame_buffer_->ResizeColorAttachment(viewport_size.x, viewport_size.y);
-			last_viewport_size_ = viewport_size;
+		viewport_focused_ = ImGui::IsWindowFocused();   // 选定
+		viewport_hovered_ = ImGui::IsWindowHovered();	// 悬停
+		Application::Get().GetImGuiLayer()->BlockEvents(!viewport_focused_ || !viewport_hovered_);
 
-			camera_controller_.OnResize(vp_size.x, vp_size.y);
-		}
+		ImVec2 vp_size = ImGui::GetContentRegionAvail();
+		last_viewport_size_ = { vp_size.x,vp_size.y };
 
 		ImGui::Image((void*)frame_buffer_->GetColorAttachmentRendererID(), vp_size, { 0,1 }, { 1,0 });
 		
@@ -186,7 +198,9 @@ namespace Nagi {
 
 	void EditorLayer::OnEvent(Event& event)
 	{
-		camera_controller_.OnEvent(event);
+		if (viewport_focused_) {
+			camera_controller_.OnEvent(event);
+		}
 	}
 
 }

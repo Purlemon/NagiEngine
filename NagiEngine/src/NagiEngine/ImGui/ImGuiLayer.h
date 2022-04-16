@@ -16,10 +16,15 @@ namespace Nagi {
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;
+		virtual void OnEvent(Event& event) override;
 
 		void Begin();
 		void End();
+
+		void BlockEvents(bool block) { block_events_ = block; }
+
 	private:
+		bool block_events_ = true;
 		float time_ = 0.0f;
 	};
 

@@ -4,6 +4,8 @@
 
 namespace Nagi {
 
+	static const ng_uint32 kMaxFramebufferSize = 8192;
+
 	OpenGLFramebuffer::OpenGLFramebuffer(const FramebufferProps& props)
 		:props_(props)
 	{
@@ -55,6 +57,11 @@ namespace Nagi {
 
 	void OpenGLFramebuffer::ResizeColorAttachment(ng_uint32 width, ng_uint32 height) 
 	{
+		if (width == 0 || height == 0 || width > kMaxFramebufferSize || height > kMaxFramebufferSize) {
+			NAGI_CORE_WARN("Try to resize framebuffer to ({0}, {1})", width, height);
+			return;
+		}
+
 		if (render_id_ != -1) {
 			props_.width = width;
 			props_.height = height;

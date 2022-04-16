@@ -31,6 +31,9 @@ namespace Nagi {
 
 		static Application& Get() { return *instance_; }
 		Window& GetWindow() { return *window_; }
+
+		ImGuiLayer* GetImGuiLayer() { return imgui_layer_; }
+
 	private:
 		bool OnWindowClose(class WindowCloseEvent& e);
 		bool OnWindowResize(class WindowResizeEvent& e);

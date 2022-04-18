@@ -1,3 +1,5 @@
+#include "ngpch.h"
+
 #include "OrthographicCameraController.h"
 
 #include "NagiEngine/NagiCode/KeyCodes.h"

@@ -1,3 +1,5 @@
+#include "ngpch.h"
+
 #include "NagiEngine/Core/Input.h"
 
 #include "NagiEngine/Core/Application.h"

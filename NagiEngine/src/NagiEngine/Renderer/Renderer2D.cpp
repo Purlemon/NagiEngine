@@ -1,3 +1,5 @@
+#include "ngpch.h"
+
 #include "Renderer2D.h"
 
 #include "VertexArray.h"
@@ -5,8 +7,6 @@
 #include "RenderCommand.h"
 
 #include "Platform/OpenGL/OpenGLShader.h"
-
-#include "NagiEngine/Core/Log.h"
 
 namespace Nagi {
 

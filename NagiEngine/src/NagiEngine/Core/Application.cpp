@@ -1,6 +1,7 @@
+#include "ngpch.h"
+
 #include "Application.h"
 #include "NagiEngine/Event/ApplicationEvent.h"
-#include "Log.h"
 #include "Input.h"
 
 #include <GLFW/glfw3.h>

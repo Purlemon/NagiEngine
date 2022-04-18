@@ -1,5 +1,6 @@
+#include "ngpch.h"
+
 #include "WindowsWindow.h"
-#include "NagiEngine/Core/Log.h"
 
 #include "NagiEngine/Event/ApplicationEvent.h"
 #include "NagiEngine/Event/KeyEvent.h"

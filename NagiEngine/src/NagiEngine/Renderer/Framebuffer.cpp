@@ -1,3 +1,5 @@
+#include "ngpch.h"
+
 #include "Framebuffer.h"
 
 #include "Platform/OpenGL/OpenGLFramebuffer.h"

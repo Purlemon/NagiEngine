@@ -1,3 +1,5 @@
+#include "ngpch.h"
+
 #include "OpenGLRendererAPI.h"
 
 #include <glad/glad.h>

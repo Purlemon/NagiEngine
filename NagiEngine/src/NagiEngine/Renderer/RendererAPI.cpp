@@ -1,3 +1,5 @@
+#include "ngpch.h"
+
 #include "RendererAPI.h"
 
 namespace Nagi {

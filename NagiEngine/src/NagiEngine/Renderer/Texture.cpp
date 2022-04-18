@@ -1,3 +1,5 @@
+#include "ngpch.h"
+
 #include "Texture.h"
 
 #include "Renderer.h"

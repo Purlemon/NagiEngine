@@ -1,3 +1,5 @@
+#include "ngpch.h"
+
 #include "LayerStack.h"
 
 namespace Nagi {

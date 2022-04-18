@@ -1,5 +1,6 @@
+#include "ngpch.h"
+
 #include "OpenGLContext.h"
-#include "NagiEngine/Core/Log.h"
 
 namespace Nagi {
 

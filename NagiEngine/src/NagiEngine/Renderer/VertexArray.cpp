@@ -1,3 +1,5 @@
+#include "ngpch.h"
+
 #include "VertexArray.h"
 #include "Renderer.h"
 

@@ -1,3 +1,5 @@
+#include "ngpch.h"
+
 #include "NagiEngine/Core/Core.h"
 
 #include "Buffer.h"

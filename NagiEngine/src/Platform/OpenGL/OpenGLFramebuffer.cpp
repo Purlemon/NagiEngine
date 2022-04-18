@@ -1,3 +1,5 @@
+#include "ngpch.h"
+
 #include "OpenGLFramebuffer.h"
 
 #include "glad/glad.h"

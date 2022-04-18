@@ -1,3 +1,5 @@
+#include "ngpch.h"
+
 #include "OrthographicCamera.h"
 
 namespace Nagi {

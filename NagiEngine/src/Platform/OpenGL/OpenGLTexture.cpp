@@ -1,7 +1,8 @@
+#include "ngpch.h"
+
 #include "OpenGLTexture.h"
 
 #include "stb_image.h"
-#include "NagiEngine/Core/Log.h"
 
 namespace Nagi {
 

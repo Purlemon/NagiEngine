@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="src\NagiEngine\Debug\Instrumentor.h" />
     <ClInclude Include="src\NagiEngine\Renderer\Framebuffer.h" />
+    <ClInclude Include="src\ngpch.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
@@ -53,6 +54,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\NagiEngine\Renderer\Framebuffer.cpp" />
+    <ClCompile Include="src\ngpch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ngpch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
@@ -143,6 +148,8 @@
       <AssemblerOutput>AssemblyCode</AssemblerOutput>
       <AdditionalIncludeDirectories>$(SolutionDir)NagiEngine\vendor\Glad\include;$(SolutionDir)NagiEngine\vendor\spdlog\include;$(SolutionDir)NagiEngine\vendor\ImGui;$(SolutionDir)NagiEngine\vendor\GLFW\include;$(SolutionDir)NagiEngine\vendor\stb_image;$(SolutionDir)NagiEngine\vendor\glm;$(SolutionDir)NagiEngine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>ngpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

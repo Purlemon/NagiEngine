@@ -1,3 +1,5 @@
+#include "ngpch.h"
+
 #include "Shader.h"
 
 #include "Renderer.h"

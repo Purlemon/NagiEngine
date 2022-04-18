@@ -1,3 +1,5 @@
+#include "ngpch.h"
+
 #include "OpenGLVertexArray.h"
 
 #include <glad/glad.h>
